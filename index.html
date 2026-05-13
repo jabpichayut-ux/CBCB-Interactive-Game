@@ -6,6 +6,205 @@
 <title>เช็คอิน ลุ้นบินดูคาราบาวคัพ | Carabao Cup 2026</title>
 <link rel="stylesheet" href="style.css">
 <link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,700&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style id="social-wall-styles">
+/* ── SOCIAL WALL ── */
+.social-wall {
+  padding: 80px 20px;
+  background: linear-gradient(180deg, #0a1a0e 0%, #050d08 100%);
+  position: relative;
+  overflow: hidden;
+}
+.social-wall::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(45,190,96,0.03) 0px, transparent 1px, transparent 40px),
+    repeating-linear-gradient(90deg, rgba(45,190,96,0.03) 0px, transparent 1px, transparent 40px);
+  pointer-events: none;
+}
+.social-wall-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+
+/* Section heading */
+.sw-heading { text-align: center; margin-bottom: 48px; }
+.sw-tag {
+  display: inline-block;
+  background: linear-gradient(135deg, #2dbe60, #1a8a42);
+  color: #fff; font-size: 11px; font-weight: 800;
+  letter-spacing: 3px; text-transform: uppercase;
+  padding: 6px 18px; border-radius: 20px; margin-bottom: 16px;
+  box-shadow: 0 0 20px rgba(45,190,96,0.35);
+}
+.sw-title {
+  font-size: clamp(26px, 4vw, 42px); font-weight: 800; line-height: 1.2;
+  margin-bottom: 10px;
+  background: linear-gradient(135deg, #fff 30%, #2dbe60 70%, #f5c842 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.sw-subtitle { color: rgba(232,245,236,0.55); font-size: 15px; }
+.sw-hashtag {
+  display: inline-block; margin-top: 12px;
+  color: #2dbe60; font-size: 18px; font-weight: 800;
+  background: rgba(45,190,96,0.1); border: 1px solid rgba(45,190,96,0.3);
+  padding: 6px 20px; border-radius: 30px;
+  box-shadow: 0 0 16px rgba(45,190,96,0.2);
+}
+
+/* Slideshow wrapper */
+.sw-slideshow-wrap {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+/* Track */
+.sw-track {
+  display: flex;
+  gap: 20px;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+/* Each card */
+.sw-card {
+  flex: 0 0 calc(33.333% - 14px);
+  min-width: 280px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.sw-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.5), 0 0 20px rgba(45,190,96,0.1);
+}
+
+/* Card header — Facebook-style */
+.sw-card-header {
+  display: flex; align-items: center; gap:10px;
+  padding: 14px 14px 10px;
+}
+.sw-avatar {
+  width: 38px; height: 38px; border-radius: 50%; flex-shrink: 0;
+  object-fit: cover; border: 2px solid rgba(45,190,96,0.4);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; font-weight: 700;
+  background: linear-gradient(135deg, #2dbe60, #1a8a42);
+  color: #fff;
+}
+.sw-user-info { flex: 1; }
+.sw-username { font-size: 13px; font-weight: 700; color: #e8f5ec; }
+.sw-meta { font-size: 10px; color: rgba(232,245,236,0.45); margin-top: 2px; }
+.sw-fb-icon { color: #4ab3ff; font-size: 16px; }
+
+/* Post image */
+.sw-card-img {
+  width: 100%; aspect-ratio: 1/1; object-fit: cover;
+  background: linear-gradient(135deg, #0f2414, #1a3d20);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 64px; position: relative; overflow: hidden;
+}
+.sw-card-img-placeholder {
+  width: 100%; aspect-ratio: 1/1;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+/* Fake photo backgrounds */
+.sw-card-img-placeholder::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center;
+}
+.sw-bg-1::before { background: linear-gradient(135deg, #1a3d20 0%, #2dbe60 50%, #f5c842 100%); }
+.sw-bg-2::before { background: linear-gradient(135deg, #0d1b2a 0%, #1565c0 50%, #2dbe60 100%); }
+.sw-bg-3::before { background: linear-gradient(135deg, #1a0a2e 0%, #6a1b9a 50%, #2dbe60 100%); }
+.sw-bg-4::before { background: linear-gradient(135deg, #1a1a0a 0%, #f57f17 50%, #2dbe60 100%); }
+.sw-bg-5::before { background: linear-gradient(135deg, #0a1a1a 0%, #00695c 50%, #2dbe60 100%); }
+.sw-bg-6::before { background: linear-gradient(135deg, #1a0a0a 0%, #b71c1c 50%, #2dbe60 100%); }
+
+.sw-emoji-overlay {
+  position: relative; z-index: 1;
+  font-size: 56px; text-align: center;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5));
+}
+.sw-sign-overlay {
+  position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%);
+  background: #2dbe60; color: #fff;
+  font-size: 11px; font-weight: 800;
+  padding: 6px 14px; border-radius: 8px;
+  white-space: nowrap; z-index: 2;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+/* Card body */
+.sw-card-body { padding: 12px 14px 14px; }
+.sw-caption {
+  font-size: 12px; color: rgba(232,245,236,0.8);
+  line-height: 1.6; margin-bottom: 8px;
+}
+.sw-caption .sw-ht { color: #2dbe60; font-weight: 700; }
+.sw-caption .sw-page-tag { color: #4ab3ff; font-weight: 600; }
+.sw-reactions {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 11px; color: rgba(232,245,236,0.4);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding-top: 8px; margin-top: 4px;
+}
+.sw-reaction-item { display: flex; align-items: center; gap: 4px; }
+
+/* Dots navigation */
+.sw-dots {
+  display: flex; justify-content: center; gap: 8px; margin-top: 24px;
+}
+.sw-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: rgba(45,190,96,0.25);
+  cursor: pointer; transition: all 0.3s;
+  border: none; padding: 0;
+}
+.sw-dot.active {
+  background: #2dbe60;
+  box-shadow: 0 0 8px rgba(45,190,96,0.6);
+  width: 24px; border-radius: 4px;
+}
+
+/* Progress bar */
+.sw-progress-wrap {
+  width: 100%; height: 3px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 2px; margin-top: 16px; overflow: hidden;
+}
+.sw-progress-bar {
+  height: 100%; width: 0%;
+  background: linear-gradient(90deg, #2dbe60, #f5c842);
+  border-radius: 2px;
+  transition: width linear;
+}
+
+/* Live badge */
+.sw-live-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(255,59,48,0.15); border: 1px solid rgba(255,59,48,0.3);
+  color: #ff6b6b; font-size: 10px; font-weight: 700;
+  padding: 4px 12px; border-radius: 20px; margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+.sw-live-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: #ff3b30;
+  animation: sw-blink 1s ease-in-out infinite;
+}
+@keyframes sw-blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .sw-card { flex: 0 0 calc(100% - 0px); min-width: 0; }
+}
+@media (min-width: 769px) and (max-width: 1024px) {
+  .sw-card { flex: 0 0 calc(50% - 10px); }
+}
+</style>
 </head>
 <body>
 
@@ -101,6 +300,226 @@
     <div class="scroll-dot"></div>
     <span>เลื่อนดูรายละเอียด</span>
   </a>
+</section>
+
+<section class="social-wall">
+  <div class="social-wall-inner">
+
+    <!-- Heading -->
+    <div class="sw-heading">
+      <div class="sw-tag">📲 Social Wall</div>
+      <div class="sw-live-badge"><span class="sw-live-dot"></span>LIVE FEED</div>
+      <h2 class="sw-title">แฟนบอลทั่วไทย<br>เชียร์พร้อมกัน!</h2>
+      <p class="sw-subtitle">แท็ก <strong style="color:#4ab3ff">@CarabaoTawandangBeverage</strong> และใช้แฮชแท็ก</p>
+      <div class="sw-hashtag">#เชียร์บอลเชียร์บาว</div>
+    </div>
+
+    <!-- Slideshow -->
+    <div class="sw-slideshow-wrap">
+      <div class="sw-track" id="swTrack">
+
+        <!-- CARD 1 -->
+        <div class="sw-card">
+          <div class="sw-card-header">
+            <div class="sw-avatar">ส</div>
+            <div class="sw-user-info">
+              <div class="sw-username">สมชาย ร.</div>
+              <div class="sw-meta">📍 ร้านค้าพาร์ทเนอร์ อโศก · 2 ชั่วโมงที่แล้ว</div>
+            </div>
+            <span class="sw-fb-icon">𝒇</span>
+          </div>
+          <div class="sw-card-img-placeholder sw-bg-1">
+            <div class="sw-emoji-overlay">🤳⚽</div>
+            <div class="sw-sign-overlay">เชียร์บอล เชียร์บาว</div>
+          </div>
+          <div class="sw-card-body">
+            <div class="sw-caption">
+              มาเช็คอินที่ร้านพาร์ทเนอร์ อโศก ได้แต้มแล้ว! 🏆
+              <span class="sw-ht">#เชียร์บอลเชียร์บาว</span>
+              <span class="sw-ht">#CarabaoCup2026</span>
+              <span class="sw-page-tag">@CarabaoTawandangBeverage</span>
+            </div>
+            <div class="sw-reactions">
+              <span class="sw-reaction-item">👍 124</span>
+              <span class="sw-reaction-item">❤️ 48</span>
+              <span class="sw-reaction-item">💬 12</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 2 -->
+        <div class="sw-card">
+          <div class="sw-card-header">
+            <div class="sw-avatar" style="background:linear-gradient(135deg,#1565c0,#4ab3ff)">น</div>
+            <div class="sw-user-info">
+              <div class="sw-username">นภา ว.</div>
+              <div class="sw-meta">📍 เซ็นทรัล ลาดพร้าว · 5 ชั่วโมงที่แล้ว</div>
+            </div>
+            <span class="sw-fb-icon">𝒇</span>
+          </div>
+          <div class="sw-card-img-placeholder sw-bg-2">
+            <div class="sw-emoji-overlay">🏆✈️</div>
+            <div class="sw-sign-overlay">เชียร์บอล เชียร์บาว</div>
+          </div>
+          <div class="sw-card-body">
+            <div class="sw-caption">
+              วันนี้เชียร์บอลพร้อมเพื่อน ลุ้นไปเวมบลีย์ด้วยกัน! 🎯✈️
+              <span class="sw-ht">#เชียร์บอลเชียร์บาว</span>
+              <span class="sw-ht">#WembleyOrBust</span>
+              <span class="sw-page-tag">@CarabaoTawandangBeverage</span>
+            </div>
+            <div class="sw-reactions">
+              <span class="sw-reaction-item">👍 89</span>
+              <span class="sw-reaction-item">❤️ 67</span>
+              <span class="sw-reaction-item">💬 23</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 3 -->
+        <div class="sw-card">
+          <div class="sw-card-header">
+            <div class="sw-avatar" style="background:linear-gradient(135deg,#6a1b9a,#9b7fe8)">ก</div>
+            <div class="sw-user-info">
+              <div class="sw-username">กานต์ ป.</div>
+              <div class="sw-meta">📍 Big C รังสิต · เมื่อวาน</div>
+            </div>
+            <span class="sw-fb-icon">𝒇</span>
+          </div>
+          <div class="sw-card-img-placeholder sw-bg-3">
+            <div class="sw-emoji-overlay">⚽🎉</div>
+            <div class="sw-sign-overlay">เชียร์บอล เชียร์บาว</div>
+          </div>
+          <div class="sw-card-body">
+            <div class="sw-caption">
+              แต้มสะสมครบ 10 แต้มแล้ว! ฝันถึงลอนดอน 🏴󠁧󠁢󠁥󠁮󠁧󠁿
+              <span class="sw-ht">#เชียร์บอลเชียร์บาว</span>
+              <span class="sw-ht">#CarabaoCup</span>
+              <span class="sw-page-tag">@CarabaoTawandangBeverage</span>
+            </div>
+            <div class="sw-reactions">
+              <span class="sw-reaction-item">👍 201</span>
+              <span class="sw-reaction-item">❤️ 95</span>
+              <span class="sw-reaction-item">💬 34</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 4 -->
+        <div class="sw-card">
+          <div class="sw-card-header">
+            <div class="sw-avatar" style="background:linear-gradient(135deg,#f57f17,#ffd740)">ม</div>
+            <div class="sw-user-info">
+              <div class="sw-username">มานะ ส.</div>
+              <div class="sw-meta">📍 Makro ชลบุรี · 2 วันที่แล้ว</div>
+            </div>
+            <span class="sw-fb-icon">𝒇</span>
+          </div>
+          <div class="sw-card-img-placeholder sw-bg-4">
+            <div class="sw-emoji-overlay">🤳🏅</div>
+            <div class="sw-sign-overlay">เชียร์บอล เชียร์บาว</div>
+          </div>
+          <div class="sw-card-body">
+            <div class="sw-caption">
+              มาจากชลบุรีไม่ยอมแพ้! เช็คอินทุกวัน 💪
+              <span class="sw-ht">#เชียร์บอลเชียร์บาว</span>
+              <span class="sw-ht">#ลุ้นเวมบลีย์</span>
+              <span class="sw-page-tag">@CarabaoTawandangBeverage</span>
+            </div>
+            <div class="sw-reactions">
+              <span class="sw-reaction-item">👍 156</span>
+              <span class="sw-reaction-item">❤️ 72</span>
+              <span class="sw-reaction-item">💬 18</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 5 -->
+        <div class="sw-card">
+          <div class="sw-card-header">
+            <div class="sw-avatar" style="background:linear-gradient(135deg,#00695c,#2dbe60)">พ</div>
+            <div class="sw-user-info">
+              <div class="sw-username">พิม ท.</div>
+              <div class="sw-meta">📍 Tops Supermarket · 3 วันที่แล้ว</div>
+            </div>
+            <span class="sw-fb-icon">𝒇</span>
+          </div>
+          <div class="sw-card-img-placeholder sw-bg-5">
+            <div class="sw-emoji-overlay">👭⚽</div>
+            <div class="sw-sign-overlay">เชียร์บอล เชียร์บาว</div>
+          </div>
+          <div class="sw-card-body">
+            <div class="sw-caption">
+              มากับแก๊งสาว เช็คอินพร้อมกัน 4 แต้ม! 🎊
+              <span class="sw-ht">#เชียร์บอลเชียร์บาว</span>
+              <span class="sw-ht">#GirlsWhoPlay</span>
+              <span class="sw-page-tag">@CarabaoTawandangBeverage</span>
+            </div>
+            <div class="sw-reactions">
+              <span class="sw-reaction-item">👍 312</span>
+              <span class="sw-reaction-item">❤️ 143</span>
+              <span class="sw-reaction-item">💬 56</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 6 -->
+        <div class="sw-card">
+          <div class="sw-card-header">
+            <div class="sw-avatar" style="background:linear-gradient(135deg,#b71c1c,#ff6b4a)">ต</div>
+            <div class="sw-user-info">
+              <div class="sw-username">ตั้ม อ.</div>
+              <div class="sw-meta">📍 Family Mart สีลม · 4 วันที่แล้ว</div>
+            </div>
+            <span class="sw-fb-icon">𝒇</span>
+          </div>
+          <div class="sw-card-img-placeholder sw-bg-6">
+            <div class="sw-emoji-overlay">🏆🔥</div>
+            <div class="sw-sign-overlay">เชียร์บอล เชียร์บาว</div>
+          </div>
+          <div class="sw-card-body">
+            <div class="sw-caption">
+              ทำงานใกล้ร้าน เช็คอินทุกวันไม่มีหยุด 🔥
+              <span class="sw-ht">#เชียร์บอลเชียร์บาว</span>
+              <span class="sw-ht">#EverydayCheckin</span>
+              <span class="sw-page-tag">@CarabaoTawandangBeverage</span>
+            </div>
+            <div class="sw-reactions">
+              <span class="sw-reaction-item">👍 98</span>
+              <span class="sw-reaction-item">❤️ 41</span>
+              <span class="sw-reaction-item">💬 9</span>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- end sw-track -->
+    </div><!-- end sw-slideshow-wrap -->
+
+    <!-- Progress bar -->
+    <div class="sw-progress-wrap">
+      <div class="sw-progress-bar" id="swProgress"></div>
+    </div>
+
+    <!-- Dots -->
+    <div class="sw-dots" id="swDots"></div>
+
+    <!-- CTA -->
+    <div style="text-align:center;margin-top:36px;">
+      <p style="color:rgba(232,245,236,0.55);font-size:13px;margin-bottom:14px;">
+        อยากให้โพสต์ของคุณปรากฏที่นี่?
+      </p>
+      <a href="https://www.facebook.com/CarabaoTawandangBeverage/"
+         target="_blank"
+         style="display:inline-flex;align-items:center;gap:8px;
+                background:linear-gradient(135deg,#2dbe60,#1a8a42);
+                color:#fff;font-weight:800;font-size:14px;
+                padding:14px 28px;border-radius:12px;text-decoration:none;
+                box-shadow:0 0 24px rgba(45,190,96,0.35);">
+        📘 แท็ก @CarabaoTawandangBeverage &amp; #เชียร์บอลเชียร์บาว
+      </a>
+    </div>
+
+  </div>
 </section>
 
 <section class="section" id="overview">
@@ -349,5 +768,88 @@
 </div>
 
 <script src="script.js"></script>
+<script id="social-wall-js">
+(function() {
+  const SLIDE_DURATION = 30000; // 30 seconds
+  const track    = document.getElementById('swTrack');
+  const dotsWrap = document.getElementById('swDots');
+  const progress = document.getElementById('swProgress');
+  if (!track) return;
+
+  const cards       = track.querySelectorAll('.sw-card');
+  const cardWidth   = () => cards[0].offsetWidth + 20; // 20px gap
+  let visibleCount  = () => window.innerWidth >= 1025 ? 3 : window.innerWidth >= 769 ? 2 : 1;
+  let total         = Math.ceil(cards.length / visibleCount());
+  let current       = 0;
+  let timer, progressTimer;
+
+  // Build dots
+  function buildDots() {
+    dotsWrap.innerHTML = '';
+    total = Math.ceil(cards.length / visibleCount());
+    for (let i = 0; i < total; i++) {
+      const d = document.createElement('button');
+      d.className = 'sw-dot' + (i === current ? ' active' : '');
+      d.setAttribute('aria-label', 'Slide ' + (i+1));
+      d.onclick = () => goTo(i);
+      dotsWrap.appendChild(d);
+    }
+  }
+
+  function updateDots() {
+    dotsWrap.querySelectorAll('.sw-dot').forEach((d,i) => {
+      d.classList.toggle('active', i === current);
+    });
+  }
+
+  function goTo(index) {
+    current = (index + total) % total;
+    const offset = current * visibleCount() * cardWidth();
+    track.style.transform = `translateX(-${offset}px)`;
+    updateDots();
+    resetProgress();
+  }
+
+  function next() { goTo(current + 1); }
+
+  function resetProgress() {
+    clearInterval(progressTimer);
+    progress.style.transition = 'none';
+    progress.style.width = '0%';
+    setTimeout(() => {
+      progress.style.transition = `width ${SLIDE_DURATION}ms linear`;
+      progress.style.width = '100%';
+    }, 50);
+  }
+
+  function startAuto() {
+    clearInterval(timer);
+    timer = setInterval(next, SLIDE_DURATION);
+    resetProgress();
+  }
+
+  // Pause on hover
+  track.addEventListener('mouseenter', () => {
+    clearInterval(timer);
+    clearInterval(progressTimer);
+  });
+  track.addEventListener('mouseleave', startAuto);
+
+  // Touch swipe support
+  let touchStartX = 0;
+  track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, {passive:true});
+  track.addEventListener('touchend', e => {
+    const diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) diff > 0 ? next() : goTo(current - 1);
+  });
+
+  // Resize
+  window.addEventListener('resize', () => { buildDots(); goTo(0); });
+
+  // Init
+  buildDots();
+  startAuto();
+})();
+</script>
 </body>
 </html>
