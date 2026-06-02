@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>CBCB Prototype — เช็คอิน ลุ้นบินดูคาราบาวคัพ</title>
+<title>CBCB Prototype M4 — เช็คอิน ลุ้นบินดูคาราบาวคัพ</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;700;900&family=Prompt:wght@400;700;900&display=swap');
 
 :root {
   --green: #2dbe60;
@@ -13,7 +13,8 @@
   --green-glow: rgba(45,190,96,0.35);
   --gold: #f5c842;
   --line-green: #06C755;
-  --font: 'Sarabun', sans-serif;
+  --grey: #6c757d;
+  --font: 'Sarabun', 'Prompt', sans-serif;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -58,7 +59,6 @@ body {
 .sb-line { background: var(--line-green); color: white; }
 .sb-web  { background: #f2f2f2; color: #333; }
 .sb-dark { background: #1a1a1a; color: #ccc; }
-.sb-maps { background: #4285f4; color: white; }
 .sb-fb   { background: #1877F2; color: white; }
 
 /* ── SCREENS ── */
@@ -68,7 +68,8 @@ body {
 /* ── LINE UI ── */
 .line-header { background: var(--line-green); height: 50px; display: flex; align-items: center; padding: 0 12px; gap: 10px; flex-shrink: 0; }
 .line-back   { color: white; font-size: 22px; cursor: pointer; padding: 4px 6px; }
-.line-avatar { width: 34px; height: 34px; border-radius: 50%; background: #059b48; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 900; color: white; flex-shrink: 0; border: 1.5px solid rgba(255,255,255,0.3); }
+.line-avatar { width: 34px; height: 34px; border-radius: 50%; background: #059b48; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 900; color: white; flex-shrink: 0; border: 1.5px solid rgba(255,255,255,0.3); overflow: hidden; }
+.line-avatar img { width: 100%; height: 100%; object-fit: cover; }
 .line-info   { flex: 1; }
 .line-name   { color: white; font-size: 13px; font-weight: 700; line-height: 1.2; display: flex; align-items: center; gap: 4px; }
 .line-badge  { background: rgba(255,255,255,0.25); border-radius: 3px; padding: 1px 4px; font-size: 8px; font-weight: 700; }
@@ -88,19 +89,26 @@ body {
 .chat-date { text-align: center; font-size: 9px; color: #777; background: rgba(0,0,0,0.07); border-radius: 999px; padding: 2px 10px; align-self: center; }
 .bubble-row { display: flex; align-items: flex-end; gap: 5px; }
 .bubble-row.out { justify-content: flex-end; }
-.bav { width: 30px; height: 30px; border-radius: 50%; background: #059b48; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 900; color: white; flex-shrink: 0; }
-.bubble { max-width: 195px; padding: 8px 11px; font-size: 11px; line-height: 1.5; border-radius: 14px; box-shadow: 0 1px 2px rgba(0,0,0,0.08); }
+.bav { width: 30px; height: 30px; border-radius: 50%; background: #059b48; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 900; color: white; flex-shrink: 0; overflow: hidden; }
+.bav img { width: 100%; height: 100%; object-fit: cover; }
+.bubble { max-width: 200px; padding: 8px 11px; font-size: 11px; line-height: 1.5; border-radius: 14px; box-shadow: 0 1px 2px rgba(0,0,0,0.08); }
 .bubble.in  { background: white; border-radius: 4px 14px 14px 14px; color: #111; }
 .bubble.out { background: #adffb0; border-radius: 14px 4px 14px 14px; color: #111; }
 .btime { font-size: 8px; color: #aaa; padding-bottom: 2px; }
 .bread { font-size: 8px; color: var(--line-green); padding-bottom: 2px; }
 
-/* LINE Rich Menu */
-.rich-menu { background: white; border-top: 2px solid #c8c8c8; display: grid; grid-template-columns: 1fr 1fr; flex-shrink: 0; }
+/* LINE Rich Menu — 2×2 grid */
+.rich-menu {
+  background: white;
+  border-top: 2px solid #c8c8c8;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  flex-shrink: 0;
+}
 .rm-btn {
   display: flex; flex-direction: column; align-items: center; justify-content: center;
-  gap: 4px; padding: 13px 4px;
-  font-size: 10px; font-weight: 700; font-family: var(--font);
+  gap: 4px; padding: 12px 4px;
+  font-size: 9.5px; font-weight: 700; font-family: var(--font);
   color: #222; background: white; border: none; cursor: pointer;
   border-right: 1.5px solid #dedede; border-bottom: 1.5px solid #dedede;
   transition: background 0.12s; text-align: center; line-height: 1.3;
@@ -110,7 +118,7 @@ body {
 .rm-btn:nth-child(4) { border-right: none; border-bottom: none; }
 .rm-btn.primary { background: var(--line-green); color: white; }
 .rm-btn:active  { opacity: 0.7; }
-.rm-icon { font-size: 22px; }
+.rm-icon { font-size: 20px; }
 
 /* LINE bottom nav */
 .line-bottom-nav {
@@ -149,7 +157,7 @@ body {
 .wv-screen { background: #f7f9f7; flex: 1; display: flex; flex-direction: column; position: relative; overflow: hidden; }
 .wv-pattern { position: absolute; inset: 0; background-image: url('pattern.png'); background-size: 220px; opacity: 0.06; pointer-events: none; z-index: 0; }
 .wv-logo-bar { background: var(--green); padding: 9px 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; position: relative; z-index: 1; }
-.wv-logo { height: 40px; mix-blend-mode: screen; object-fit: contain; }
+.wv-logo { height: 38px; mix-blend-mode: screen; object-fit: contain; }
 .wv-body { position: relative; z-index: 1; flex: 1; display: flex; flex-direction: column; padding: 14px; gap: 9px; overflow-y: auto; }
 .wv-title { font-size: 15px; font-weight: 900; color: #0c1a11; text-align: center; }
 .wv-sub   { font-size: 10px; color: #4a6650; text-align: center; line-height: 1.5; }
@@ -158,133 +166,467 @@ body {
 .wv-btn:active  { opacity: 0.8; }
 .wv-btn.sec     { background: #f0f0f0; color: #333; box-shadow: none; border: 1px solid #ddd; }
 .wv-btn.outline { background: transparent; color: var(--green); border: 1.5px solid var(--green); box-shadow: none; }
-.wv-btn.red     { background: #e74c3c; box-shadow: 0 3px 12px rgba(231,76,60,0.3); }
-
-/* ── GPS ── */
-.gps-wrap { position: relative; width: 84px; height: 84px; margin: 0 auto; display: flex; align-items: center; justify-content: center; }
-.gps-ring { position: absolute; border: 2px solid var(--green); border-radius: 50%; animation: gpsPulse 2s ease-out infinite; }
-.gps-ring:nth-child(1) { width: 26px; height: 26px; animation-delay: 0s; }
-.gps-ring:nth-child(2) { width: 48px; height: 48px; animation-delay: 0.5s; }
-.gps-ring:nth-child(3) { width: 70px; height: 70px; animation-delay: 1s; }
-.gps-center { width: 18px; height: 18px; background: var(--green); border-radius: 50%; z-index: 1; box-shadow: 0 0 10px var(--green-glow); }
-@keyframes gpsPulse { 0% { transform: scale(1); opacity: 0.9; } 100% { transform: scale(2.8); opacity: 0; } }
-
-/* ── FACE SCAN ── */
-.face-wrap { position: relative; width: 104px; height: 124px; margin: 0 auto; }
-.face-oval { width: 100%; height: 100%; border: 2.5px solid var(--green); border-radius: 50%; overflow: hidden; position: relative; background: rgba(45,190,96,0.04); box-shadow: 0 0 16px rgba(45,190,96,0.2); display: flex; align-items: center; justify-content: center; font-size: 50px; color: rgba(0,0,0,0.12); }
-.scan-line { position: absolute; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--green), transparent); box-shadow: 0 0 6px var(--green-glow); animation: scanAnim 2.5s ease-in-out infinite; z-index: 2; top: 10%; }
-@keyframes scanAnim { 0% { top: 10%; } 50% { top: 85%; } 100% { top: 10%; } }
+.wv-btn.gold    { background: linear-gradient(135deg, #f5c842, #e0a800); color: #333; box-shadow: 0 3px 12px rgba(245,200,66,0.4); }
 
 /* ── FORMS ── */
 .form-group { display: flex; flex-direction: column; gap: 3px; }
 .form-label { font-size: 9px; font-weight: 700; color: #555; }
 .form-input { background: white; border: 1.5px solid #e0e8e4; border-radius: 8px; padding: 8px 10px; font-size: 10px; color: #333; font-family: var(--font); }
+.form-input.placeholder { color: #aaa; }
 .form-row   { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-.consent-row { display: flex; align-items: flex-start; gap: 6px; font-size: 9px; color: #555; }
+.form-row3  { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
+.consent-row { display: flex; align-items: flex-start; gap: 6px; font-size: 9px; color: #555; line-height: 1.5; }
 .consent-box { width: 14px; height: 14px; border: 1.5px solid var(--green); border-radius: 3px; background: rgba(45,190,96,0.15); flex-shrink: 0; margin-top: 1px; display: flex; align-items: center; justify-content: center; font-size: 9px; color: var(--green); }
 .section-divider { height: 1px; background: linear-gradient(90deg, transparent, rgba(45,190,96,0.3), transparent); margin: 2px 0; }
 .section-label   { font-size: 11px; font-weight: 900; color: var(--green); text-align: center; }
-.location-pill   { background: rgba(45,190,96,0.08); border: 1px solid rgba(45,190,96,0.25); border-radius: 8px; padding: 5px 9px; font-size: 9px; color: #1a7a3a; display: flex; align-items: center; gap: 4px; font-weight: 700; }
 .skip-badge      { background: linear-gradient(135deg, var(--green), var(--green-dark)); color: white; border-radius: 10px; padding: 9px 12px; text-align: center; font-size: 10px; font-weight: 700; box-shadow: 0 4px 12px rgba(45,190,96,0.3); }
 .points-box      { background: linear-gradient(135deg, var(--green), var(--green-dark)); border-radius: 10px; padding: 10px; text-align: center; color: white; }
 .points-num      { font-size: 28px; font-weight: 900; line-height: 1; }
 .points-label    { font-size: 9px; opacity: 0.85; }
-.ret-avatar      { width: 58px; height: 58px; border-radius: 50%; background: linear-gradient(135deg, var(--green), var(--green-dark)); display: flex; align-items: center; justify-content: center; font-size: 28px; margin: 0 auto; box-shadow: 0 4px 14px rgba(45,190,96,0.4); }
-
-/* selfie */
-.selfie-guide { width: 100%; height: 92px; object-fit: cover; border-radius: 10px; border: 1px solid rgba(45,190,96,0.2); }
-.rules { display: flex; flex-direction: column; gap: 3px; }
-.rule { font-size: 8.5px; display: flex; gap: 4px; line-height: 1.4; }
-.rule.ok { color: #1a7a3a; } .rule.no { color: #c0392b; }
 
 /* info boxes */
 .confirmed-box { background: rgba(45,190,96,0.1); border: 1.5px solid rgba(45,190,96,0.4); border-radius: 10px; padding: 10px; text-align: center; }
 .confirmed-title { font-size: 11px; font-weight: 900; color: var(--green); }
 .confirmed-sub   { font-size: 9px; color: #4a6650; margin-top: 3px; }
+.info-box   { background: rgba(45,190,96,0.07); border: 1px solid rgba(45,190,96,0.2); border-radius: 8px; padding: 8px 10px; font-size: 9px; color: #1a7a3a; line-height: 1.6; }
 .error-box   { background: rgba(220,50,50,0.08); border: 1.5px solid rgba(220,50,50,0.3); border-radius: 10px; padding: 10px; text-align: center; }
 .error-title { font-size: 11px; font-weight: 900; color: #c0392b; }
-.error-sub   { font-size: 9px; color: #888; margin-top: 3px; line-height: 1.4; }
 
-/* ── LUCKY DRAW ── */
-.ld-screen { background: linear-gradient(180deg,#0c1a11 0%,#060d0a 100%); flex: 1; display: flex; flex-direction: column; align-items: center; padding: 14px; gap: 10px; position: relative; overflow: hidden; }
-.trophy-img { width: 114px; height: 134px; object-fit: contain; mix-blend-mode: screen; animation: trophyGlow 2.5s ease-in-out infinite; }
-@keyframes trophyGlow { 0%,100% { filter: drop-shadow(0 0 14px rgba(245,200,66,0.5)); } 50% { filter: drop-shadow(0 0 32px rgba(245,200,66,1)); } }
-.confetti { position: absolute; top: 0; left: 0; right: 0; height: 160px; pointer-events: none; }
-.ld-title { font-size: 17px; font-weight: 900; color: var(--gold); text-shadow: 0 0 12px rgba(245,200,66,0.5); text-align: center; }
-.ld-sub   { font-size: 10px; color: rgba(255,255,255,0.6); text-align: center; }
-.ld-date  { font-size: 11px; font-weight: 700; color: var(--green); text-align: center; }
-.prize-box { background: rgba(245,200,66,0.07); border: 1px solid rgba(245,200,66,0.2); border-radius: 10px; padding: 10px; display: flex; flex-direction: column; gap: 5px; width: 100%; }
-.prize-row { display: flex; align-items: center; gap: 8px; font-size: 9px; color: #ddd; }
+/* ── OTP SCREEN ── */
+.otp-receipt-mock {
+  background: white;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  padding: 10px;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.otp-receipt-mock::after {
+  content: '';
+  position: absolute;
+  bottom: -8px; left: 10px; right: 10px; height: 8px;
+  background: repeating-linear-gradient(90deg, white 0, white 6px, transparent 6px, transparent 12px);
+}
+.receipt-row { display: flex; justify-content: space-between; font-size: 9px; color: #555; padding: 2px 0; }
+.receipt-row.bold { font-weight: 900; color: #111; }
+.receipt-otp { background: rgba(45,190,96,0.1); border: 2px dashed var(--green); border-radius: 6px; padding: 6px; text-align: center; margin-top: 6px; }
+.receipt-otp-label { font-size: 8px; color: var(--green); font-weight: 700; }
+.receipt-otp-code  { font-size: 20px; font-weight: 900; color: #0c1a11; letter-spacing: 4px; }
+
+.otp-boxes { display: flex; gap: 6px; justify-content: center; }
+.otp-box { width: 36px; height: 44px; background: white; border: 2px solid #e0e8e4; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 900; color: #0c1a11; }
+.otp-box.filled { border-color: var(--green); background: rgba(45,190,96,0.05); }
+
+/* ── PHOTO / FOAM ART SCREEN ── */
+.camera-viewfinder {
+  background: #0a0a0a;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid rgba(45,190,96,0.3);
+}
+.camera-corner {
+  position: absolute;
+  width: 20px; height: 20px;
+  border-color: var(--green);
+  border-style: solid;
+  border-width: 0;
+}
+.cc-tl { top: 8px; left: 8px; border-top-width: 2.5px; border-left-width: 2.5px; }
+.cc-tr { top: 8px; right: 8px; border-top-width: 2.5px; border-right-width: 2.5px; }
+.cc-bl { bottom: 8px; left: 8px; border-bottom-width: 2.5px; border-left-width: 2.5px; }
+.cc-br { bottom: 8px; right: 8px; border-bottom-width: 2.5px; border-right-width: 2.5px; }
+
+.beer-glass-mock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+.foam-top {
+  width: 72px;
+  height: 28px;
+  background: linear-gradient(180deg, #f8f8f8 0%, #e8e4d8 100%);
+  border-radius: 50% 50% 0 0 / 80% 80% 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: 0 -2px 8px rgba(255,255,255,0.3);
+}
+.foam-bubble-l { position: absolute; width: 10px; height: 10px; background: white; border-radius: 50%; top: 4px; left: 8px; opacity: 0.7; }
+.foam-bubble-r { position: absolute; width: 7px; height: 7px; background: white; border-radius: 50%; top: 2px; right: 10px; opacity: 0.6; }
+.foam-logo-text {
+  font-size: 8px;
+  font-weight: 900;
+  color: var(--green);
+  letter-spacing: 1px;
+  background: rgba(255,255,255,0.9);
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 6px rgba(45,190,96,0.5);
+  z-index: 1;
+  font-size: 6px;
+  text-align: center;
+  line-height: 1.1;
+}
+.beer-body-mock {
+  width: 64px;
+  height: 52px;
+  background: linear-gradient(180deg, rgba(212,160,23,0.9) 0%, rgba(180,120,10,0.95) 100%);
+  border-radius: 0 0 8px 8px;
+  border: 1.5px solid rgba(212,160,23,0.4);
+  border-top: none;
+  position: relative;
+  overflow: hidden;
+}
+.beer-bubble-1 { position: absolute; width: 3px; height: 10px; background: rgba(255,255,255,0.2); border-radius: 2px; left: 14px; top: 6px; animation: bubbleRise 2s ease-in infinite; }
+.beer-bubble-2 { position: absolute; width: 2px; height: 8px; background: rgba(255,255,255,0.15); border-radius: 2px; left: 32px; top: 10px; animation: bubbleRise 2.5s ease-in infinite 0.8s; }
+.beer-bubble-3 { position: absolute; width: 3px; height: 12px; background: rgba(255,255,255,0.2); border-radius: 2px; left: 48px; top: 4px; animation: bubbleRise 1.8s ease-in infinite 0.3s; }
+@keyframes bubbleRise { 0% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(-40px); opacity: 0; } }
+
+.camera-label-bar {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  background: rgba(0,0,0,0.6);
+  padding: 5px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.camera-label-text { font-size: 9px; color: rgba(255,255,255,0.9); font-weight: 700; }
+
+.cam-rules { display: flex; flex-direction: column; gap: 2px; }
+.cam-rule { font-size: 8.5px; display: flex; gap: 5px; line-height: 1.4; }
+.cam-rule.ok { color: #1a7a3a; }
+.cam-rule.no { color: #c0392b; }
+
+.photo-taken {
+  background: #0a0a0a;
+  border-radius: 12px;
+  aspect-ratio: 4/3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border: 2px solid var(--green);
+  overflow: hidden;
+}
+.photo-taken-inner { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.photo-taken-ok { font-size: 28px; }
+.photo-taken-label { font-size: 10px; color: white; font-weight: 700; }
+.photo-check-badge { position: absolute; top: 8px; right: 8px; background: var(--green); border-radius: 50%; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; font-size: 11px; color: white; }
+
+/* ── SPIN WHEEL ── */
+.spin-screen {
+  background: linear-gradient(180deg, #0c1a11 0%, #060d0a 100%);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 14px;
+  gap: 10px;
+  position: relative;
+  overflow: hidden;
+}
+.confetti-svg { position: absolute; top: 0; left: 0; right: 0; height: 160px; pointer-events: none; }
+
+.spin-pts-earned {
+  background: rgba(45,190,96,0.15);
+  border: 1px solid rgba(45,190,96,0.4);
+  border-radius: 10px;
+  padding: 8px 16px;
+  text-align: center;
+  width: 100%;
+}
+.spin-pts-earned-num  { font-size: 22px; font-weight: 900; color: var(--green); line-height: 1; }
+.spin-pts-earned-label { font-size: 9px; color: rgba(255,255,255,0.7); }
+
+.wheel-wrap {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.wheel-pointer {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0; height: 0;
+  border-left: 11px solid transparent;
+  border-right: 11px solid transparent;
+  border-top: 20px solid white;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.6));
+  z-index: 10;
+}
+#spin-wheel {
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  background: conic-gradient(
+    #555 0deg 216deg,
+    #2dbe60 216deg 288deg,
+    #f5c842 288deg 324deg,
+    #059b48 324deg 360deg
+  );
+  border: 4px solid white;
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.1), 0 6px 24px rgba(0,0,0,0.5);
+  transform-origin: center;
+  will-change: transform;
+}
+.wheel-center {
+  position: absolute;
+  width: 36px; height: 36px;
+  background: white;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  z-index: 5;
+  font-size: 14px;
+}
+
+.wheel-legend {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+  width: 100%;
+}
+.wl-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 7px;
+  padding: 5px 7px;
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: background 0.3s, border-color 0.3s;
+}
+.wl-item.highlight {
+  background: rgba(255,255,255,0.15);
+  border-color: rgba(255,255,255,0.3);
+  box-shadow: 0 0 10px rgba(255,255,255,0.1);
+}
+.wl-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.wl-text { font-size: 8.5px; color: rgba(255,255,255,0.8); font-weight: 700; line-height: 1.3; }
+.wl-pct  { font-size: 8px; color: rgba(255,255,255,0.4); margin-left: auto; flex-shrink: 0; }
+
+#spin-btn {
+  background: linear-gradient(135deg, var(--gold), #e0a800);
+  color: #111;
+  border: none;
+  border-radius: 50%;
+  width: 72px; height: 72px;
+  font-size: 14px;
+  font-weight: 900;
+  font-family: var(--font);
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(245,200,66,0.5);
+  transition: opacity 0.2s, transform 0.1s;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1px;
+}
+#spin-btn:active { transform: scale(0.95); }
+#spin-btn:disabled { opacity: 0.5; cursor: default; }
+
+.spin-result-card {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,0.06);
+  border: 1.5px solid rgba(255,255,255,0.15);
+  border-radius: 12px;
+  padding: 12px 14px;
+  width: 100%;
+  text-align: center;
+}
+.spin-result-icon  { font-size: 28px; }
+.spin-result-title { font-size: 14px; font-weight: 900; }
+.spin-result-sub   { font-size: 9.5px; color: rgba(255,255,255,0.6); line-height: 1.5; }
+
 .share-row { display: flex; gap: 6px; width: 100%; }
 .share-btn { flex: 1; padding: 9px 4px; border-radius: 8px; font-size: 9px; font-weight: 700; font-family: var(--font); border: none; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 2px; }
 .share-btn.replay  { background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2); }
 .share-btn.lshare  { background: #06C755; color: white; }
-.share-btn.fbshare { background: #1877F2; color: white; }
+.share-btn.home    { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.8); border: 1px solid rgba(255,255,255,0.15); }
 .share-btn:active  { opacity: 0.75; }
 
-/* ── MAPS ── */
-.maps-header { background: #4285f4; height: 50px; display: flex; align-items: center; padding: 0 12px; gap: 10px; flex-shrink: 0; }
-.maps-back   { color: white; font-size: 22px; cursor: pointer; }
-.maps-title  { color: white; font-size: 14px; font-weight: 700; flex: 1; }
-.maps-share  { color: white; font-size: 13px; font-weight: 700; cursor: pointer; padding: 6px 12px; background: rgba(255,255,255,0.2); border-radius: 8px; border: 1px solid rgba(255,255,255,0.3); }
-.maps-share:active { background: rgba(255,255,255,0.35); }
-.maps-body   { background: #dcedc8; flex: 1; position: relative; overflow: hidden; }
-.map-bg      { width: 100%; height: 100%; background: linear-gradient(135deg, #c8e6c9, #a5d6a7, #c8e6c9); display: flex; align-items: center; justify-content: center; font-size: 48px; }
-.map-pin     { position: absolute; font-size: 34px; animation: pinBounce 1s ease-in-out infinite; }
-@keyframes pinBounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
-.location-list { position: absolute; bottom: 0; left: 0; right: 0; background: white; border-radius: 16px 16px 0 0; padding: 12px; display: flex; flex-direction: column; gap: 8px; box-shadow: 0 -4px 20px rgba(0,0,0,0.1); }
-.loc-item { display: flex; align-items: center; gap: 10px; padding: 8px; border-radius: 8px; }
-.loc-icon { font-size: 20px; flex-shrink: 0; }
-.loc-info { flex: 1; }
-.loc-name { font-size: 11px; font-weight: 700; color: #111; }
-.loc-addr { font-size: 9px; color: #888; }
-.loc-sep  { height: 1px; background: #f0f0f0; }
-.loc-hint { font-size: 9px; color: var(--green); font-weight: 700; text-align: center; padding: 5px; background: rgba(45,190,96,0.08); border-radius: 6px; }
+/* ── POINTS HISTORY SCREEN ── */
+.pts-hero {
+  background: linear-gradient(135deg, var(--green), var(--green-dark));
+  border-radius: 12px;
+  padding: 14px;
+  text-align: center;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+.pts-hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: url('pattern.png') center/180px;
+  opacity: 0.07;
+}
+.pts-hero-num   { font-size: 42px; font-weight: 900; line-height: 1; position: relative; }
+.pts-hero-label { font-size: 10px; opacity: 0.85; position: relative; }
+.pts-hero-sub   { font-size: 9px; opacity: 0.7; margin-top: 4px; position: relative; }
 
-/* send modal */
-.send-modal { position: absolute; inset: 0; background: rgba(0,0,0,0.45); display: flex; align-items: center; justify-content: center; padding: 20px; z-index: 10; }
-.send-card  { background: white; border-radius: 16px; padding: 22px 16px; text-align: center; display: flex; flex-direction: column; gap: 12px; width: 100%; }
-.send-card-title { font-size: 12px; font-weight: 700; color: #111; line-height: 1.5; }
-.send-card-sub   { font-size: 10px; color: #666; }
-.send-btns   { display: flex; gap: 8px; }
-.send-cancel { flex: 1; padding: 11px; border-radius: 8px; border: 1px solid #ddd; background: white; font-size: 12px; font-weight: 700; font-family: var(--font); color: #666; cursor: pointer; }
-.send-ok     { flex: 1; padding: 11px; border-radius: 8px; border: none; background: var(--line-green); font-size: 12px; font-weight: 700; font-family: var(--font); color: white; cursor: pointer; }
+.tx-list { display: flex; flex-direction: column; gap: 1px; }
+.tx-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(45,190,96,0.1);
+}
+.tx-icon { font-size: 16px; flex-shrink: 0; width: 28px; text-align: center; }
+.tx-info { flex: 1; }
+.tx-title { font-size: 10px; font-weight: 700; color: #0c1a11; }
+.tx-date  { font-size: 8.5px; color: #888; }
+.tx-pts   { font-size: 12px; font-weight: 900; }
+.tx-pts.pos { color: var(--green); }
+.tx-pts.neu { color: #888; }
 
-/* venue cards */
-.venue-cards { display: flex; gap: 8px; overflow-x: auto; padding: 4px 0; }
-.venue-card  { background: white; border-radius: 10px; padding: 10px; min-width: 104px; border: 1px solid #e8e8e8; flex-shrink: 0; text-align: center; cursor: pointer; }
-.venue-card:active { background: #f5f5f5; }
-.venue-icon  { font-size: 22px; margin-bottom: 4px; }
-.venue-name  { font-size: 9px; font-weight: 700; color: #111; line-height: 1.3; }
-.venue-dist  { font-size: 8px; color: var(--green); margin-top: 2px; font-weight: 700; }
-.venue-badge { display: inline-block; background: var(--green); color: white; border-radius: 4px; padding: 1px 5px; font-size: 7px; font-weight: 700; margin-top: 3px; }
+.prize-tier-mini {
+  background: white;
+  border-radius: 10px;
+  border: 1px solid #e0e8e4;
+  overflow: hidden;
+}
+.ptm-header {
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-bottom: 1px solid #f0f0f0;
+}
+.ptm-icon { font-size: 16px; }
+.ptm-title { font-size: 10px; font-weight: 900; color: #111; }
+.ptm-body { padding: 8px 12px; font-size: 9px; color: #555; line-height: 1.8; }
 
-/* gmaps */
-.gmaps-bar    { background: white; padding: 8px 10px; display: flex; align-items: center; gap: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); flex-shrink: 0; }
-.gmaps-search { flex: 1; background: #f5f5f5; border-radius: 20px; padding: 7px 12px; font-size: 10px; color: #666; border: none; font-family: var(--font); }
-.gmaps-body   { flex: 1; position: relative; background: #dcedc8; }
-.gmaps-result { position: absolute; bottom: 0; left: 0; right: 0; background: white; border-radius: 16px 16px 0 0; padding: 14px; box-shadow: 0 -4px 20px rgba(0,0,0,0.1); }
-.gmaps-place  { font-size: 12px; font-weight: 700; color: #111; margin-bottom: 4px; }
-.gmaps-stars  { font-size: 10px; color: #f5a623; }
-.gmaps-hours  { font-size: 9px; color: #666; margin-bottom: 10px; }
-.gmaps-btns   { display: flex; gap: 8px; }
-.gmaps-btn    { flex: 1; padding: 10px; border-radius: 8px; border: none; font-size: 10px; font-weight: 700; font-family: var(--font); cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 4px; }
-.gmaps-btn.dir   { background: #4285f4; color: white; }
-.gmaps-btn.start { background: var(--green); color: white; }
+/* ── FLOW START ── */
+.flow-start-card {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1.5px solid;
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+.flow-start-card:active { transform: scale(0.98); }
+.fsc-header { padding: 14px; display: flex; align-items: center; gap: 10px; }
+.fsc-icon { font-size: 28px; }
+.fsc-title { font-size: 13px; font-weight: 900; }
+.fsc-sub   { font-size: 9.5px; opacity: 0.8; margin-top: 2px; }
+.fsc-arrow { font-size: 18px; margin-left: auto; }
 
-/* permission */
-.perm-modal   { position: absolute; inset: 0; background: rgba(0,0,0,0.5); display: flex; align-items: flex-end; z-index: 10; }
-.perm-card    { background: white; border-radius: 14px 14px 0 0; padding: 22px; width: 100%; display: flex; flex-direction: column; gap: 12px; }
-.perm-title   { font-size: 13px; font-weight: 700; color: #111; text-align: center; line-height: 1.4; }
-.perm-sub     { font-size: 10px; color: #666; text-align: center; line-height: 1.5; }
-.perm-btns    { display: flex; gap: 8px; }
-.perm-deny    { flex: 1; padding: 11px; border-radius: 8px; border: 1px solid #ddd; background: white; font-size: 12px; font-weight: 700; font-family: var(--font); color: #666; cursor: pointer; }
-.perm-approve { flex: 1; padding: 11px; border-radius: 8px; border: none; background: var(--line-green); font-size: 12px; font-weight: 700; font-family: var(--font); color: white; cursor: pointer; }
+/* how-to steps */
+.howto-steps { display: flex; flex-direction: column; gap: 0; }
+.howto-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 7px 0;
+  border-bottom: 1px solid rgba(45,190,96,0.1);
+}
+.howto-step:last-child { border-bottom: none; }
+.step-num {
+  width: 20px; height: 20px;
+  background: var(--green);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 9px; font-weight: 900; color: white;
+  flex-shrink: 0; margin-top: 1px;
+}
+.step-text { font-size: 10px; color: #0c1a11; line-height: 1.5; }
+.step-pts  { font-size: 9px; color: var(--green); font-weight: 700; }
 
-/* ── LINE SHARE D1 ── */
+/* day badge */
+.day-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(245,200,66,0.12);
+  border: 1px solid rgba(245,200,66,0.4);
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 9.5px;
+  font-weight: 700;
+  color: #8b6900;
+}
+
+/* ── RETURNING SCREEN ── */
+.ret-avatar {
+  width: 58px; height: 58px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--green), var(--green-dark));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 28px; margin: 0 auto;
+  box-shadow: 0 4px 14px rgba(45,190,96,0.4);
+}
+
+/* ── PRIZE TIERS SCREEN ── */
+.prize-screen {
+  background: linear-gradient(180deg, #0c1a11 0%, #060d0a 100%);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 14px;
+  gap: 10px;
+  overflow-y: auto;
+}
+.prize-tier-card {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid;
+}
+.ptc-header {
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.ptc-badge { font-size: 9px; font-weight: 900; background: rgba(255,255,255,0.2); border-radius: 4px; padding: 2px 6px; margin-left: auto; }
+.ptc-icon { font-size: 22px; }
+.ptc-title { font-size: 12px; font-weight: 900; color: white; }
+.ptc-sub { font-size: 9px; color: rgba(255,255,255,0.7); margin-top: 1px; }
+.ptc-body { background: rgba(0,0,0,0.3); padding: 10px 12px; }
+.ptc-item { font-size: 9.5px; color: rgba(255,255,255,0.85); padding: 3px 0; display: flex; gap: 6px; align-items: flex-start; line-height: 1.4; }
+.ptc-draw-row {
+  background: rgba(255,255,255,0.06);
+  border-radius: 8px;
+  padding: 8px 10px;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.ptc-draw-icon { font-size: 20px; flex-shrink: 0; }
+.ptc-draw-info { flex: 1; }
+.ptc-draw-title { font-size: 10px; font-weight: 900; color: white; }
+.ptc-draw-sub   { font-size: 8.5px; color: rgba(255,255,255,0.6); margin-top: 2px; }
+.ptc-draw-count { font-size: 8px; font-weight: 700; color: var(--gold); background: rgba(245,200,66,0.15); border-radius: 4px; padding: 2px 6px; flex-shrink: 0; }
+
+/* ── LINE SHARE ── */
 .friend-picker { background: white; flex: 1; display: flex; flex-direction: column; }
 .fp-header { background: var(--line-green); padding: 12px 14px; color: white; font-size: 14px; font-weight: 700; display: flex; align-items: center; gap: 10px; }
-.fp-body   { flex: 1; padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+.fp-body   { flex: 1; padding: 12px; display: flex; flex-direction: column; gap: 8px; overflow-y: auto; }
 .fp-hint   { font-size: 10px; color: #888; }
 .friend-item { display: flex; align-items: center; gap: 10px; padding: 9px; border-radius: 8px; cursor: pointer; }
 .friend-item:active { background: #f5f5f5; }
@@ -293,84 +635,65 @@ body {
 .friend-check  { width: 22px; height: 22px; border-radius: 50%; border: 2px solid #ddd; display: flex; align-items: center; justify-content: center; font-size: 11px; }
 .friend-check.selected { background: var(--line-green); border-color: var(--line-green); color: white; }
 .fp-send-btn { background: var(--line-green); color: white; border: none; border-radius: 10px; padding: 13px; font-size: 14px; font-weight: 700; font-family: var(--font); cursor: pointer; margin: 12px; }
-
-/* rich card in chat */
 .rich-card { background: linear-gradient(135deg,#1a5c2e,#0c3d1e); border-radius: 12px; padding: 12px; margin: 2px 0; font-size: 9px; color: white; line-height: 1.6; }
 .rich-card strong { color: var(--gold); font-size: 10px; }
 .rich-card a { color: #6dff9e; }
 .rich-card-btn { background: var(--green); color: white; border: none; border-radius: 8px; padding: 8px 12px; font-size: 10px; font-weight: 700; font-family: var(--font); width: 100%; cursor: pointer; margin-top: 8px; }
 
-/* ── FB ── */
-.fb-header { background: #1877F2; height: 50px; display: flex; align-items: center; padding: 0 14px; gap: 10px; flex-shrink: 0; }
-.fb-header-title { flex: 1; color: white; font-size: 15px; font-weight: 700; }
-.fb-post-btn { background: white; color: #1877F2; border: none; border-radius: 6px; padding: 6px 14px; font-size: 11px; font-weight: 700; font-family: var(--font); cursor: pointer; }
-.fb-body { background: white; flex: 1; padding: 14px; display: flex; flex-direction: column; gap: 10px; overflow-y: auto; }
-.fb-user-row   { display: flex; align-items: center; gap: 8px; }
-.fb-user-avatar{ width: 38px; height: 38px; border-radius: 50%; background: #1877F2; display: flex; align-items: center; justify-content: center; color: white; font-size: 15px; font-weight: 700; flex-shrink: 0; }
-.fb-user-name  { font-size: 13px; font-weight: 700; color: #111; }
-.fb-caption    { font-size: 11px; color: #333; line-height: 1.6; padding: 4px 0; border-bottom: 1px solid #f0f0f0; }
-.fb-photo-box  { background: #f5f5f5; border-radius: 10px; height: 100px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; position: relative; }
-.auto-badge    { position: absolute; top: 8px; right: 8px; background: var(--green); color: white; font-size: 8px; font-weight: 700; padding: 2px 6px; border-radius: 4px; }
-.fb-hint       { font-size: 8px; color: #aaa; }
-.fb-submit     { background: #1877F2; color: white; border: none; border-radius: 8px; padding: 12px; font-size: 13px; font-weight: 700; font-family: var(--font); cursor: pointer; width: 100%; }
-.fb-post-card  { background: white; border: 1px solid #e4e6eb; border-radius: 12px; overflow: hidden; margin: 4px 0; }
-.fb-post-head  { padding: 10px 12px; display: flex; align-items: center; gap: 8px; }
-.fb-post-av    { width: 34px; height: 34px; border-radius: 50%; background: #1877F2; display: flex; align-items: center; justify-content: center; color: white; font-size: 13px; font-weight: 700; flex-shrink: 0; }
-.fb-post-nm    { font-size: 12px; font-weight: 700; color: #111; }
-.fb-post-time  { font-size: 9px; color: #aaa; }
-.fb-post-text  { padding: 0 12px 10px; font-size: 11px; color: #333; line-height: 1.6; }
-.fb-post-link  { color: #1877F2; }
-.fb-post-photo { background: #f5f5f5; height: 80px; display: flex; align-items: center; justify-content: center; font-size: 28px; }
-.fb-reactions  { padding: 8px 12px; display: flex; gap: 16px; border-top: 1px solid #f0f0f0; }
-.fb-reaction   { font-size: 10px; color: #666; cursor: pointer; }
-.fb-oa-cta     { background: rgba(45,190,96,0.08); border: 1px solid rgba(45,190,96,0.3); border-radius: 8px; padding: 9px 12px; font-size: 10px; color: #1a7a3a; font-weight: 700; text-align: center; margin: 4px 12px 12px; cursor: pointer; }
+/* trophy glow */
+.trophy-img { width: 80px; height: 94px; object-fit: contain; mix-blend-mode: screen; animation: trophyGlow 2.5s ease-in-out infinite; }
+@keyframes trophyGlow { 0%,100% { filter: drop-shadow(0 0 10px rgba(245,200,66,0.5)); } 50% { filter: drop-shadow(0 0 28px rgba(245,200,66,1)); } }
 </style>
 </head>
 <body>
 
 <div class="proto-header">
-  <div class="proto-title">CBCB Interactive Prototype</div>
+  <div class="proto-title">CBCB Interactive Prototype · M4</div>
   <div class="proto-sub">เช็คอิน ลุ้นบินดูคาราบาวคัพ · Tap to navigate</div>
 </div>
 
 <div class="phone">
   <div class="phone-notch"></div>
 
-  <!-- ══ S0 — LINE OA HOME ══ -->
+  <!-- ══════════════════════════════════════════
+       S0 — LINE OA HOME
+  ══════════════════════════════════════════ -->
   <div id="s0" class="screen active">
     <div class="status-bar sb-line"><span>9:41</span><span>🔋 📶</span></div>
     <div class="line-header">
-      <div class="line-avatar">CB</div>
+      <div class="line-avatar">
+        <img src="CBCB%20Logo.png" alt="CB" onerror="this.parentElement.textContent='CB'">
+      </div>
       <div class="line-info">
         <div class="line-name">Cheer Ball Cheer Bao <span class="line-badge">OA</span></div>
-        <div class="line-status-text">กำลังใช้งาน</div>
+        <div class="line-status-text">@carabaotawandangbeverage</div>
       </div>
-      <div class="line-header-icons"><span>📞</span><span>🎥</span></div>
+      <div class="line-header-icons"><span>🔔</span><span>☰</span></div>
     </div>
     <div class="line-chat">
-      <div class="chat-date">วันนี้</div>
+      <div class="chat-date">วันนี้ · 2 มิ.ย. 2569</div>
       <div class="bubble-row">
-        <div class="bav">CB</div>
-        <div class="bubble in">🏆 สวัสดีแฟนบอล!<br>ร่วมสนุก <strong>เช็คอิน ลุ้นบินดูคาราบาวคัพ</strong><br>ส.ค. – ต.ค. 2569 🎉</div>
+        <div class="bav"><img src="CBCB%20Logo.png" alt="CB" onerror="this.textContent='CB'"></div>
+        <div class="bubble in">🏆 สวัสดีแฟนบอล!<br>ร่วมสนุก <strong>"เช็คอิน ลุ้นบินดูคาราบาวคัพ"</strong><br>ส.ค. 2569 – พ.ค. 2570 🎉</div>
       </div>
-      <div class="bubble-row">
+      <div class="bubble-row" style="margin-top:-4px">
         <div class="bav" style="opacity:0"></div>
-        <div class="bubble in">📸 ถ่ายเซลฟี่ในร้านพาร์ทเนอร์ สะสมแต้ม ลุ้นบินเวมบลีย์! ✈️🏟️</div>
+        <div class="bubble in">📸 ถ่ายภาพฟองเบียร์ลาย CBCB + OTP จากใบเสร็จ สะสมแต้ม ลุ้นบินเวมบลีย์! ✈️🏟️</div>
       </div>
       <div class="bubble-row out">
         <div class="btime">9:31</div><div class="bread">อ่านแล้ว</div>
         <div class="bubble out">สนใจจ้า! 🙋</div>
       </div>
       <div class="bubble-row">
-        <div class="bav">CB</div>
+        <div class="bav"><img src="CBCB%20Logo.png" alt="CB" onerror="this.textContent='CB'"></div>
         <div class="bubble in">✅ กดปุ่ม <strong>"เข้าร่วมกิจกรรม"</strong> ด้านล่างได้เลยครับ!</div>
       </div>
     </div>
     <div class="rich-menu">
+      <button class="rm-btn" onclick="go('s-website')"><span class="rm-icon">🌐</span>รายละเอียด<br>เพิ่มเติม</button>
       <button class="rm-btn" onclick="go('s-fb-load')"><span class="rm-icon">👍</span>Facebook</button>
-      <button class="rm-btn" onclick="go('s-howto-load')"><span class="rm-icon">💡</span>วิธีการเล่น</button>
-      <button class="rm-btn" onclick="go('s-loc-perm')"><span class="rm-icon">📍</span>สถานที่ตั้ง</button>
-      <button class="rm-btn primary" onclick="go('s-gps')"><span class="rm-icon">🎯</span>เข้าร่วมกิจกรรม</button>
+      <button class="rm-btn" onclick="go('s-points')"><span class="rm-icon">⭐</span>ดูแต้ม/<br>ประวัติ</button>
+      <button class="rm-btn primary" onclick="go('s-flow-start')"><span class="rm-icon">🎯</span>เข้าร่วม<br>กิจกรรม</button>
     </div>
     <div class="line-bottom-nav">
       <div class="nav-item"><span>🏠</span>Home</div>
@@ -380,7 +703,35 @@ body {
     </div>
   </div>
 
-  <!-- ══ FACEBOOK REDIRECT ══ -->
+  <!-- ══════════════════════════════════════════
+       S-WEBSITE — รายละเอียดเพิ่มเติม REDIRECT
+  ══════════════════════════════════════════ -->
+  <div id="s-website" class="screen">
+    <div class="status-bar sb-web"><span>9:41</span><span style="color:#333;font-weight:700">carabaocup.th</span><span>📶</span></div>
+    <div class="web-bar">
+      <span class="web-back" onclick="go('s0')">‹</span>
+      <div class="web-url">carabaocup.th/cbcb-campaign</div>
+    </div>
+    <div class="redirect-screen">
+      <div class="redirect-icon" style="background:var(--green);overflow:hidden">
+        <img src="CBCB%20Logo.png" style="width:100%;height:100%;object-fit:cover" onerror="this.parentElement.textContent='🏆'">
+      </div>
+      <div class="redirect-title">เช็คอิน ลุ้นบินดูคาราบาวคัพ</div>
+      <div class="redirect-sub">กำลังเปิดหน้าเว็บกิจกรรม<br>Carabao Cup 2026/27</div>
+      <div class="redirect-dots">
+        <div class="redirect-dot" style="background:var(--green);animation-delay:0s"></div>
+        <div class="redirect-dot" style="background:var(--gold);animation-delay:0.2s"></div>
+        <div class="redirect-dot" style="background:var(--green);animation-delay:0.4s"></div>
+      </div>
+      <div class="redirect-url">carabaocup.th/cbcb-campaign</div>
+      <button class="open-btn" style="background:var(--green)" onclick="go('s0')">เปิดหน้าเว็บกิจกรรม ↗</button>
+      <button class="open-btn" style="background:#f0f0f0;color:#333;margin-top:-4px" onclick="go('s0')">← กลับ</button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       S-FB-LOAD — FACEBOOK REDIRECT
+  ══════════════════════════════════════════ -->
   <div id="s-fb-load" class="screen">
     <div class="status-bar sb-fb"><span>9:41</span><span>facebook.com</span><span>📶</span></div>
     <div class="web-bar">
@@ -393,361 +744,719 @@ body {
       <div class="redirect-sub">กำลังเปิดหน้า Facebook<br>กรุณารอสักครู่...</div>
       <div class="redirect-dots">
         <div class="redirect-dot" style="background:#1877F2;animation-delay:0s"></div>
-        <div class="redirect-dot" style="animation-delay:0.2s"></div>
-        <div class="redirect-dot" style="animation-delay:0.4s"></div>
+        <div class="redirect-dot" style="animation-delay:0.2s;background:#ccc"></div>
+        <div class="redirect-dot" style="animation-delay:0.4s;background:#1877F2"></div>
       </div>
       <div class="redirect-url">facebook.com/CarabaoTawandangBeverage</div>
-      <button class="open-btn" style="background:#1877F2" onclick="window.open('https://www.facebook.com/CarabaoTawandangBeverage','_blank');go('s0')">เปิดใน Facebook ↗</button>
+      <button class="open-btn" style="background:#1877F2" onclick="go('s0')">เปิดใน Facebook ↗</button>
       <button class="open-btn" style="background:#f0f0f0;color:#333;margin-top:-4px" onclick="go('s0')">← กลับ</button>
     </div>
   </div>
 
-  <!-- ══ วิธีการเล่น REDIRECT ══ -->
-  <div id="s-howto-load" class="screen">
-    <div class="status-bar sb-web"><span>9:41</span><span style="color:#333;font-weight:700">jabpichayut-ux.github.io</span><span>📶</span></div>
+  <!-- ══════════════════════════════════════════
+       S-POINTS — POINTS & HISTORY
+  ══════════════════════════════════════════ -->
+  <div id="s-points" class="screen">
+    <div class="status-bar sb-web"><span>9:41</span><span style="color:var(--green);font-weight:700">line.me</span><span>📶</span></div>
     <div class="web-bar">
       <span class="web-back" onclick="go('s0')">‹</span>
-      <div class="web-url">jabpichayut-ux.github.io/CBCB-Interactive-Game/</div>
+      <div class="web-url">checkin.carabaocup.th/points</div>
     </div>
-    <div class="redirect-screen">
-      <div class="redirect-icon" style="background:#24292e;color:white;font-size:30px">🐙</div>
-      <div class="redirect-title">CBCB Interactive Game</div>
-      <div class="redirect-sub">กำลังเปิดหน้าวิธีการเล่น<br>กรุณารอสักครู่...</div>
-      <div class="redirect-dots">
-        <div class="redirect-dot" style="background:#24292e;animation-delay:0s"></div>
-        <div class="redirect-dot" style="background:#2dbe60;animation-delay:0.2s"></div>
-        <div class="redirect-dot" style="background:#24292e;animation-delay:0.4s"></div>
-      </div>
-      <div class="redirect-url">jabpichayut-ux.github.io/CBCB-Interactive-Game/</div>
-      <button class="open-btn" style="background:var(--green)" onclick="window.open('https://jabpichayut-ux.github.io/CBCB-Interactive-Game/','_blank');go('s0')">เปิดวิธีการเล่น ↗</button>
-      <button class="open-btn" style="background:#f0f0f0;color:#333;margin-top:-4px" onclick="go('s0')">← กลับ</button>
-    </div>
-  </div>
-
-  <!-- ══ LOCATION PERMISSION ══ -->
-  <div id="s-loc-perm" class="screen">
-    <div class="status-bar sb-line"><span>9:41</span><span>🔋 📶</span></div>
-    <div class="line-header">
-      <span class="line-back" onclick="go('s0')">‹</span>
-      <div class="line-avatar">CB</div>
-      <div class="line-info">
-        <div class="line-name">Cheer Ball Cheer Bao <span class="line-badge">OA</span></div>
-        <div class="line-status-text">กำลังใช้งาน</div>
-      </div>
-    </div>
-    <div class="line-chat" style="position:relative">
-      <div class="bubble-row">
-        <div class="bav">CB</div>
-        <div class="bubble in">กรุณาแชร์ตำแหน่งของคุณเพื่อค้นหาร้านพาร์ทเนอร์ Carabao ใกล้คุณ 📍</div>
-      </div>
-      <div class="perm-modal">
-        <div class="perm-card">
-          <div class="perm-title">"Cheer Ball Cheer Bao"<br>ต้องการเข้าถึงตำแหน่งของคุณ</div>
-          <div class="perm-sub">เพื่อค้นหาร้านพาร์ทเนอร์ใกล้คุณ</div>
-          <div class="perm-btns">
-            <button class="perm-deny" onclick="go('s0')">ไม่อนุญาต</button>
-            <button class="perm-approve" onclick="go('s-loc-maps')">อนุญาต</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ══ LINE MAPS PICKER (tap Share top-right) ══ -->
-  <div id="s-loc-maps" class="screen">
-    <div class="status-bar sb-maps"><span>9:41</span><span style="font-weight:700">LINE Maps</span><span>📶</span></div>
-    <div class="maps-header">
-      <span class="maps-back" onclick="go('s-loc-perm')">✕</span>
-      <span class="maps-title">Locations</span>
-      <span class="maps-share" onclick="go('s-loc-confirm')">Share</span>
-    </div>
-    <div class="maps-body" style="position:relative">
-      <div class="map-bg"><div class="map-pin" style="top:30%;left:45%">📍</div></div>
-      <div class="location-list">
-        <div style="font-size:10px;color:#aaa;padding:0 4px">🔍 Search</div>
-        <div class="loc-hint">👆 เลือกตำแหน่ง แล้วกด <strong>Share</strong> ด้านบนขวา</div>
-        <div class="loc-item"><div class="loc-icon">🍺</div><div class="loc-info"><div class="loc-name">Boon Restaurant (บุญโภชนา)</div><div class="loc-addr">152/18-19 Naradhiwas Rd, Bang Rak</div></div></div>
-        <div class="loc-sep"></div>
-        <div class="loc-item"><div class="loc-icon">🛒</div><div class="loc-info"><div class="loc-name">Lalaisap Market</div><div class="loc-addr">Silom 5, Bang Rak 10500</div></div></div>
-        <div class="loc-sep"></div>
-        <div class="loc-item"><div class="loc-icon">🍜</div><div class="loc-info"><div class="loc-name">น้ำเงี้ยวป้าสุข</div><div class="loc-addr">Sol Phi Phat, บางรัก</div></div></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ══ CONFIRM SEND ══ -->
-  <div id="s-loc-confirm" class="screen">
-    <div class="status-bar sb-maps"><span>9:41</span><span style="font-weight:700">LINE Maps</span><span>📶</span></div>
-    <div class="maps-header">
-      <span class="maps-back" onclick="go('s-loc-maps')">✕</span>
-      <span class="maps-title">Locations</span>
-      <span class="maps-share">Share</span>
-    </div>
-    <div class="maps-body" style="position:relative">
-      <div class="map-bg"><div class="map-pin" style="top:28%;left:50%">📍</div></div>
-      <div class="send-modal">
-        <div class="send-card">
-          <div class="send-card-title">ส่งตำแหน่ง "393 Si Lom Rd,<br>Bang Rak" ให้ Carabao Beverage?</div>
-          <div class="send-card-sub">กด Send เพื่อยืนยัน</div>
-          <div class="send-btns">
-            <button class="send-cancel" onclick="go('s-loc-maps')">Cancel</button>
-            <button class="send-ok" onclick="go('s-loc-venues')">Send</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ══ VENUE CARDS ══ -->
-  <div id="s-loc-venues" class="screen">
-    <div class="status-bar sb-line"><span>9:41</span><span>🔋 📶</span></div>
-    <div class="line-header">
-      <span class="line-back" onclick="go('s0')">‹</span>
-      <div class="line-avatar">CB</div>
-      <div class="line-info"><div class="line-name">Cheer Ball Cheer Bao <span class="line-badge">OA</span></div><div class="line-status-text">กำลังใช้งาน</div></div>
-    </div>
-    <div class="line-chat">
-      <div class="bubble-row"><div class="bav">CB</div><div class="bubble in">🔍 กำลังค้นหาร้านใกล้คุณ...</div></div>
-      <div class="bubble-row"><div class="bav" style="opacity:0"></div><div class="bubble in">🍺 ร้านพาร์ทเนอร์ใกล้คุณ 😊</div></div>
-      <div class="venue-cards">
-        <div class="venue-card" onclick="go('s-loc-gmaps')"><div class="venue-icon">🍺</div><div class="venue-name">German Tawandang</div><div class="venue-dist">0.8 km</div><div class="venue-badge">นำทาง</div></div>
-        <div class="venue-card" onclick="go('s-loc-gmaps')"><div class="venue-icon">🐶</div><div class="venue-name">BrewDog Ploenchit</div><div class="venue-dist">1.2 km</div><div class="venue-badge">นำทาง</div></div>
-        <div class="venue-card" onclick="go('s-loc-gmaps')"><div class="venue-icon">🏠</div><div class="venue-name">Ro Yim Bar</div><div class="venue-dist">1.9 km</div><div class="venue-badge">นำทาง</div></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ══ GOOGLE MAPS ══ -->
-  <div id="s-loc-gmaps" class="screen">
-    <div class="status-bar sb-web"><span>9:41</span><span style="color:#4285f4;font-weight:700">Google Maps</span><span>📶</span></div>
-    <div class="gmaps-bar"><div class="gmaps-search">Search here</div><span style="font-size:16px;color:#4285f4">✏️</span></div>
-    <div class="gmaps-body">
-      <div class="map-bg" style="height:100%"><div class="map-pin" style="top:35%;left:60%">📍</div></div>
-      <div class="gmaps-result">
-        <div class="gmaps-place">เยอรมันตะวันแดง (German Tawandang)</div>
-        <div class="gmaps-stars">★★★★☆ (14) · 1 min</div>
-        <div class="gmaps-hours">Open · Closes 23:00</div>
-        <div class="gmaps-btns">
-          <button class="gmaps-btn dir" onclick="go('s0')">▶ Directions</button>
-          <button class="gmaps-btn start" onclick="go('s0')">▶ Start</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ══ GPS CHECK ══ -->
-  <div id="s-gps" class="screen">
-    <div class="status-bar sb-web"><span>9:41</span><span style="color:var(--green);font-weight:700">line.me</span><span>📶</span></div>
-    <div class="web-bar"><span class="web-back" onclick="go('s0')">‹</span><div class="web-url">checkin.carabaocup.th</div></div>
     <div class="wv-screen">
       <div class="wv-pattern"></div>
-      <div class="wv-logo-bar"><img class="wv-logo" src="CBCB%20Logo.png" alt="logo"></div>
+      <div class="wv-logo-bar"><img class="wv-logo" src="CBCB%20Logo.png" alt="CBCB Logo"></div>
       <div class="wv-body">
-        <div class="wv-title">📍 ตรวจสอบตำแหน่ง</div>
-        <div class="wv-sub">กำลังค้นหาตำแหน่งของคุณ...</div>
-        <div style="padding:12px 0"><div class="gps-wrap"><div class="gps-ring"></div><div class="gps-ring"></div><div class="gps-ring"></div><div class="gps-center"></div></div></div>
+        <div class="pts-hero">
+          <div class="pts-hero-num">27</div>
+          <div class="pts-hero-label">แต้มสะสมของคุณ</div>
+          <div class="pts-hero-sub">ฤดูกาล ส.ค. 2569 – พ.ค. 2570 · คุมาริ สุขดี</div>
+        </div>
+
+        <div style="font-size:10px;font-weight:900;color:var(--green)">ประวัติแต้ม</div>
+        <div class="tx-list">
+          <div class="tx-item">
+            <div class="tx-icon">🔥</div>
+            <div class="tx-info">
+              <div class="tx-title">Viewing Party — German Tawandang</div>
+              <div class="tx-date">2 มิ.ย. 2569 · 20:14</div>
+            </div>
+            <div class="tx-pts pos">+3</div>
+          </div>
+          <div class="tx-item">
+            <div class="tx-icon">🎡</div>
+            <div class="tx-info">
+              <div class="tx-title">สปินวีล — แต้ม 2× ครั้งถัดไป</div>
+              <div class="tx-date">2 มิ.ย. 2569</div>
+            </div>
+            <div class="tx-pts neu">โบนัส</div>
+          </div>
+          <div class="tx-item">
+            <div class="tx-icon">📅</div>
+            <div class="tx-info">
+              <div class="tx-title">Weekend — Ro Yim Bar</div>
+              <div class="tx-date">31 พ.ค. 2569</div>
+            </div>
+            <div class="tx-pts pos">+4</div>
+          </div>
+          <div class="tx-item">
+            <div class="tx-icon">📅</div>
+            <div class="tx-info">
+              <div class="tx-title">Weekend — German Tawandang</div>
+              <div class="tx-date">24 พ.ค. 2569</div>
+            </div>
+            <div class="tx-pts pos">+2</div>
+          </div>
+          <div class="tx-item">
+            <div class="tx-icon">🗓️</div>
+            <div class="tx-info">
+              <div class="tx-title">ปกติ — German Tawandang</div>
+              <div class="tx-date">20 พ.ค. 2569</div>
+            </div>
+            <div class="tx-pts pos">+1</div>
+          </div>
+        </div>
+
+        <div style="font-size:10px;font-weight:900;color:var(--green)">รางวัลที่กำลังลุ้น</div>
+        <div class="prize-tier-mini">
+          <div class="ptm-header" style="background:rgba(245,200,66,0.08)">
+            <div class="ptm-icon">🏆</div>
+            <div class="ptm-title">รางวัลใหญ่ — Draw 2</div>
+            <div style="margin-left:auto;font-size:8px;color:var(--gold);font-weight:700">มี.ค. 2570</div>
+          </div>
+          <div class="ptm-body">
+            ✈️ Carabao Cup Final (เวมบลีย์)<br>
+            27 แต้ม = <strong style="color:var(--green)">27 สิทธิ์</strong> ในการจับรางวัล<br>
+            <span style="color:#aaa">ยิ่งมีแต้มมาก ยิ่งมีสิทธิ์มาก</span>
+          </div>
+        </div>
+
+        <button class="wv-btn" onclick="go('s-flow-start')" style="margin-top:4px">🎯 เช็คอินรับแต้มเพิ่ม</button>
+        <button class="wv-btn outline" onclick="go('s-prizes')">🎁 ดูรายละเอียดรางวัลทั้งหมด</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       S-FLOW-START — CHOOSE FIRST/RETURNING
+  ══════════════════════════════════════════ -->
+  <div id="s-flow-start" class="screen">
+    <div class="status-bar sb-web"><span>9:41</span><span style="color:var(--green);font-weight:700">line.me</span><span>📶</span></div>
+    <div class="web-bar">
+      <span class="web-back" onclick="go('s0')">‹</span>
+      <div class="web-url">checkin.carabaocup.th</div>
+    </div>
+    <div class="wv-screen">
+      <div class="wv-pattern"></div>
+      <div class="wv-logo-bar"><img class="wv-logo" src="CBCB%20Logo.png" alt="CBCB Logo"></div>
+      <div class="wv-body">
+        <div class="wv-title">🎯 เช็คอิน ลุ้นบินดูคาราบาวคัพ</div>
+
+        <div class="day-badge">
+          🔥 วันนี้: Viewing Party · 2 มิ.ย. 2569 &nbsp;|&nbsp; รับ <strong>3 แต้ม</strong> ต่อ 2 แก้ว
+        </div>
+
+        <!-- How to play steps -->
+        <div style="background:white;border-radius:10px;border:1px solid #e0e8e4;padding:10px">
+          <div class="section-label" style="margin-bottom:6px">📋 วิธีการเล่น</div>
+          <div class="howto-steps">
+            <div class="howto-step">
+              <div class="step-num">1</div>
+              <div class="step-text">กรอกรหัส <strong>OTP จากใบเสร็จ</strong> ที่ได้จากการสั่งดราฟต์เบียร์ในร้านพาร์ทเนอร์</div>
+            </div>
+            <div class="howto-step">
+              <div class="step-num">2</div>
+              <div class="step-text">ถ่ายภาพ <strong>ฟองเบียร์ลาย CBCB</strong> จากเครื่องพิมพ์ฟอง (กล้องเท่านั้น ห้ามใช้คลัง)</div>
+            </div>
+            <div class="howto-step">
+              <div class="step-num">3</div>
+              <div class="step-text"><strong>หมุนวีล</strong> ลุ้นรางวัลทันที แล้วสะสมแต้มลุ้น <strong>บินดูคาราบาวคัพ</strong> ที่เวมบลีย์! 🏆</div>
+            </div>
+          </div>
+          <div style="font-size:8.5px;color:#888;margin-top:6px;text-align:center">ปกติ 1แต้ม · วันหยุด 2แต้ม · Viewing Party 3แต้ม (ต่อ 2 แก้ว)</div>
+        </div>
+
+        <!-- Choose flow -->
+        <div style="font-size:10px;font-weight:700;color:#555;text-align:center">คุณเป็น...</div>
+        <div class="flow-start-card" style="background:rgba(45,190,96,0.07);border-color:rgba(45,190,96,0.3)" onclick="go('s-register')">
+          <div class="fsc-header">
+            <div class="fsc-icon">👋</div>
+            <div>
+              <div class="fsc-title" style="color:var(--green)">ลงทะเบียนครั้งแรก</div>
+              <div class="fsc-sub" style="color:#4a6650">ยังไม่เคยร่วมกิจกรรมนี้</div>
+            </div>
+            <div class="fsc-arrow" style="color:var(--green)">›</div>
+          </div>
+        </div>
+        <div class="flow-start-card" style="background:rgba(245,200,66,0.07);border-color:rgba(245,200,66,0.3)" onclick="go('s-returning')">
+          <div class="fsc-header">
+            <div class="fsc-icon">⭐</div>
+            <div>
+              <div class="fsc-title" style="color:#8b6900">สมาชิกเดิม</div>
+              <div class="fsc-sub" style="color:#8b6900">เคยลงทะเบียนแล้ว</div>
+            </div>
+            <div class="fsc-arrow" style="color:var(--gold)">›</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       S-REGISTER — REGISTRATION FORM (First Timer)
+  ══════════════════════════════════════════ -->
+  <div id="s-register" class="screen">
+    <div class="status-bar sb-web"><span>9:41</span><span style="color:var(--green);font-weight:700">line.me</span><span>📶</span></div>
+    <div class="web-bar">
+      <span class="web-back" onclick="go('s-flow-start')">‹</span>
+      <div class="web-url">checkin.carabaocup.th/register</div>
+    </div>
+    <div class="wv-screen">
+      <div class="wv-pattern"></div>
+      <div class="wv-logo-bar"><img class="wv-logo" src="CBCB%20Logo.png" alt="CBCB Logo"></div>
+      <div class="wv-body" style="gap:8px">
+        <div class="section-label">📝 ลงทะเบียน</div>
+        <div class="consent-row">
+          <div class="consent-box">✓</div>
+          <div>ฉันยอมรับ <span style="color:var(--green);font-weight:700">เงื่อนไขการร่วมกิจกรรม</span> และ <span style="color:var(--green);font-weight:700">นโยบายความเป็นส่วนตัว</span> และยืนยันว่ามีอายุ 20 ปีขึ้นไป</div>
+        </div>
+
+        <div class="form-group">
+          <div class="form-label">ชื่อ-นามสกุล *</div>
+          <div class="form-input">คุมาริ สุขดี</div>
+        </div>
+        <div class="form-group">
+          <div class="form-label">เลขบัตรประชาชน *</div>
+          <div class="form-input" style="letter-spacing:1.5px">3-1005-12345-67-8</div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <div class="form-label">อายุ *</div>
+            <div class="form-input">28</div>
+          </div>
+          <div class="form-group">
+            <div class="form-label">เพศ *</div>
+            <div class="form-input">หญิง ▾</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-label">จังหวัด *</div>
+          <div class="form-input">กรุงเทพมหานคร ▾</div>
+        </div>
+        <div class="form-group">
+          <div class="form-label">เบอร์โทรศัพท์ *</div>
+          <div class="form-input">081-234-5678</div>
+        </div>
+
+        <button class="wv-btn" onclick="go('s-otp')" style="margin-top:4px">ถัดไป — กรอก OTP →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       S-OTP — OTP ENTRY (First Timer)
+  ══════════════════════════════════════════ -->
+  <div id="s-otp" class="screen">
+    <div class="status-bar sb-web"><span>9:41</span><span style="color:var(--green);font-weight:700">line.me</span><span>📶</span></div>
+    <div class="web-bar">
+      <span class="web-back" onclick="go('s-register')">‹</span>
+      <div class="web-url">checkin.carabaocup.th/otp</div>
+    </div>
+    <div class="wv-screen">
+      <div class="wv-pattern"></div>
+      <div class="wv-logo-bar"><img class="wv-logo" src="CBCB%20Logo.png" alt="CBCB Logo"></div>
+      <div class="wv-body">
+        <div class="wv-title">🧾 กรอกรหัส OTP</div>
+        <div class="wv-sub">รหัส OTP อยู่บนใบเสร็จของคุณ<br>ใช้ได้ครั้งเดียวเท่านั้น</div>
+
+        <!-- Receipt mockup -->
+        <div class="otp-receipt-mock">
+          <div class="receipt-row"><span>เยอรมันตะวันแดง สาขาสยาม</span></div>
+          <div class="receipt-row"><span>📅 2 มิ.ย. 2569  20:14 น.</span></div>
+          <div style="height:1px;background:#eee;margin:4px 0"></div>
+          <div class="receipt-row"><span>ดราฟต์เบียร์ Carabao 0.5L × 2</span><span>฿240</span></div>
+          <div class="receipt-row bold"><span>รวม</span><span>฿240</span></div>
+          <div class="receipt-otp">
+            <div class="receipt-otp-label">🎯 รหัส OTP สำหรับ CBCB Campaign</div>
+            <div class="receipt-otp-code">4 8 3 9 2 1</div>
+            <div style="font-size:8px;color:#888;margin-top:2px">ใช้ได้วันนี้เท่านั้น · single-use</div>
+          </div>
+        </div>
+
+        <div style="font-size:10px;font-weight:700;color:#555;text-align:center">กรอกรหัส 6 หลัก</div>
+        <div class="otp-boxes">
+          <div class="otp-box filled">4</div>
+          <div class="otp-box filled">8</div>
+          <div class="otp-box filled">3</div>
+          <div class="otp-box filled">9</div>
+          <div class="otp-box filled">2</div>
+          <div class="otp-box filled">1</div>
+        </div>
         <div class="confirmed-box">
-          <div class="confirmed-title">✅ พบตำแหน่งร้านพาร์ทเนอร์!</div>
-          <div class="confirmed-sub">📍 ร้านพาร์ทเนอร์ สาขาสยาม · ห่าง 42 เมตร</div>
+          <div class="confirmed-title">✅ OTP ถูกต้อง!</div>
+          <div class="confirmed-sub">Viewing Party 🔥 · 3 แต้มต่อ 2 แก้ว</div>
         </div>
-        <button class="wv-btn" onclick="go('s-scan')">ถัดไป — First Timer →</button>
-        <button class="wv-btn outline" onclick="go('s-returning')">ถัดไป — Returning →</button>
-        <button class="wv-btn red" onclick="go('s-gps-err')">จำลอง GPS Error ❌</button>
+
+        <button class="wv-btn" onclick="go('s-photo')">ถัดไป — ถ่ายภาพฟองเบียร์ →</button>
       </div>
     </div>
   </div>
 
-  <!-- ══ GPS ERROR ══ -->
-  <div id="s-gps-err" class="screen">
+  <!-- ══════════════════════════════════════════
+       S-PHOTO — FOAM ART PHOTO (First Timer)
+  ══════════════════════════════════════════ -->
+  <div id="s-photo" class="screen">
     <div class="status-bar sb-web"><span>9:41</span><span style="color:var(--green);font-weight:700">line.me</span><span>📶</span></div>
-    <div class="web-bar"><span class="web-back" onclick="go('s-gps')">‹</span><div class="web-url">checkin.carabaocup.th</div></div>
+    <div class="web-bar">
+      <span class="web-back" onclick="go('s-otp')">‹</span>
+      <div class="web-url">checkin.carabaocup.th/photo</div>
+    </div>
     <div class="wv-screen">
       <div class="wv-pattern"></div>
-      <div class="wv-logo-bar"><img class="wv-logo" src="CBCB%20Logo.png" alt="logo"></div>
-      <div class="wv-body">
-        <div class="wv-title">📍 ตรวจสอบตำแหน่ง</div>
-        <div style="font-size:46px;text-align:center;padding:10px 0">📡</div>
-        <div class="error-box"><div class="error-title">❌ ไม่พบตำแหน่งร้านพาร์ทเนอร์</div><div class="error-sub">กรุณาตรวจสอบว่าคุณอยู่ในร้านที่ร่วมกิจกรรม และเปิดใช้งาน GPS</div></div>
-        <button class="wv-btn" onclick="go('s-gps')">🔄 ลองใหม่อีกครั้ง</button>
-        <button class="wv-btn sec" onclick="go('s-loc-venues')">ดูร้านพาร์ทเนอร์ใกล้ฉัน 🗺️</button>
+      <div class="wv-logo-bar"><img class="wv-logo" src="CBCB%20Logo.png" alt="CBCB Logo"></div>
+      <div class="wv-body" style="gap:8px">
+        <div class="section-label">📸 ถ่ายภาพฟองเบียร์ลาย CBCB</div>
+
+        <!-- Camera viewfinder mockup -->
+        <div id="photo-before">
+          <div class="camera-viewfinder">
+            <div class="camera-corner cc-tl"></div>
+            <div class="camera-corner cc-tr"></div>
+            <div class="camera-corner cc-bl"></div>
+            <div class="camera-corner cc-br"></div>
+            <div class="beer-glass-mock">
+              <div class="foam-top">
+                <div class="foam-bubble-l"></div>
+                <div class="foam-bubble-r"></div>
+                <div class="foam-logo-text">CBCB<br>☕</div>
+              </div>
+              <div class="beer-body-mock">
+                <div class="beer-bubble-1"></div>
+                <div class="beer-bubble-2"></div>
+                <div class="beer-bubble-3"></div>
+              </div>
+            </div>
+            <div class="camera-label-bar">
+              <div class="camera-label-text">📷 วางแก้วให้ตรงกรอบ — เห็นลายฟอง CBCB</div>
+            </div>
+          </div>
+          <div class="cam-rules" style="margin-top:6px">
+            <div class="cam-rule ok">✅ เห็นลาย CBCB บนฟองเบียร์ชัดเจน</div>
+            <div class="cam-rule ok">✅ เห็นแก้วเบียร์ครบ ไม่ครึ่งแก้ว</div>
+            <div class="cam-rule ok">✅ ถ่ายจากกล้องโดยตรง ไม่ผ่านแอพแต่ง</div>
+            <div class="cam-rule no">❌ ห้ามใช้ภาพจากคลัง (Gallery)</div>
+            <div class="cam-rule no">❌ ห้ามใช้ภาพที่แต่งหรือ filter</div>
+          </div>
+          <button class="wv-btn" style="margin-top:6px" onclick="takePhoto('photo-before','photo-after','s-spin')">
+            📷 เปิดกล้องถ่ายภาพ
+          </button>
+        </div>
+
+        <!-- After photo taken -->
+        <div id="photo-after" style="display:none;flex-direction:column;gap:8px">
+          <div class="photo-taken">
+            <div class="photo-check-badge">✓</div>
+            <div class="photo-taken-inner">
+              <div class="photo-taken-ok">🍺</div>
+              <div class="photo-taken-label">ถ่ายภาพสำเร็จ!</div>
+            </div>
+          </div>
+          <div class="confirmed-box">
+            <div class="confirmed-title">✅ ภาพผ่านการตรวจสอบ</div>
+            <div class="confirmed-sub">ฟองเบียร์ลาย CBCB · Viewing Party 🔥 +3 แต้ม</div>
+          </div>
+          <button class="wv-btn" onclick="go('s-spin')">ส่งภาพ — หมุนวีลรับรางวัล 🎡 →</button>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- ══ FACE SCAN (First Timer) ══ -->
-  <div id="s-scan" class="screen">
-    <div class="status-bar sb-web"><span>9:41</span><span style="color:var(--green);font-weight:700">line.me</span><span>📶</span></div>
-    <div class="web-bar"><span class="web-back" onclick="go('s-gps')">‹</span><div class="web-url">checkin.carabaocup.th</div></div>
-    <div class="wv-screen">
-      <div class="wv-pattern"></div>
-      <div class="wv-logo-bar"><img class="wv-logo" src="CBCB%20Logo.png" alt="logo"></div>
-      <div class="wv-body">
-        <div class="wv-title">🔍 ยืนยันตัวตน</div>
-        <div class="wv-sub">วางใบหน้าในกรอบ แล้วรอสักครู่</div>
-        <div style="padding:8px 0"><div class="face-wrap"><div class="face-oval">👤</div><div class="scan-line"></div></div></div>
-        <div style="background:rgba(45,190,96,0.07);border-radius:8px;padding:8px;font-size:9px;color:#1a7a3a;text-align:center;line-height:1.5">🔒 ข้อมูลใบหน้าจะไม่ถูกบันทึก<br>ใช้เพื่อยืนยันตัวตนครั้งแรกเท่านั้น</div>
-        <div style="font-size:10px;font-weight:700;color:var(--green);text-align:center">กำลังสแกน... ⏳</div>
-        <button class="wv-btn" onclick="go('s-form-selfie')">✅ สแกนสำเร็จ → กรอกข้อมูล</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- ══ RETURNING ══ -->
+  <!-- ══════════════════════════════════════════
+       S-RETURNING — WELCOME BACK
+  ══════════════════════════════════════════ -->
   <div id="s-returning" class="screen">
     <div class="status-bar sb-web"><span>9:41</span><span style="color:var(--green);font-weight:700">line.me</span><span>📶</span></div>
-    <div class="web-bar"><span class="web-back" onclick="go('s-gps')">‹</span><div class="web-url">checkin.carabaocup.th</div></div>
+    <div class="web-bar">
+      <span class="web-back" onclick="go('s-flow-start')">‹</span>
+      <div class="web-url">checkin.carabaocup.th</div>
+    </div>
     <div class="wv-screen">
       <div class="wv-pattern"></div>
-      <div class="wv-logo-bar"><img class="wv-logo" src="CBCB%20Logo.png" alt="logo"></div>
+      <div class="wv-logo-bar"><img class="wv-logo" src="CBCB%20Logo.png" alt="CBCB Logo"></div>
       <div class="wv-body">
         <div class="wv-title">👋 ยินดีต้อนรับกลับ!</div>
         <div class="ret-avatar">⚽</div>
-        <div class="skip-badge">✅ ระบบตรวจสอบแล้ว — ข้ามการสแกนใบหน้า<br><span style="font-size:8px;font-weight:400;opacity:0.85">คุณลงทะเบียนแล้วในแคมเปญนี้</span></div>
-        <div style="background:white;border-radius:10px;padding:12px;text-align:center;border:1px solid #e0e8e4">
-          <div style="font-size:10px;font-weight:700;color:#333">แต้มสะสมของคุณ</div>
-          <div style="font-size:34px;font-weight:900;color:var(--green);line-height:1.1">24</div>
-          <div style="font-size:9px;color:#666">แต้ม</div>
+        <div style="text-align:center;font-size:12px;font-weight:700;color:#0c1a11">คุมาริ สุขดี</div>
+        <div class="skip-badge">
+          ✅ พบข้อมูลสมาชิกแล้ว — ไม่ต้องลงทะเบียนใหม่
+          <div style="font-size:8.5px;font-weight:400;opacity:0.85;margin-top:2px">สมาชิกตั้งแต่ ส.ค. 2569</div>
         </div>
-        <button class="wv-btn" onclick="go('s-selfie-ret')">📸 ถ่ายเซลฟี่ต่อ →</button>
+        <div class="points-box">
+          <div class="points-num">24</div>
+          <div class="points-label">แต้มสะสมของคุณ</div>
+        </div>
+        <div class="day-badge" style="justify-content:center">
+          🔥 วันนี้: Viewing Party · รับ <strong style="margin:0 2px">3 แต้ม</strong> ต่อ 2 แก้ว
+        </div>
+        <button class="wv-btn" onclick="go('s-otp-ret')">ถัดไป — กรอก OTP จากใบเสร็จ →</button>
       </div>
     </div>
   </div>
 
-  <!-- ══ COMBINED FORM + SELFIE (First Timer) ══ -->
-  <div id="s-form-selfie" class="screen">
+  <!-- ══════════════════════════════════════════
+       S-OTP-RET — OTP ENTRY (Returning)
+  ══════════════════════════════════════════ -->
+  <div id="s-otp-ret" class="screen">
     <div class="status-bar sb-web"><span>9:41</span><span style="color:var(--green);font-weight:700">line.me</span><span>📶</span></div>
-    <div class="web-bar"><span class="web-back" onclick="go('s-scan')">‹</span><div class="web-url">checkin.carabaocup.th</div></div>
+    <div class="web-bar">
+      <span class="web-back" onclick="go('s-returning')">‹</span>
+      <div class="web-url">checkin.carabaocup.th/otp</div>
+    </div>
     <div class="wv-screen">
       <div class="wv-pattern"></div>
-      <div class="wv-logo-bar"><img class="wv-logo" src="CBCB%20Logo.png" alt="logo"></div>
-      <div class="wv-body" style="gap:8px">
-        <div class="section-label">📝 ข้อมูลการสมัคร</div>
-        <div class="consent-row"><div class="consent-box">✓</div><div style="font-size:8.5px">ฉันยอมรับ <span style="color:var(--green);font-weight:700">เงื่อนไขและนโยบายความเป็นส่วนตัว</span></div></div>
-        <div class="form-group"><div class="form-label">ชื่อ-นามสกุล *</div><div class="form-input">กรอกชื่อ-นามสกุล</div></div>
-        <div class="form-group"><div class="form-label">เลขบัตรประชาชน *</div><div class="form-input" style="color:#aaa;letter-spacing:1px">X-XXXX-XXXXX-XX-X</div></div>
-        <div class="form-row">
-          <div class="form-group"><div class="form-label">อายุ *</div><div class="form-input">25</div></div>
-          <div class="form-group"><div class="form-label">เพศ *</div><div class="form-input">ชาย ▾</div></div>
+      <div class="wv-logo-bar"><img class="wv-logo" src="CBCB%20Logo.png" alt="CBCB Logo"></div>
+      <div class="wv-body">
+        <div class="wv-title">🧾 กรอกรหัส OTP</div>
+        <div class="wv-sub">รหัส OTP อยู่บนใบเสร็จของคุณ<br>ใช้ได้ครั้งเดียวเท่านั้น</div>
+
+        <div class="otp-receipt-mock">
+          <div class="receipt-row"><span>เยอรมันตะวันแดง สาขาสยาม</span></div>
+          <div class="receipt-row"><span>📅 2 มิ.ย. 2569  20:14 น.</span></div>
+          <div style="height:1px;background:#eee;margin:4px 0"></div>
+          <div class="receipt-row"><span>ดราฟต์เบียร์ Carabao 0.5L × 2</span><span>฿240</span></div>
+          <div class="receipt-row bold"><span>รวม</span><span>฿240</span></div>
+          <div class="receipt-otp">
+            <div class="receipt-otp-label">🎯 รหัส OTP สำหรับ CBCB Campaign</div>
+            <div class="receipt-otp-code">7 2 5 1 9 4</div>
+            <div style="font-size:8px;color:#888;margin-top:2px">ใช้ได้วันนี้เท่านั้น · single-use</div>
+          </div>
         </div>
-        <div class="form-group"><div class="form-label">จังหวัด *</div><div class="form-input">กรุงเทพมหานคร ▾</div></div>
-        <div class="location-pill">📍 ร้านพาร์ทเนอร์ สาขาสยาม (อัตโนมัติ)</div>
-        <div class="section-divider"></div>
-        <div class="section-label">📸 ถ่ายเซลฟี่เพื่อรับแต้ม</div>
-        <button class="wv-btn">📸 ถ่ายเซลฟี่ (กล้องเท่านั้น)</button>
-        <img class="selfie-guide" src="selfie-guide-2.png" alt="selfie guide">
-        <div class="rules">
-          <div class="rule ok">✅ ถือป้ายให้เห็นชัดเจน</div>
-          <div class="rule ok">✅ เห็นใบหน้าชัดเจน ไม่บดบัง</div>
-          <div class="rule ok">✅ ถ่ายในร้านพาร์ทเนอร์เท่านั้น</div>
-          <div class="rule ok">✅ แสงสว่างเพียงพอ ไม่มืด</div>
-          <div class="rule no">❌ ห้ามใช้ภาพจาก Gallery</div>
-          <div class="rule no">❌ ห้ามปิดบังใบหน้าด้วยมือ/หมวก</div>
+
+        <div style="font-size:10px;font-weight:700;color:#555;text-align:center">กรอกรหัส 6 หลัก</div>
+        <div class="otp-boxes">
+          <div class="otp-box filled">7</div>
+          <div class="otp-box filled">2</div>
+          <div class="otp-box filled">5</div>
+          <div class="otp-box filled">1</div>
+          <div class="otp-box filled">9</div>
+          <div class="otp-box filled">4</div>
         </div>
-        <button class="wv-btn" onclick="go('s-lucky')">📤 ส่งภาพ</button>
+        <div class="confirmed-box">
+          <div class="confirmed-title">✅ OTP ถูกต้อง!</div>
+          <div class="confirmed-sub">Viewing Party 🔥 · 3 แต้มต่อ 2 แก้ว</div>
+        </div>
+
+        <button class="wv-btn" onclick="go('s-photo-ret')">ถัดไป — ถ่ายภาพฟองเบียร์ →</button>
       </div>
     </div>
   </div>
 
-  <!-- ══ SELFIE ONLY (Returning) ══ -->
-  <div id="s-selfie-ret" class="screen">
+  <!-- ══════════════════════════════════════════
+       S-PHOTO-RET — FOAM ART PHOTO (Returning)
+  ══════════════════════════════════════════ -->
+  <div id="s-photo-ret" class="screen">
     <div class="status-bar sb-web"><span>9:41</span><span style="color:var(--green);font-weight:700">line.me</span><span>📶</span></div>
-    <div class="web-bar"><span class="web-back" onclick="go('s-returning')">‹</span><div class="web-url">checkin.carabaocup.th</div></div>
+    <div class="web-bar">
+      <span class="web-back" onclick="go('s-otp-ret')">‹</span>
+      <div class="web-url">checkin.carabaocup.th/photo</div>
+    </div>
     <div class="wv-screen">
       <div class="wv-pattern"></div>
-      <div class="wv-logo-bar"><img class="wv-logo" src="CBCB%20Logo.png" alt="logo"></div>
+      <div class="wv-logo-bar"><img class="wv-logo" src="CBCB%20Logo.png" alt="CBCB Logo"></div>
       <div class="wv-body" style="gap:8px">
-        <div class="section-label">📸 ถ่ายเซลฟี่เพื่อรับแต้ม</div>
-        <div class="skip-badge" style="font-size:9px">✅ ไม่ต้องกรอกข้อมูลอีก — ระบบตรวจสอบแล้ว</div>
-        <div class="location-pill">📍 ร้านพาร์ทเนอร์ สาขาสยาม (อัตโนมัติ)</div>
-        <div class="points-box"><div class="points-num">24</div><div class="points-label">แต้มสะสมของคุณ</div></div>
-        <button class="wv-btn">📸 ถ่ายเซลฟี่ (กล้องเท่านั้น)</button>
-        <img class="selfie-guide" src="selfie-guide-2.png" alt="selfie guide">
-        <div class="rules">
-          <div class="rule ok">✅ ถือป้ายให้เห็นชัดเจน</div>
-          <div class="rule ok">✅ เห็นใบหน้าชัดเจน ไม่บดบัง</div>
-          <div class="rule ok">✅ ถ่ายในร้านพาร์ทเนอร์เท่านั้น</div>
-          <div class="rule ok">✅ แสงสว่างเพียงพอ ไม่มืด</div>
-          <div class="rule no">❌ ห้ามใช้ภาพจาก Gallery</div>
-          <div class="rule no">❌ ห้ามปิดบังใบหน้าด้วยมือ/หมวก</div>
+        <div class="section-label">📸 ถ่ายภาพฟองเบียร์ลาย CBCB</div>
+        <div class="skip-badge" style="font-size:9px;padding:7px 10px">
+          ⭐ สมาชิกเดิม — ไม่ต้องกรอกข้อมูลใหม่
         </div>
-        <button class="wv-btn" onclick="go('s-lucky')">📤 ส่งภาพ</button>
+        <div class="points-box" style="padding:7px">
+          <div class="points-num" style="font-size:22px">24</div>
+          <div class="points-label">แต้มปัจจุบัน</div>
+        </div>
+
+        <div id="photo-ret-before">
+          <div class="camera-viewfinder">
+            <div class="camera-corner cc-tl"></div>
+            <div class="camera-corner cc-tr"></div>
+            <div class="camera-corner cc-bl"></div>
+            <div class="camera-corner cc-br"></div>
+            <div class="beer-glass-mock">
+              <div class="foam-top">
+                <div class="foam-bubble-l"></div>
+                <div class="foam-bubble-r"></div>
+                <div class="foam-logo-text">CBCB<br>☕</div>
+              </div>
+              <div class="beer-body-mock">
+                <div class="beer-bubble-1"></div>
+                <div class="beer-bubble-2"></div>
+                <div class="beer-bubble-3"></div>
+              </div>
+            </div>
+            <div class="camera-label-bar">
+              <div class="camera-label-text">📷 วางแก้วให้ตรงกรอบ — เห็นลายฟอง CBCB</div>
+            </div>
+          </div>
+          <div class="cam-rules" style="margin-top:6px">
+            <div class="cam-rule ok">✅ เห็นลาย CBCB บนฟองเบียร์ชัดเจน</div>
+            <div class="cam-rule ok">✅ เห็นแก้วเบียร์ครบ ไม่ครึ่งแก้ว</div>
+            <div class="cam-rule no">❌ ห้ามใช้ภาพจากคลัง (Gallery)</div>
+            <div class="cam-rule no">❌ ห้ามใช้ภาพที่แต่งหรือ filter</div>
+          </div>
+          <button class="wv-btn" style="margin-top:6px" onclick="takePhoto('photo-ret-before','photo-ret-after','s-spin')">
+            📷 เปิดกล้องถ่ายภาพ
+          </button>
+        </div>
+
+        <div id="photo-ret-after" style="display:none;flex-direction:column;gap:8px">
+          <div class="photo-taken">
+            <div class="photo-check-badge">✓</div>
+            <div class="photo-taken-inner">
+              <div class="photo-taken-ok">🍺</div>
+              <div class="photo-taken-label">ถ่ายภาพสำเร็จ!</div>
+            </div>
+          </div>
+          <div class="confirmed-box">
+            <div class="confirmed-title">✅ ภาพผ่านการตรวจสอบ</div>
+            <div class="confirmed-sub">ฟองเบียร์ลาย CBCB · Viewing Party 🔥 +3 แต้ม</div>
+          </div>
+          <button class="wv-btn" onclick="go('s-spin')">ส่งภาพ — หมุนวีลรับรางวัล 🎡 →</button>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- ══ LUCKY DRAW ══ -->
-  <div id="s-lucky" class="screen">
+  <!-- ══════════════════════════════════════════
+       S-SPIN — SPIN WHEEL + RESULT
+  ══════════════════════════════════════════ -->
+  <div id="s-spin" class="screen">
     <div class="status-bar sb-dark"><span>9:41</span><span style="color:var(--green);font-weight:700">line.me</span><span>📶</span></div>
     <div class="web-bar" style="background:#0c1a11;border-color:#1a3024">
       <span class="web-back" style="color:#aaa" onclick="go('s0')">‹</span>
-      <div class="web-url" style="background:#0c1a11;border-color:#1a3024;color:#4a6650">checkin.carabaocup.th/lucky</div>
+      <div class="web-url" style="background:#0c1a11;border-color:#1a3024;color:#4a6650">checkin.carabaocup.th/spin</div>
     </div>
     <div class="wv-screen" style="background:transparent">
-      <div class="wv-logo-bar"><img class="wv-logo" src="CBCB%20Logo.png" alt="logo"></div>
-      <div class="ld-screen">
-        <svg class="confetti" viewBox="0 0 320 160" xmlns="http://www.w3.org/2000/svg">
-          <rect x="30" y="0" width="6" height="10" fill="#f5c842" rx="1" transform="rotate(20 30 0)"><animate attributeName="y" from="-10" to="160" dur="2s" repeatCount="indefinite" begin="0s"/><animate attributeName="opacity" from="1" to="0" dur="2s" repeatCount="indefinite" begin="0s"/></rect>
+      <div class="wv-logo-bar"><img class="wv-logo" src="CBCB%20Logo.png" alt="CBCB Logo"></div>
+      <div class="spin-screen">
+        <!-- confetti -->
+        <svg class="confetti-svg" viewBox="0 0 320 160" xmlns="http://www.w3.org/2000/svg">
+          <rect x="30" y="0" width="6" height="10" fill="#f5c842" rx="1" transform="rotate(20 30 0)"><animate attributeName="y" from="-10" to="160" dur="2s" repeatCount="indefinite" begin="0s"/><animate attributeName="opacity" from="1" to="0" dur="2s" repeatCount="indefinite"/></rect>
           <rect x="80" y="0" width="5" height="8" fill="#2dbe60" rx="1"><animate attributeName="y" from="-10" to="160" dur="2.3s" repeatCount="indefinite" begin="0.3s"/><animate attributeName="opacity" from="1" to="0" dur="2.3s" repeatCount="indefinite" begin="0.3s"/></rect>
           <rect x="140" y="0" width="7" height="6" fill="#fff" rx="1" transform="rotate(35 140 0)"><animate attributeName="y" from="-10" to="160" dur="1.8s" repeatCount="indefinite" begin="0.6s"/><animate attributeName="opacity" from="1" to="0" dur="1.8s" repeatCount="indefinite" begin="0.6s"/></rect>
           <rect x="200" y="0" width="5" height="9" fill="#f5c842" rx="1"><animate attributeName="y" from="-10" to="160" dur="2.1s" repeatCount="indefinite" begin="0.1s"/><animate attributeName="opacity" from="1" to="0" dur="2.1s" repeatCount="indefinite" begin="0.1s"/></rect>
           <rect x="260" y="0" width="6" height="7" fill="#2dbe60" rx="1"><animate attributeName="y" from="-10" to="160" dur="2.5s" repeatCount="indefinite" begin="0.8s"/><animate attributeName="opacity" from="1" to="0" dur="2.5s" repeatCount="indefinite" begin="0.8s"/></rect>
-          <rect x="50" y="0" width="4" height="8" fill="#fff" rx="1" transform="rotate(-40 50 0)"><animate attributeName="y" from="-10" to="160" dur="2.2s" repeatCount="indefinite" begin="1.1s"/><animate attributeName="opacity" from="1" to="0" dur="2.2s" repeatCount="indefinite" begin="1.1s"/></rect>
-          <rect x="300" y="0" width="6" height="9" fill="#2dbe60" rx="1"><animate attributeName="y" from="-10" to="160" dur="2.4s" repeatCount="indefinite" begin="1.4s"/><animate attributeName="opacity" from="1" to="0" dur="2.4s" repeatCount="indefinite" begin="1.4s"/></rect>
         </svg>
-        <img class="trophy-img" src="trophy.png" alt="trophy">
-        <div class="ld-title">ขอบคุณที่เข้าร่วม! 🎉</div>
-        <div class="ld-sub">คุณได้รับ 1 แต้มสะสมเรียบร้อยแล้ว</div>
-        <div class="ld-date">📅 ประกาศผล 30 พฤศจิกายน 2569</div>
-        <div class="prize-box">
-          <div class="prize-row">✈️ 2 รางวัล — บินดูเกมที่เวมบลีย์</div>
-          <div class="prize-row">👕 5 เสื้อลายเซ็นนักเตะ</div>
-          <div class="prize-row">🟢 20 เสื้อ CBCB</div>
+
+        <!-- Points earned -->
+        <div class="spin-pts-earned">
+          <div class="spin-pts-earned-num">+3 แต้ม</div>
+          <div class="spin-pts-earned-label">🔥 Viewing Party · เพิ่มเข้าบัญชีแล้ว</div>
         </div>
-        <div class="share-row">
-          <button class="share-btn replay" onclick="go('s-gps')">🔄<span>เล่นอีก</span></button>
-          <button class="share-btn lshare" onclick="go('s-share-d1')">💬<span>แชร์ LINE</span></button>
-          <button class="share-btn fbshare" onclick="go('s-share-e1')">👍<span>แชร์ FB</span></button>
+
+        <!-- Wheel -->
+        <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+          <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.7)">หมุนวีลเพื่อลุ้นรางวัลพิเศษ!</div>
+          <div style="display:flex;align-items:center;gap:16px">
+            <div class="wheel-wrap">
+              <div class="wheel-pointer"></div>
+              <div id="spin-wheel"></div>
+              <div class="wheel-center">🎡</div>
+            </div>
+            <button id="spin-btn" onclick="doSpin()">
+              <span style="font-size:20px">🎡</span>
+              <span>หมุน!</span>
+            </button>
+          </div>
         </div>
-        <button class="wv-btn outline" style="color:white;border-color:rgba(255,255,255,0.3);font-size:10px" onclick="go('s0')">← กลับหน้าหลัก LINE</button>
+
+        <!-- Legend -->
+        <div class="wheel-legend">
+          <div class="wl-item" id="leg-none"><div class="wl-dot" style="background:#555"></div><div class="wl-text">ไม่ได้รางวัล</div><div class="wl-pct">60%</div></div>
+          <div class="wl-item" id="leg-2x"><div class="wl-dot" style="background:#2dbe60"></div><div class="wl-text">แต้ม 2× ครั้งถัดไป</div><div class="wl-pct">20%</div></div>
+          <div class="wl-item" id="leg-merch"><div class="wl-dot" style="background:#f5c842"></div><div class="wl-text">ของที่ระลึก CBCB</div><div class="wl-pct">10%</div></div>
+          <div class="wl-item" id="leg-10x"><div class="wl-dot" style="background:#059b48"></div><div class="wl-text">แต้ม 10× ครั้งถัดไป</div><div class="wl-pct">10%</div></div>
+        </div>
+
+        <!-- Result card (hidden until spin done) -->
+        <div class="spin-result-card" id="spin-result">
+          <div class="spin-result-icon" id="spin-result-icon">🎉</div>
+          <div class="spin-result-title" id="spin-result-title">ยินดีด้วย!</div>
+          <div class="spin-result-sub" id="spin-result-sub"></div>
+        </div>
+
+        <!-- Buttons (hidden until result) -->
+        <div id="spin-after-btns" style="display:none;flex-direction:column;gap:6px;width:100%">
+          <div class="share-row">
+            <button class="share-btn lshare" onclick="go('s-share-d1')">💬<span>แชร์ LINE</span></button>
+            <button class="share-btn home" onclick="resetAndGo('s0')">🏠<span>หน้าหลัก</span></button>
+            <button class="share-btn home" onclick="go('s-prizes')">🏆<span>ดูรางวัล</span></button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- ══ D1 — LINE FRIEND PICKER ══ -->
+  <!-- ══════════════════════════════════════════
+       S-PRIZES — FULL PRIZE TIERS
+  ══════════════════════════════════════════ -->
+  <div id="s-prizes" class="screen">
+    <div class="status-bar sb-dark"><span>9:41</span><span style="color:var(--green);font-weight:700">line.me</span><span>📶</span></div>
+    <div class="web-bar" style="background:#0c1a11;border-color:#1a3024">
+      <span class="web-back" style="color:#aaa" onclick="go('s-spin')">‹</span>
+      <div class="web-url" style="background:#0c1a11;border-color:#1a3024;color:#4a6650">checkin.carabaocup.th/prizes</div>
+    </div>
+    <div class="wv-screen" style="background:transparent">
+      <div class="wv-logo-bar"><img class="wv-logo" src="CBCB%20Logo.png" alt="CBCB Logo"></div>
+      <div class="prize-screen">
+        <div style="text-align:center">
+          <img class="trophy-img" src="trophy.png" alt="trophy" onerror="this.style.display='none'">
+          <div style="font-size:16px;font-weight:900;color:var(--gold);margin-top:4px">รางวัลทั้งหมด</div>
+          <div style="font-size:9.5px;color:rgba(255,255,255,0.5);margin-top:2px">ส.ค. 2569 – พ.ค. 2570</div>
+        </div>
+
+        <!-- SMALL TIER -->
+        <div class="prize-tier-card" style="border-color:rgba(45,190,96,0.3)">
+          <div class="ptc-header" style="background:linear-gradient(135deg,rgba(45,190,96,0.25),rgba(26,148,72,0.15))">
+            <div class="ptc-icon">🎡</div>
+            <div>
+              <div class="ptc-title">รางวัลเล็ก</div>
+              <div class="ptc-sub">รับทันทีทุกครั้งที่เช็คอิน</div>
+            </div>
+            <div class="ptc-badge" style="background:rgba(45,190,96,0.4)">ทุกครั้ง</div>
+          </div>
+          <div class="ptc-body">
+            <div class="ptc-item"><span>🎡</span><span>หมุนสปินวีลทันทีหลังส่งภาพ</span></div>
+            <div class="ptc-item"><span>🟢</span><span>แต้ม 2× ครั้งถัดไป (20%)</span></div>
+            <div class="ptc-item"><span>🟡</span><span>ของที่ระลึก CBCB รับที่ร้านวันนั้น (10%)</span></div>
+            <div class="ptc-item"><span>🟢🟢</span><span>แต้ม 10× ครั้งถัดไป (10%)</span></div>
+          </div>
+        </div>
+
+        <!-- MIDDLE TIER -->
+        <div class="prize-tier-card" style="border-color:rgba(245,200,66,0.3)">
+          <div class="ptc-header" style="background:linear-gradient(135deg,rgba(245,200,66,0.2),rgba(180,120,10,0.1))">
+            <div class="ptc-icon">🏅</div>
+            <div>
+              <div class="ptc-title">รางวัลกลาง</div>
+              <div class="ptc-sub">จับรางวัลรายเดือน ส.ค. 2569 – พ.ค. 2570</div>
+            </div>
+            <div class="ptc-badge" style="background:rgba(245,200,66,0.3);color:var(--gold)">~10 ครั้ง</div>
+          </div>
+          <div class="ptc-body">
+            <div class="ptc-item"><span>🌟</span><span>Hang with Legend — พบนักเตะพิเศษ</span></div>
+            <div class="ptc-item"><span>🏟️</span><span>ที่นั่ง VIP Red War + NR Sports Radio <span style="opacity:0.6">(รอยืนยัน)</span></span></div>
+            <div class="ptc-item"><span>👕</span><span>เสื้อลายเซ็นนักเตะ</span></div>
+            <div class="ptc-item"><span>🟢</span><span>เสื้อ CBCB Official</span></div>
+            <div style="font-size:8.5px;color:rgba(255,255,255,0.4);margin-top:4px">* รางวัลพิเศษเพิ่มในเดือน Red War / Carabao Cup Final / UCL / PL Final Day</div>
+          </div>
+        </div>
+
+        <!-- BIG TIER -->
+        <div class="prize-tier-card" style="border-color:rgba(245,200,66,0.5)">
+          <div class="ptc-header" style="background:linear-gradient(135deg,rgba(245,200,66,0.3),rgba(180,120,10,0.2))">
+            <div class="ptc-icon">🏆</div>
+            <div>
+              <div class="ptc-title" style="color:var(--gold)">รางวัลใหญ่</div>
+              <div class="ptc-sub">3 ครั้ง ตลอดฤดูกาล</div>
+            </div>
+            <div class="ptc-badge" style="background:rgba(245,200,66,0.4);color:var(--gold)">3 ครั้ง</div>
+          </div>
+          <div class="ptc-body">
+            <div class="ptc-draw-row">
+              <div class="ptc-draw-icon">🏟️</div>
+              <div class="ptc-draw-info">
+                <div class="ptc-draw-title">Draw 1 — ทริป Red War</div>
+                <div class="ptc-draw-sub">บินดู Red War พร้อมกัน ✈️ · วันที่ TBC</div>
+              </div>
+              <div class="ptc-draw-count">4 คน</div>
+            </div>
+            <div class="ptc-draw-row">
+              <div class="ptc-draw-icon">🏆</div>
+              <div class="ptc-draw-info">
+                <div class="ptc-draw-title">Draw 2 — Carabao Cup Final</div>
+                <div class="ptc-draw-sub">เวมบลีย์ ลอนดอน ✈️🏴󠁧󠁢󠁥󠁮󠁧󠁿 · มี.ค. 2570</div>
+              </div>
+              <div class="ptc-draw-count">2 คน</div>
+            </div>
+            <div class="ptc-draw-row">
+              <div class="ptc-draw-icon">⚽</div>
+              <div class="ptc-draw-info">
+                <div class="ptc-draw-title">Draw 3 — Premier League Final Day</div>
+                <div class="ptc-draw-sub">อังกฤษ ✈️🏴󠁧󠁢󠁥󠁮󠁧󠁿 · พ.ค. 2570</div>
+              </div>
+              <div class="ptc-draw-count">2 คน</div>
+            </div>
+            <div style="font-size:8.5px;color:rgba(255,255,255,0.4);margin-top:4px;line-height:1.6">
+              ยิ่งมีแต้มมาก ยิ่งมีสิทธิ์มาก · แต้มสะสมตลอดฤดูกาล<br>
+              ประกาศรางวัลแรก: 25 ธ.ค. 2569 🎄
+            </div>
+          </div>
+        </div>
+
+        <button class="wv-btn" onclick="go('s0')" style="margin-top:4px">← กลับหน้าหลัก LINE</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       S-SHARE-D1 — LINE FRIEND PICKER
+  ══════════════════════════════════════════ -->
   <div id="s-share-d1" class="screen">
     <div class="status-bar sb-line"><span>9:41</span><span>LINE</span><span>📶</span></div>
     <div class="friend-picker">
-      <div class="fp-header"><span style="cursor:pointer;font-size:20px" onclick="go('s-lucky')">✕</span><span>ส่งให้เพื่อน</span></div>
+      <div class="fp-header">
+        <span style="cursor:pointer;font-size:20px" onclick="go('s-spin')">✕</span>
+        <span>ส่งให้เพื่อน</span>
+      </div>
       <div class="fp-body">
-        <div class="fp-hint">เลือกเพื่อนที่ต้องการส่ง</div>
-        <div class="friend-item" onclick="toggleFriend(this)"><div class="friend-avatar" style="background:#ff6b9d">🐱</div><div class="friend-name">น้องมิ้ว</div><div class="friend-check selected">✓</div></div>
-        <div class="friend-item" onclick="toggleFriend(this)"><div class="friend-avatar" style="background:#ffa94d">🦊</div><div class="friend-name">พี่ใจ</div><div class="friend-check">○</div></div>
-        <div class="friend-item" onclick="toggleFriend(this)"><div class="friend-avatar" style="background:#845ef7">🐻</div><div class="friend-name">เพื่อนสนิท</div><div class="friend-check selected">✓</div></div>
-        <div class="friend-item" onclick="toggleFriend(this)"><div class="friend-avatar" style="background:#339af0">🐬</div><div class="friend-name">หมูกรอบ</div><div class="friend-check">○</div></div>
+        <div class="fp-hint">เลือกเพื่อนที่ต้องการชวน</div>
+        <div class="friend-item" onclick="toggleFriend(this)">
+          <div class="friend-avatar" style="background:#ff6b9d">🐱</div>
+          <div class="friend-name">น้องมิ้ว</div>
+          <div class="friend-check selected">✓</div>
+        </div>
+        <div class="friend-item" onclick="toggleFriend(this)">
+          <div class="friend-avatar" style="background:#ffa94d">🦊</div>
+          <div class="friend-name">พี่ใจ</div>
+          <div class="friend-check">○</div>
+        </div>
+        <div class="friend-item" onclick="toggleFriend(this)">
+          <div class="friend-avatar" style="background:#845ef7">🐻</div>
+          <div class="friend-name">เพื่อนสนิท</div>
+          <div class="friend-check selected">✓</div>
+        </div>
+        <div class="friend-item" onclick="toggleFriend(this)">
+          <div class="friend-avatar" style="background:#339af0">🐬</div>
+          <div class="friend-name">หมูกรอบ</div>
+          <div class="friend-check">○</div>
+        </div>
       </div>
       <button class="fp-send-btn" onclick="go('s-share-d2')">ส่ง →</button>
     </div>
   </div>
 
-  <!-- ══ D2 — AUTO-MESSAGE SENT ══ -->
+  <!-- ══════════════════════════════════════════
+       S-SHARE-D2 — LINE SHARE SENT
+  ══════════════════════════════════════════ -->
   <div id="s-share-d2" class="screen">
     <div class="status-bar sb-line"><span>9:41</span><span>LINE</span><span>📶</span></div>
     <div class="line-header">
-      <span class="line-back" onclick="go('s-lucky')">‹</span>
+      <span class="line-back" onclick="go('s-spin')">‹</span>
       <div class="line-avatar" style="background:#059b48;font-size:16px">✅</div>
-      <div class="line-info"><div class="line-name">ส่งสำเร็จ</div><div class="line-status-text">ข้อความที่ส่งอัตโนมัติ</div></div>
+      <div class="line-info">
+        <div class="line-name">ส่งสำเร็จ</div>
+        <div class="line-status-text">ข้อความที่ส่งอัตโนมัติ</div>
+      </div>
     </div>
     <div class="line-chat">
       <div class="chat-date">วันนี้</div>
       <div class="bubble-row">
         <div class="bav">CB</div>
-        <div style="max-width:205px">
+        <div style="max-width:210px">
           <div class="rich-card">
-            <strong>🏆 มาร่วมสนุกกับ Carabao Cup!</strong><br>
-            เพิ่งมาเล่นกิจกรรม มีสิทธิ์ลุ้นไปดูที่<br>
-            🏟 Carabao Cup Final ด้วยกัน! 🏆 ⚡<br>
-            <a href="#">🔗 line.me/ti/p/@carabaobao</a>
-            <button class="rich-card-btn" onclick="go('s-share-d3')">เข้าร่วมกิจกรรม →</button>
+            <strong>🏆 มาร่วมสนุกกับ CBCB Campaign!</strong><br>
+            เพิ่งเช็คอินได้ 3 แต้ม 🔥<br>
+            ลุ้นบินดู Carabao Cup Final ที่เวมบลีย์!<br>
+            ✈️🏟️ ยิ่งดื่ม ยิ่งมีสิทธิ์!<br>
+            <a href="#">🔗 line.me/ti/p/@carabaotawandangbeverage</a>
+            <button class="rich-card-btn" onclick="go('s-flow-start')">เข้าร่วมกิจกรรม →</button>
           </div>
           <div style="font-size:9px;color:#aaa;margin-top:4px">📋 ส่งให้ 2 เพื่อนแล้ว</div>
         </div>
@@ -755,106 +1464,183 @@ body {
     </div>
   </div>
 
-  <!-- ══ D3 — เพื่อนได้รับ ══ -->
-  <div id="s-share-d3" class="screen">
-    <div class="status-bar sb-line"><span>9:41</span><span>LINE</span><span>📶</span></div>
-    <div class="line-header">
-      <span class="line-back" onclick="go('s-share-d2')">‹</span>
-      <div class="line-avatar">CB</div>
-      <div class="line-info"><div class="line-name">Cheer Ball Cheer Bao <span class="line-badge">OA</span></div><div class="line-status-text">เพื่อนได้รับข้อความ</div></div>
-    </div>
-    <div class="line-chat">
-      <div style="background:rgba(45,190,96,0.08);border-radius:8px;padding:6px 10px;font-size:9px;color:#666;text-align:center;align-self:center">เพื่อนได้รับข้อความ</div>
-      <div class="bubble-row">
-        <div class="bav">CB</div>
-        <div class="bubble in">🏆 มาร่วมสนุกกับ Carabao Cup!<br>มีสิทธิ์ลุ้นไปดูที่เวมบลีย์ 😍🏟<br><span style="color:var(--line-green);font-size:9px">line.me/ti/p/@carabaobao</span></div>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px">
-        <button class="wv-btn" style="font-size:11px" onclick="go('s-gps')">🎯 กดลิงก์ → เพิ่ม LINE OA → Main Flow</button>
-      </div>
-    </div>
-  </div>
+</div><!-- /phone -->
 
-  <!-- ══ E1 — FB POST COMPOSER ══ -->
-  <div id="s-share-e1" class="screen">
-    <div class="status-bar sb-fb"><span>9:41</span><span>facebook.com</span><span>📶</span></div>
-    <div class="fb-header">
-      <span style="color:white;font-size:20px;cursor:pointer" onclick="go('s-lucky')">✕</span>
-      <span class="fb-header-title">What's on your mind?</span>
-      <button class="fb-post-btn" onclick="go('s-share-e2')">โพสต์</button>
-    </div>
-    <div class="fb-body">
-      <div class="fb-user-row"><div class="fb-user-avatar">K</div><div class="fb-user-name">คุณ</div></div>
-      <div class="fb-caption">🏆 มาเชียร์บอลที่ German Tawandang! ดื่ม Carabao สนุกมาก 🏆 มาร่วมสนุกกัน<br><span style="color:#1877F2">line.me/ti/p/@carabaobao</span></div>
-      <div class="fb-photo-box">
-        <span style="font-size:32px">📸</span>
-        <div class="auto-badge">AUTO UPLOAD</div>
-        <div class="fb-hint">รูปเซลฟี่จากการส่งหลักฐาน</div>
-      </div>
-      <button class="fb-submit" onclick="go('s-share-e2')">โพสต์</button>
-    </div>
-  </div>
-
-  <!-- ══ E2 — FB POSTED ══ -->
-  <div id="s-share-e2" class="screen">
-    <div class="status-bar sb-fb"><span>9:41</span><span>facebook.com</span><span>📶</span></div>
-    <div class="fb-header">
-      <span style="color:white;font-size:20px;cursor:pointer" onclick="go('s-lucky')">‹</span>
-      <span class="fb-header-title">Facebook</span>
-    </div>
-    <div class="fb-body" style="padding:10px;background:#f0f2f5">
-      <div style="font-size:10px;color:#666;text-align:center;padding:4px">โพสต์ของคุณ</div>
-      <div class="fb-post-card">
-        <div class="fb-post-head"><div class="fb-post-av">K</div><div><div class="fb-post-nm">คุณ</div><div class="fb-post-time">เพิ่งเมื่อกี้ · 🌐</div></div></div>
-        <div class="fb-post-text">🏆 มาเชียร์บอลที่ German Tawandang! ดื่ม Carabao สนุกมาก 🏆<br><a class="fb-post-link" href="#">line.me/ti/p/@carabaobao</a></div>
-        <div class="fb-post-photo">📸</div>
-        <div class="fb-reactions"><span class="fb-reaction">👍 Like</span><span class="fb-reaction">💬 Comment</span><span class="fb-reaction">↗ Share</span></div>
-        <div class="fb-oa-cta" onclick="go('s-gps')">✅ โพสต์สำเร็จ! เพื่อนเห็น LINE OA Link → Main Flow</div>
-      </div>
-      <button class="wv-btn" style="margin-top:8px" onclick="go('s-lucky')">← กลับหน้า Lucky Draw</button>
-    </div>
-  </div>
-
-</div>
-
-<!-- SCREEN LABEL -->
+<!-- Screen label -->
 <div id="screen-label" style="margin-top:16px;font-size:10px;color:rgba(255,255,255,0.3);text-align:center;max-width:320px;padding:0 16px">
   S0 — LINE OA Home
 </div>
 
 <script>
+/* ── Navigation ── */
 const labels = {
-  's0':'S0 — LINE OA Home',
-  's-fb-load':'Branch Facebook — Redirect',
-  's-howto-load':'Branch วิธีการเล่น — GitHub',
-  's-loc-perm':'Branch C — Location Permission',
-  's-loc-maps':'Branch C — LINE Maps (กด Share ↗)',
-  's-loc-confirm':'Branch C — Confirm Send',
-  's-loc-venues':'Branch C — Venue Cards',
-  's-loc-gmaps':'Branch C — Google Maps',
-  's-gps':'Main Flow — GPS Check',
-  's-gps-err':'Main Flow — GPS Error',
-  's-scan':'Main Flow — Face Scan (First Timer)',
-  's-returning':'Main Flow — Returning (Auto-detected)',
-  's-form-selfie':'Main Flow — Form + Selfie (First Timer)',
-  's-selfie-ret':'Main Flow — Selfie Only (Returning)',
-  's-lucky':'Main Flow — Lucky Draw 🏆',
-  's-share-d1':'แชร์ LINE — D1 Friend Picker',
-  's-share-d2':'แชร์ LINE — D2 Auto-Message',
-  's-share-d3':'แชร์ LINE — D3 เพื่อนได้รับ',
-  's-share-e1':'แชร์ FB — E1 Post Composer',
-  's-share-e2':'แชร์ FB — E2 โพสต์สำเร็จ',
+  's0':           'S0 — LINE OA Home',
+  's-website':    'Branch A — Campaign Website Redirect',
+  's-fb-load':    'Branch B — Facebook Redirect',
+  's-points':     'Branch C — Points & History',
+  's-flow-start': 'Main Flow — Start (First Timer / Returning)',
+  's-register':   'First Timer — Registration Form',
+  's-otp':        'First Timer — OTP Entry',
+  's-photo':      'First Timer — Foam Art Photo',
+  's-returning':  'Returning — Welcome Back',
+  's-otp-ret':    'Returning — OTP Entry',
+  's-photo-ret':  'Returning — Foam Art Photo',
+  's-spin':       'Main Flow — Spin Wheel 🎡',
+  's-prizes':     'Prize Tiers — All 3 Levels 🏆',
+  's-share-d1':   'Share LINE — Friend Picker',
+  's-share-d2':   'Share LINE — Sent',
 };
+
 function go(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   document.getElementById('screen-label').textContent = labels[id] || id;
-  window.scrollTo({top:0,behavior:'smooth'});
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+
+function resetAndGo(id) {
+  // Reset photo screens for re-use
+  resetPhoto();
+  go(id);
+}
+
 function toggleFriend(el) {
   const c = el.querySelector('.friend-check');
   c.classList.toggle('selected');
   c.textContent = c.classList.contains('selected') ? '✓' : '○';
+}
+
+/* ── Photo / Camera simulation ── */
+function takePhoto(beforeId, afterId, nextScreen) {
+  const before = document.getElementById(beforeId);
+  const after = document.getElementById(afterId);
+  before.style.display = 'none';
+  after.style.display = 'flex';
+}
+
+function resetPhoto() {
+  ['photo-before','photo-ret-before'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.style.display = 'block';
+  });
+  ['photo-after','photo-ret-after'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.style.display = 'none';
+  });
+  resetSpin();
+}
+
+/* ── Spin Wheel ── */
+// Wheel segments (conic-gradient, clockwise from top = 0°):
+// #555  : 0° – 216°   (60% no prize)    center = 108°
+// #2dbe60: 216° – 288° (20% 2×)         center = 252°
+// #f5c842: 288° – 324° (10% merch)      center = 306°
+// #059b48: 324° – 360° (10% 10×)        center = 342°
+//
+// To bring segment center X to top (pointer):
+// delta = (360 - X - currentAngle % 360 + 360) % 360
+// if delta < 30, add 360 to ensure visible spin
+// then add 5 × 360 for drama
+
+const spinOutcomes = [
+  {
+    target: 252,           // 2× segment center
+    legId: 'leg-2x',
+    icon: '🎉',
+    title: 'ยินดีด้วย! ได้แต้ม 2× ครั้งถัดไป',
+    sub: 'การเช็คอินครั้งถัดไปของคุณจะได้แต้มสองเท่า!\nรับสิทธิ์อัตโนมัติ ไม่ต้องทำอะไร',
+    color: '#2dbe60',
+  },
+  {
+    target: 306,           // merch segment center
+    legId: 'leg-merch',
+    icon: '🛍️',
+    title: 'ยินดีด้วย! ได้ของที่ระลึก CBCB',
+    sub: 'รับของที่ระลึก CBCB ที่พนักงานประจำร้านได้เลย\nวันนี้เท่านั้น',
+    color: '#f5c842',
+  },
+  {
+    target: 108,           // no prize segment center
+    legId: 'leg-none',
+    icon: '😊',
+    title: 'ไม่ได้รางวัลพิเศษรอบนี้',
+    sub: 'แต้มสะสมของคุณเพิ่มขึ้น 3 แต้มแล้ว!\nลุ้นรางวัลใหญ่ได้ตลอดฤดูกาล',
+    color: '#aaa',
+  },
+  {
+    target: 342,           // 10× segment center
+    legId: 'leg-10x',
+    icon: '🚀',
+    title: 'แจ็คพ็อต! ได้แต้ม 10× ครั้งถัดไป',
+    sub: 'การเช็คอินครั้งถัดไปของคุณจะได้แต้มสิบเท่า!\nเข้าบัญชีอัตโนมัติ',
+    color: '#059b48',
+  },
+];
+
+let spinRotation = 0;
+let spinIndex    = 0;
+let isSpinning   = false;
+
+function doSpin() {
+  if (isSpinning) return;
+  isSpinning = true;
+
+  const btn = document.getElementById('spin-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<span style="font-size:14px">⏳</span><span>กำลังหมุน</span>';
+
+  const outcome = spinOutcomes[spinIndex % spinOutcomes.length];
+
+  // Calculate how far to rotate so outcome.target lands at top
+  const currentAngle = spinRotation % 360;
+  let delta = (360 - outcome.target - currentAngle + 360) % 360;
+  if (delta < 30) delta += 360;
+  delta += 5 * 360; // 5 full extra rotations
+
+  spinRotation += delta;
+
+  const wheel = document.getElementById('spin-wheel');
+  wheel.style.transition = 'transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99)';
+  wheel.style.transform  = `rotate(${spinRotation}deg)`;
+
+  setTimeout(() => showSpinResult(outcome), 4300);
+}
+
+function showSpinResult(outcome) {
+  // Highlight legend item
+  document.querySelectorAll('.wl-item').forEach(el => el.classList.remove('highlight'));
+  document.getElementById(outcome.legId).classList.add('highlight');
+
+  // Fill result card
+  document.getElementById('spin-result-icon').textContent  = outcome.icon;
+  document.getElementById('spin-result-title').textContent = outcome.title;
+  document.getElementById('spin-result-title').style.color = outcome.color;
+  document.getElementById('spin-result-sub').textContent   = outcome.sub;
+
+  const card = document.getElementById('spin-result');
+  card.style.display = 'flex';
+
+  const afterBtns = document.getElementById('spin-after-btns');
+  afterBtns.style.display = 'flex';
+
+  spinIndex++;
+}
+
+function resetSpin() {
+  const wheel = document.getElementById('spin-wheel');
+  wheel.style.transition = 'none';
+  wheel.style.transform  = 'rotate(0deg)';
+  spinRotation = 0;
+
+  const btn = document.getElementById('spin-btn');
+  btn.disabled = false;
+  btn.innerHTML = '<span style="font-size:20px">🎡</span><span>หมุน!</span>';
+
+  document.getElementById('spin-result').style.display = 'none';
+  document.getElementById('spin-after-btns').style.display = 'none';
+  document.querySelectorAll('.wl-item').forEach(el => el.classList.remove('highlight'));
+
+  isSpinning = false;
 }
 </script>
 </body>
