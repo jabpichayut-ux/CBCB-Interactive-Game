@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Carabao Prototype V4 — เช็คอิน ลุ้นบินดูคาราบาวคัพ</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;700;900&family=Prompt:wght@400;500;700;900&display=swap');
+
+:root {
+  --green: #2dbe60;
+  --green-dark: #1a9448;
+  --gold: #f5c842;
+  --g-blue: #4285f4;
+  --g-red: #ea4335;
+  --g-green: #34a853;
+  --g-yellow: #fbbc05;
+  --font: 'Sarabun', 'Prompt', sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--font);
+  background: #0a0f0c;
+  min-height: 100vh;
+  display: flex; flex-direction: column; align-items: center;
+  padding: 20px 0 60px;
+  background-image:
+    linear-gradient(rgba(45,190,96,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(45,190,96,0.03) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+.proto-header { text-align: center; margin-bottom: 14px; padding: 0 16px; }
+.proto-title { font-size: 12px; font-weight: 900; color: var(--green); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 3px; }
+.proto-sub   { font-size: 10px; color: rgba(255,255,255,0.4); }
+
+/* ── PERSISTENT POINTS HEADER (above frame) ── */
+.points-header {
+  width: 320px;
+  background: linear-gradient(135deg, var(--green), var(--green-dark));
+  border-radius: 16px;
+  padding: 12px 18px;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 6px 24px rgba(45,190,96,0.3), 0 0 0 1px rgba(45,190,96,0.4);
+  position: relative;
+  overflow: hidden;
+}
+.points-header::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: url('pattern.png') center/180px;
+  opacity: 0.08;
+}
+.ph-medal { font-size: 22px; position: relative; }
+.ph-text  { font-size: 14px; font-weight: 700; color: white; position: relative; }
+.ph-num   { font-size: 20px; font-weight: 900; color: white; position: relative; transition: transform 0.2s; }
+.ph-num.pop { transform: scale(1.4); }
+.ph-unit  { font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.85); position: relative; }
+
+/* ── PHONE ── */
+.phone {
+  width: 320px; background: #111; border-radius: 40px;
+  box-shadow: 0 0 0 2px #1a1a1a, 0 0 0 4px #252525, 0 32px 80px rgba(0,0,0,0.9), 0 0 40px rgba(45,190,96,0.06);
+  overflow: hidden; position: relative; flex-shrink: 0;
+}
+.phone-notch { width: 90px; height: 24px; background: #111; border-radius: 0 0 18px 18px; margin: 0 auto; position: relative; z-index: 10; }
+.status-bar { height: 20px; display: flex; align-items: center; justify-content: space-between; padding: 0 14px; font-size: 9px; font-weight: 700; background: #f2f2f2; color: #333; }
+.status-bar.dark { background: #000; color: #fff; }
+
+/* ── STEP DOTS ── */
+.step-dots { display: flex; align-items: center; justify-content: center; gap: 6px; padding: 10px 0; background: #fff; border-bottom: 1px solid #eee; }
+.step-dots.on-dark { background: #000; border-bottom: none; }
+.sd { width: 7px; height: 7px; border-radius: 50%; background: #d8d8d8; transition: all 0.3s; }
+.sd.active { background: var(--green); width: 22px; border-radius: 4px; }
+.sd.done { background: var(--green); }
+
+/* ── SCREENS ── */
+.screen { display: none; flex-direction: column; min-height: 560px; position: relative; }
+.screen.active { display: flex; }
+
+/* ── WEBVIEW (white) ── */
+.wv { background: #f7f9f7; flex: 1; display: flex; flex-direction: column; position: relative; overflow: hidden; }
+.wv-pattern { position: absolute; inset: 0; background-image: url('pattern.png'); background-size: 220px; opacity: 0.05; pointer-events: none; z-index: 0; }
+.wv-logo-bar { background: var(--green); padding: 9px 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; position: relative; z-index: 1; }
+.wv-logo { height: 36px; mix-blend-mode: screen; object-fit: contain; }
+.wv-body { position: relative; z-index: 1; flex: 1; display: flex; flex-direction: column; padding: 14px; gap: 10px; overflow-y: auto; }
+.wv-title { font-size: 15px; font-weight: 900; color: #0c1a11; text-align: center; }
+.wv-sub   { font-size: 10px; color: #4a6650; text-align: center; line-height: 1.5; }
+.wv-btn { background: var(--green); color: white; border: none; border-radius: 10px; padding: 12px 14px; font-size: 13px; font-weight: 700; font-family: var(--font); width: 100%; cursor: pointer; box-shadow: 0 3px 12px rgba(45,190,96,0.35); display: flex; align-items: center; justify-content: center; gap: 6px; }
+.wv-btn:active { opacity: 0.8; }
+.wv-btn.sec { background: #f0f0f0; color: #333; box-shadow: none; border: 1px solid #ddd; }
+
+/* ── STEP 1: iOS CAMERA ── */
+.cam-screen { background: #000; flex: 1; display: flex; flex-direction: column; position: relative; }
+.cam-topbar { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; z-index: 3; }
+.cam-x { color: white; font-size: 24px; font-weight: 300; cursor: pointer; line-height: 1; }
+.cam-flash { color: var(--g-yellow); font-size: 18px; }
+.cam-mode  { color: var(--g-yellow); font-size: 11px; font-weight: 700; letter-spacing: 1px; }
+.cam-viewfinder {
+  flex: 1; position: relative; display: flex; align-items: center; justify-content: center;
+  background:
+    radial-gradient(circle at 50% 42%, #2a2a2a 0%, #111 70%, #000 100%);
+  overflow: hidden;
+}
+.qr-frame {
+  width: 180px; height: 180px; position: relative;
+  display: flex; align-items: center; justify-content: center;
+}
+.qr-corner { position: absolute; width: 34px; height: 34px; border-color: white; border-style: solid; border-width: 0; }
+.qr-tl { top: 0; left: 0; border-top-width: 3px; border-left-width: 3px; border-top-left-radius: 8px; }
+.qr-tr { top: 0; right: 0; border-top-width: 3px; border-right-width: 3px; border-top-right-radius: 8px; }
+.qr-bl { bottom: 0; left: 0; border-bottom-width: 3px; border-left-width: 3px; border-bottom-left-radius: 8px; }
+.qr-br { bottom: 0; right: 0; border-bottom-width: 3px; border-right-width: 3px; border-bottom-right-radius: 8px; }
+.qr-mock {
+  width: 110px; height: 110px; border-radius: 6px;
+  background:
+    repeating-conic-gradient(#fff 0% 25%, #111 0% 50%) 0 0 / 22px 22px,
+    #fff;
+  opacity: 0.92;
+  position: relative;
+}
+.qr-mock::after {
+  content: 'CB'; position: absolute; inset: 0; margin: auto;
+  width: 30px; height: 30px; background: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 900; color: var(--green);
+  border-radius: 4px;
+}
+.qr-scanline {
+  position: absolute; left: 8px; right: 8px; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--green), transparent);
+  box-shadow: 0 0 8px var(--green);
+  animation: qrScan 2.2s ease-in-out infinite; top: 8px;
+}
+@keyframes qrScan { 0%,100% { top: 8px; } 50% { top: 168px; } }
+.cam-overlay-text {
+  position: absolute; bottom: 24px; left: 20px; right: 20px;
+  text-align: center; color: white; font-size: 12px; font-weight: 700;
+  line-height: 1.5; text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+}
+.cam-controls {
+  display: flex; align-items: center; justify-content: space-around;
+  padding: 18px 30px 26px; background: #000; z-index: 3;
+}
+.cam-ctrl-icon { font-size: 22px; color: white; cursor: pointer; opacity: 0.85; }
+.cam-shutter {
+  width: 62px; height: 62px; border-radius: 50%;
+  background: white; border: 4px solid #000;
+  box-shadow: 0 0 0 3px white; cursor: pointer;
+  transition: transform 0.1s;
+}
+.cam-shutter:active { transform: scale(0.92); }
+
+/* ── STEP 2: VOUCHER AUTO-POPULATE ── */
+.voucher-card {
+  background: white; border-radius: 14px; border: 2px solid var(--green);
+  padding: 18px; text-align: center;
+  box-shadow: 0 6px 20px rgba(45,190,96,0.15);
+  position: relative; overflow: hidden;
+}
+.voucher-detected { font-size: 11px; color: var(--green); font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 5px; }
+.voucher-code-label { font-size: 9px; color: #888; margin-top: 12px; text-transform: uppercase; letter-spacing: 1px; }
+.voucher-code {
+  font-size: 34px; font-weight: 900; color: #0c1a11;
+  letter-spacing: 3px; margin: 4px 0 2px;
+  font-family: 'Prompt', monospace;
+}
+.voucher-venue {
+  background: rgba(45,190,96,0.08); border: 1px solid rgba(45,190,96,0.25);
+  border-radius: 10px; padding: 10px; margin-top: 14px;
+  font-size: 12px; font-weight: 700; color: #1a7a3a;
+}
+.voucher-check-anim {
+  width: 54px; height: 54px; border-radius: 50%;
+  background: var(--green); color: white;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 28px; margin: 0 auto 6px;
+  animation: checkPop 0.5s ease-out;
+}
+@keyframes checkPop { 0% { transform: scale(0); } 60% { transform: scale(1.2); } 100% { transform: scale(1); } }
+
+/* ── STEP 3: REGISTRATION ── */
+.section-label { font-size: 11px; font-weight: 900; color: var(--green); text-align: center; }
+.consent-row { display: flex; align-items: flex-start; gap: 6px; font-size: 9px; color: #555; line-height: 1.5; }
+.consent-box { width: 14px; height: 14px; border: 1.5px solid var(--green); border-radius: 3px; background: rgba(45,190,96,0.15); flex-shrink: 0; margin-top: 1px; display: flex; align-items: center; justify-content: center; font-size: 9px; color: var(--green); }
+.form-group { display: flex; flex-direction: column; gap: 3px; }
+.form-label { font-size: 9px; font-weight: 700; color: #555; }
+.form-input { background: white; border: 1.5px solid #e0e8e4; border-radius: 8px; padding: 8px 10px; font-size: 10px; color: #333; font-family: var(--font); }
+.form-select { background: white; border: 1.5px solid #e0e8e4; border-radius: 8px; padding: 7px 10px; font-size: 10px; color: #333; font-family: var(--font); width: 100%; appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23999'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 10px center; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+/* ── STEP 4: GOOGLE REVIEW ── */
+.greview { background: #fff; flex: 1; display: flex; flex-direction: column; overflow-y: auto; }
+.greview-bar { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-bottom: 1px solid #eee; flex-shrink: 0; }
+.g-logo { font-size: 17px; font-weight: 700; letter-spacing: -1px; }
+.g-b { color: var(--g-blue); } .g-r { color: var(--g-red); } .g-y { color: var(--g-yellow); } .g-g { color: var(--g-green); }
+.greview-bar-title { font-size: 13px; font-weight: 700; color: #202124; }
+.greview-body { padding: 14px; display: flex; flex-direction: column; gap: 12px; }
+.gr-venue-row { display: flex; align-items: center; gap: 10px; }
+.gr-venue-icon { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg,#c8e6c9,#a5d6a7); display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+.gr-venue-name { font-size: 13px; font-weight: 700; color: #202124; }
+.gr-venue-sub { font-size: 10px; color: #5f6368; }
+.gr-prompt { font-size: 12px; color: #202124; font-weight: 500; }
+.gr-stars { display: flex; gap: 6px; }
+.gr-star { font-size: 32px; cursor: pointer; color: #dadce0; transition: transform 0.1s; }
+.gr-star.lit { color: var(--g-yellow); }
+.gr-star:active { transform: scale(1.2); }
+.gr-textbox { border: 1px solid #dadce0; border-radius: 8px; padding: 10px; font-size: 11px; color: #202124; font-family: var(--font); min-height: 64px; line-height: 1.5; }
+.gr-textbox.placeholder { color: #9aa0a6; }
+.gr-cam-btn { display: flex; align-items: center; justify-content: center; gap: 8px; border: 1px solid var(--g-blue); border-radius: 8px; padding: 11px; font-size: 12px; font-weight: 700; color: var(--g-blue); background: white; cursor: pointer; font-family: var(--font); }
+.gr-cam-btn:active { background: #f0f6ff; }
+.gr-photo-preview { background: #000; border-radius: 10px; height: 96px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+.gr-photo-inner { display: flex; flex-direction: column; align-items: center; gap: 3px; color: white; }
+.gr-photo-badge { position: absolute; top: 7px; right: 7px; background: var(--g-green); color: white; font-size: 8px; font-weight: 700; padding: 2px 6px; border-radius: 4px; }
+.gr-post-btn { background: var(--g-blue); color: white; border: none; border-radius: 24px; padding: 12px; font-size: 13px; font-weight: 700; font-family: var(--font); cursor: pointer; width: 100%; }
+.gr-post-btn:active { opacity: 0.85; }
+.gr-post-btn:disabled { opacity: 0.4; cursor: default; }
+
+/* google overlay (loading/success) */
+.g-overlay { position: absolute; inset: 0; background: rgba(255,255,255,0.97); display: none; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 30px; text-align: center; z-index: 20; }
+.g-overlay.active { display: flex; }
+.g-spinner { width: 46px; height: 46px; border: 4px solid #e0e0e0; border-top-color: var(--g-blue); border-radius: 50%; animation: gspin 0.9s linear infinite; }
+@keyframes gspin { to { transform: rotate(360deg); } }
+.g-ov-title { font-size: 14px; font-weight: 700; color: #202124; line-height: 1.5; }
+.g-ov-sub { font-size: 11px; color: #5f6368; line-height: 1.5; }
+.g-success-icon { width: 56px; height: 56px; border-radius: 50%; background: var(--g-green); color: white; display: flex; align-items: center; justify-content: center; font-size: 30px; animation: checkPop 0.5s ease-out; }
+.g-link { color: var(--g-blue); font-size: 12px; font-weight: 700; text-decoration: none; }
+
+/* step guide */
+.guide-panel { background: rgba(45,190,96,0.06); border: 1px solid rgba(45,190,96,0.2); border-radius: 10px; padding: 10px 12px; }
+.guide-title { font-size: 10px; font-weight: 900; color: var(--green); margin-bottom: 6px; }
+.guide-step { font-size: 10px; color: #444; padding: 2px 0; display: flex; gap: 6px; line-height: 1.5; }
+.clarity-rules { display: flex; flex-direction: column; gap: 2px; margin-top: 8px; padding-top: 8px; border-top: 1px dashed rgba(45,190,96,0.25); }
+.clarity-rule { font-size: 8.5px; display: flex; gap: 5px; line-height: 1.4; }
+.clarity-rule.ok { color: #1a7a3a; }
+.clarity-rule.no { color: #c0392b; }
+
+/* ── STEP 5: SPIN WHEEL ── */
+.spin-screen { background: linear-gradient(180deg,#0c1a11 0%,#060d0a 100%); flex: 1; display: flex; flex-direction: column; align-items: center; padding: 14px; gap: 12px; position: relative; overflow: hidden; }
+.confetti-svg { position: absolute; top: 0; left: 0; right: 0; height: 160px; pointer-events: none; z-index: 1; }
+.spin-heading { font-size: 14px; font-weight: 900; color: var(--gold); text-align: center; text-shadow: 0 0 12px rgba(245,200,66,0.4); position: relative; z-index: 2; }
+.spin-subheading { font-size: 10px; color: rgba(255,255,255,0.6); text-align: center; }
+.wheel-wrap { position: relative; width: 210px; height: 210px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.wheel-pointer { position: absolute; top: -8px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 12px solid transparent; border-right: 12px solid transparent; border-top: 22px solid white; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.6)); z-index: 10; }
+#spin-wheel {
+  width: 200px; height: 200px; border-radius: 50%;
+  background: conic-gradient(
+    var(--green) 0deg 120deg,
+    var(--green-dark) 120deg 240deg,
+    var(--gold) 240deg 360deg
+  );
+  border: 5px solid white;
+  box-shadow: 0 0 0 4px rgba(255,255,255,0.1), 0 6px 28px rgba(0,0,0,0.5);
+  transform-origin: center; will-change: transform;
+  position: relative;
+}
+.wheel-label { position: absolute; font-size: 15px; font-weight: 900; color: white; text-shadow: 0 1px 3px rgba(0,0,0,0.4); }
+.wheel-center { position: absolute; width: 40px; height: 40px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.4); z-index: 5; font-size: 16px; }
+#spin-btn { background: linear-gradient(135deg,var(--gold),#e0a800); color: #111; border: none; border-radius: 14px; padding: 14px; font-size: 15px; font-weight: 900; font-family: var(--font); cursor: pointer; box-shadow: 0 4px 20px rgba(245,200,66,0.5); width: 100%; transition: opacity 0.2s, transform 0.1s; position: relative; z-index: 2; }
+#spin-btn:active { transform: scale(0.97); }
+#spin-btn:disabled { opacity: 0.5; cursor: default; }
+.spin-result-card { display: none; flex-direction: column; align-items: center; gap: 6px; background: rgba(255,255,255,0.07); border: 1.5px solid rgba(245,200,66,0.3); border-radius: 14px; padding: 14px; width: 100%; text-align: center; position: relative; z-index: 2; }
+.src-icon { font-size: 32px; }
+.src-title { font-size: 16px; font-weight: 900; color: var(--gold); }
+.src-sub { font-size: 10px; color: rgba(255,255,255,0.7); line-height: 1.5; }
+.src-pts { font-size: 26px; font-weight: 900; color: var(--green); }
+
+.spin-bottom-btns { display: none; flex-direction: column; gap: 7px; width: 100%; position: relative; z-index: 2; }
+.fb-share-btn { background: #1877F2; color: white; border: none; border-radius: 10px; padding: 12px; font-size: 13px; font-weight: 700; font-family: var(--font); cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.fb-share-btn:active { opacity: 0.85; }
+.home-btn { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); border: 1px solid rgba(255,255,255,0.2); border-radius: 10px; padding: 11px; font-size: 12px; font-weight: 700; font-family: var(--font); cursor: pointer; }
+
+/* ── FACEBOOK SHARE SHEET ── */
+.fb-sheet-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.5); display: none; align-items: flex-end; z-index: 40; }
+.fb-sheet-overlay.active { display: flex; }
+.fb-sheet { background: white; border-radius: 16px 16px 0 0; width: 100%; padding: 16px; display: flex; flex-direction: column; gap: 12px; animation: sheetUp 0.3s ease-out; }
+@keyframes sheetUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+.fb-sheet-header { display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+.fb-sheet-logo { width: 34px; height: 34px; border-radius: 50%; background: #1877F2; color: white; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 900; flex-shrink: 0; }
+.fb-sheet-title { font-size: 13px; font-weight: 700; color: #111; }
+.fb-sheet-sub { font-size: 9px; color: #888; }
+.fb-user-row { display: flex; align-items: center; gap: 8px; }
+.fb-user-av { width: 36px; height: 36px; border-radius: 50%; background: #1877F2; color: white; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; flex-shrink: 0; }
+.fb-user-nm { font-size: 12px; font-weight: 700; color: #111; }
+.fb-privacy { font-size: 8px; color: #888; }
+.fb-caption-box { font-size: 11px; color: #1c1e21; line-height: 1.6; }
+.fb-caption-box .ht { color: #1877F2; font-weight: 700; }
+.fb-photo-prev { background: #000; border-radius: 8px; height: 90px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+.fb-photo-badge { position: absolute; top: 6px; right: 6px; background: var(--green); color: white; font-size: 8px; font-weight: 700; padding: 2px 6px; border-radius: 4px; }
+.fb-sheet-btns { display: flex; gap: 8px; }
+.fb-cancel { flex: 1; padding: 11px; border-radius: 8px; border: 1px solid #ddd; background: white; font-size: 12px; font-weight: 700; font-family: var(--font); color: #666; cursor: pointer; }
+.fb-confirm { flex: 2; padding: 11px; border-radius: 8px; border: none; background: #1877F2; font-size: 12px; font-weight: 700; font-family: var(--font); color: white; cursor: pointer; }
+
+/* toast */
+.toast { position: fixed; left: 50%; bottom: 40px; transform: translateX(-50%) translateY(20px); background: #1a1a1a; color: white; padding: 12px 22px; border-radius: 999px; font-size: 13px; font-weight: 700; box-shadow: 0 8px 30px rgba(0,0,0,0.4); opacity: 0; transition: opacity 0.3s, transform 0.3s; z-index: 100; pointer-events: none; }
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+.screen-label { margin-top: 14px; font-size: 10px; color: rgba(255,255,255,0.3); text-align: center; max-width: 320px; padding: 0 16px; }
+</style>
+</head>
+<body>
+
+<div class="proto-header">
+  <div class="proto-title">Carabao Prototype V4</div>
+  <div class="proto-sub">เช็คอิน ลุ้นบินดูคาราบาวคัพ · 5 ขั้นตอน</div>
+</div>
+
+<!-- ── PERSISTENT POINTS HEADER ── -->
+<div class="points-header">
+  <span class="ph-medal">🏅</span>
+  <span class="ph-text">แต้มสะสม:</span>
+  <span class="ph-num" id="ph-num">0</span>
+  <span class="ph-unit">แต้ม</span>
+</div>
+
+<div class="phone">
+  <div class="phone-notch"></div>
+
+  <!-- ══ STEP 1 — iOS CAMERA / QR SCAN ══ -->
+  <div id="step1" class="screen active">
+    <div class="status-bar dark"><span>9:41</span><span>🔋 📶</span></div>
+    <div class="step-dots on-dark">
+      <div class="sd active"></div><div class="sd"></div><div class="sd"></div><div class="sd"></div><div class="sd"></div>
+    </div>
+    <div class="cam-screen">
+      <div class="cam-topbar">
+        <span class="cam-x" onclick="goStep(1)">✕</span>
+        <span class="cam-flash">⚡</span>
+        <span class="cam-mode">QR CODE</span>
+      </div>
+      <div class="cam-viewfinder">
+        <div class="qr-frame">
+          <div class="qr-corner qr-tl"></div><div class="qr-corner qr-tr"></div>
+          <div class="qr-corner qr-bl"></div><div class="qr-corner qr-br"></div>
+          <div class="qr-mock"></div>
+          <div class="qr-scanline"></div>
+        </div>
+        <div class="cam-overlay-text">ส่องกล้องไปที่ QR Code<br>บน Voucher ของคุณ</div>
+      </div>
+      <div class="cam-controls">
+        <span class="cam-ctrl-icon">⚡</span>
+        <div class="cam-shutter" onclick="goStep(2)"></div>
+        <span class="cam-ctrl-icon">🔄</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ STEP 2 — VOUCHER AUTO-POPULATE ══ -->
+  <div id="step2" class="screen">
+    <div class="status-bar"><span>9:41</span><span>🔋 📶</span></div>
+    <div class="step-dots">
+      <div class="sd done"></div><div class="sd active"></div><div class="sd"></div><div class="sd"></div><div class="sd"></div>
+    </div>
+    <div class="wv">
+      <div class="wv-pattern"></div>
+      <div class="wv-logo-bar"><img class="wv-logo" src="CBCB%20Logo.png" alt="CBCB"></div>
+      <div class="wv-body">
+        <div class="wv-title">🧾 ตรวจพบ Voucher แล้ว</div>
+        <div class="voucher-card">
+          <div class="voucher-check-anim">✓</div>
+          <div class="voucher-detected">✅ ระบบตรวจพบ Voucher ของคุณแล้ว</div>
+          <div class="voucher-code-label">รหัส Voucher</div>
+          <div class="voucher-code">CB-374XK</div>
+          <div class="voucher-venue">📍 Tawandang German Brewery</div>
+        </div>
+        <div class="wv-sub">ระบบกรอกรหัสให้อัตโนมัติ<br>ไม่ต้องพิมพ์เอง</div>
+        <button class="wv-btn" onclick="goStep(3)">ยืนยัน — ไปลงทะเบียน →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ STEP 3 — CONSENT + REGISTRATION ══ -->
+  <div id="step3" class="screen">
+    <div class="status-bar"><span>9:41</span><span>🔋 📶</span></div>
+    <div class="step-dots">
+      <div class="sd done"></div><div class="sd done"></div><div class="sd active"></div><div class="sd"></div><div class="sd"></div>
+    </div>
+    <div class="wv">
+      <div class="wv-pattern"></div>
+      <div class="wv-logo-bar"><img class="wv-logo" src="CBCB%20Logo.png" alt="CBCB"></div>
+      <div class="wv-body" style="gap:8px">
+        <div class="section-label">📝 ลงทะเบียน</div>
+        <div class="consent-row">
+          <div class="consent-box">✓</div>
+          <div>ฉันยอมรับ <span style="color:var(--green);font-weight:700">เงื่อนไขการร่วมกิจกรรม</span> และ <span style="color:var(--green);font-weight:700">นโยบายความเป็นส่วนตัว</span> และยืนยันว่ามีอายุ 20 ปีขึ้นไป</div>
+        </div>
+        <div class="form-group"><div class="form-label">ชื่อ-นามสกุล *</div><div class="form-input">คุมาริ สุขดี</div></div>
+        <div class="form-group"><div class="form-label">เลขบัตรประชาชน *</div><div class="form-input" style="letter-spacing:1.5px">3-1005-12345-67-8</div></div>
+        <div class="form-row">
+          <div class="form-group"><div class="form-label">อายุ *</div><div class="form-input">28</div></div>
+          <div class="form-group"><div class="form-label">เพศ *</div><div class="form-input">หญิง ▾</div></div>
+        </div>
+        <div class="form-group"><div class="form-label">จังหวัด *</div><div class="form-input">กรุงเทพมหานคร ▾</div></div>
+        <div class="form-group"><div class="form-label">เบอร์โทรศัพท์ *</div><input class="form-input" id="reg-phone" value="081-234-5678" inputmode="tel"></div>
+        <div class="form-group">
+          <div class="form-label">ทีมพรีเมียร์ลีกที่ชื่นชอบ *</div>
+          <select class="form-select">
+            <option selected>Manchester United</option>
+            <option>Liverpool</option><option>Arsenal</option><option>Chelsea</option>
+            <option>Manchester City</option><option>Tottenham Hotspur</option>
+            <option>Newcastle United</option><option>Aston Villa</option>
+            <option>West Ham United</option><option>Brighton &amp; Hove Albion</option>
+            <option>Fulham</option><option>Brentford</option><option>Wolverhampton</option>
+            <option>Crystal Palace</option><option>Everton</option><option>Nottingham Forest</option>
+            <option>Bournemouth</option><option>ไม่มีทีมที่ชอบ</option>
+          </select>
+        </div>
+        <button class="wv-btn" onclick="completeRegistration()" style="margin-top:4px">ถัดไป — รีวิวร้าน →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ STEP 4 — GOOGLE REVIEW ══ -->
+  <div id="step4" class="screen">
+    <div class="status-bar"><span>9:41</span><span>🔋 📶</span></div>
+    <div class="step-dots">
+      <div class="sd done"></div><div class="sd done"></div><div class="sd done"></div><div class="sd active"></div><div class="sd"></div>
+    </div>
+    <div class="greview" style="position:relative">
+      <div class="greview-bar">
+        <span class="g-logo"><span class="g-b">G</span><span class="g-r">o</span><span class="g-y">o</span><span class="g-b">g</span><span class="g-g">l</span><span class="g-r">e</span></span>
+        <span class="greview-bar-title">รีวิว</span>
+      </div>
+      <div class="greview-body">
+        <div class="gr-venue-row">
+          <div class="gr-venue-icon">🍺</div>
+          <div>
+            <div class="gr-venue-name">Tawandang German Brewery</div>
+            <div class="gr-venue-sub">ร้านอาหาร · เบียร์สด · พระราม 3</div>
+          </div>
+        </div>
+        <div class="gr-prompt">ให้คะแนนประสบการณ์ของคุณ</div>
+        <div class="gr-stars" id="gr-stars">
+          <span class="gr-star lit" onclick="rateStar(1)">★</span>
+          <span class="gr-star lit" onclick="rateStar(2)">★</span>
+          <span class="gr-star lit" onclick="rateStar(3)">★</span>
+          <span class="gr-star lit" onclick="rateStar(4)">★</span>
+          <span class="gr-star lit" onclick="rateStar(5)">★</span>
+        </div>
+        <div class="gr-textbox placeholder" id="gr-text">เขียนรีวิวร้านนี้...</div>
+        <button class="gr-cam-btn" id="gr-cam-btn" onclick="takeSelfie()">📷 ถ่ายเซลฟี่กับเบียร์ของคุณ</button>
+        <div class="gr-photo-preview" id="gr-photo" style="display:none">
+          <div class="gr-photo-badge">✓ แนบรูปแล้ว</div>
+          <div class="gr-photo-inner"><span style="font-size:26px">🤳🍺</span><span style="font-size:9px">เซลฟี่กับเบียร์</span></div>
+        </div>
+        <button class="gr-post-btn" onclick="postReview()">โพสต์</button>
+
+        <!-- step guide -->
+        <div class="guide-panel">
+          <div class="guide-title">วิธีรีวิวรับแต้ม</div>
+          <div class="guide-step">1. ✍️ เขียนรีวิว</div>
+          <div class="guide-step">2. 📷 ถ่ายเซลฟี่กับเบียร์</div>
+          <div class="guide-step">3. ✅ กด โพสต์</div>
+          <div class="clarity-rules">
+            <div class="clarity-rule ok">✅ ภาพคมชัด เห็นใบหน้าและเบียร์ชัดเจน</div>
+            <div class="clarity-rule ok">✅ แสงสว่างเพียงพอ ไม่มืด</div>
+            <div class="clarity-rule no">❌ ห้ามภาพเบลอหรือโฟกัสไม่ชัด</div>
+            <div class="clarity-rule no">❌ ห้ามใช้ภาพจากคลังหรือภาพที่แต่ง Filter</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- google overlay -->
+      <div class="g-overlay" id="g-overlay">
+        <div id="g-loading" style="display:flex;flex-direction:column;align-items:center;gap:14px">
+          <div class="g-spinner"></div>
+          <div class="g-ov-title">กำลังเชื่อมต่อ Google Maps...</div>
+        </div>
+        <div id="g-success" style="display:none;flex-direction:column;align-items:center;gap:14px">
+          <div class="g-success-icon">✓</div>
+          <div class="g-ov-title">รีวิวของคุณถูกส่งไปยัง<br>Google Maps แล้ว ✅</div>
+          <a class="g-link" href="https://www.google.com/maps" target="_blank">ดูรีวิวของคุณบน Google Maps →</a>
+          <div class="g-ov-sub">+10 แต้มจากการรีวิว · กำลังไปหมุนวงล้อ...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ STEP 5 — SPIN WHEEL + POINTS ══ -->
+  <div id="step5" class="screen">
+    <div class="status-bar dark"><span>9:41</span><span>🔋 📶</span></div>
+    <div class="step-dots on-dark">
+      <div class="sd done"></div><div class="sd done"></div><div class="sd done"></div><div class="sd done"></div><div class="sd active"></div>
+    </div>
+    <div class="spin-screen">
+      <svg class="confetti-svg" viewBox="0 0 320 160" xmlns="http://www.w3.org/2000/svg">
+        <rect x="30" y="0" width="6" height="10" fill="#f5c842" rx="1"><animate attributeName="y" from="-10" to="160" dur="2s" repeatCount="indefinite"/><animate attributeName="opacity" from="1" to="0" dur="2s" repeatCount="indefinite"/></rect>
+        <rect x="80" y="0" width="5" height="8" fill="#2dbe60" rx="1"><animate attributeName="y" from="-10" to="160" dur="2.3s" repeatCount="indefinite" begin="0.3s"/><animate attributeName="opacity" from="1" to="0" dur="2.3s" repeatCount="indefinite" begin="0.3s"/></rect>
+        <rect x="140" y="0" width="7" height="6" fill="#fff" rx="1"><animate attributeName="y" from="-10" to="160" dur="1.8s" repeatCount="indefinite" begin="0.6s"/><animate attributeName="opacity" from="1" to="0" dur="1.8s" repeatCount="indefinite" begin="0.6s"/></rect>
+        <rect x="210" y="0" width="5" height="9" fill="#f5c842" rx="1"><animate attributeName="y" from="-10" to="160" dur="2.1s" repeatCount="indefinite" begin="0.1s"/><animate attributeName="opacity" from="1" to="0" dur="2.1s" repeatCount="indefinite" begin="0.1s"/></rect>
+        <rect x="270" y="0" width="6" height="7" fill="#2dbe60" rx="1"><animate attributeName="y" from="-10" to="160" dur="2.5s" repeatCount="indefinite" begin="0.8s"/><animate attributeName="opacity" from="1" to="0" dur="2.5s" repeatCount="indefinite" begin="0.8s"/></rect>
+      </svg>
+
+      <div class="spin-heading">🎡 หมุนวงล้อทวีคูณแต้ม!</div>
+      <div class="spin-subheading">คุณได้ 10 แต้มฐานจากการรีวิว<br>หมุนวงล้อเพื่อรับแต้มเพิ่ม!</div>
+
+      <div class="wheel-wrap">
+        <div class="wheel-pointer"></div>
+        <div id="spin-wheel">
+          <div class="wheel-label" style="top:32px;left:50%;transform:translateX(-50%)">2x</div>
+          <div class="wheel-label" style="bottom:46px;left:38px">3x</div>
+          <div class="wheel-label" style="bottom:46px;right:38px">5x</div>
+        </div>
+        <div class="wheel-center">🍺</div>
+      </div>
+
+      <button id="spin-btn" onclick="doSpin()">🎡 หมุนเลย!</button>
+
+      <div class="spin-result-card" id="spin-result">
+        <div class="src-icon" id="src-icon">🎉</div>
+        <div class="src-title" id="src-title"></div>
+        <div class="src-pts" id="src-pts"></div>
+        <div class="src-sub" id="src-sub"></div>
+      </div>
+
+      <div class="spin-bottom-btns" id="spin-bottom">
+        <button class="fb-share-btn" onclick="openFbSheet()">👍 แชร์บน Facebook</button>
+        <button class="home-btn" onclick="goStep(1)">🔄 เริ่มเช็คอินใหม่</button>
+      </div>
+    </div>
+
+    <!-- FB SHARE SHEET -->
+    <div class="fb-sheet-overlay" id="fb-sheet-overlay">
+      <div class="fb-sheet">
+        <div class="fb-sheet-header">
+          <div class="fb-sheet-logo">f</div>
+          <div><div class="fb-sheet-title">แชร์ไปยัง Facebook</div><div class="fb-sheet-sub">โพสต์ลงไทม์ไลน์ของคุณ</div></div>
+        </div>
+        <div class="fb-user-row">
+          <div class="fb-user-av">K</div>
+          <div><div class="fb-user-nm">คุมาริ สุขดี</div><div class="fb-privacy">🌐 สาธารณะ</div></div>
+        </div>
+        <div class="fb-caption-box">มาร่วมสนุกกันเลย! เชียร์บอล ชนบาว สนุกมากกก 🍻⚽ <span class="ht">#เชียร์บอลเชียร์บาว</span></div>
+        <div class="fb-photo-prev">
+          <div class="fb-photo-badge">รูปจากรีวิว</div>
+          <span style="font-size:30px">🤳🍺</span>
+        </div>
+        <div class="fb-sheet-btns">
+          <button class="fb-cancel" onclick="closeFbSheet()">ยกเลิก</button>
+          <button class="fb-confirm" onclick="confirmFbShare()">แชร์เลย</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /phone -->
+
+<div class="screen-label" id="screen-label">STEP 1 — iPhone Camera / สแกน QR</div>
+
+<!-- toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+/* ═══ POINTS (localStorage by phone) ═══ */
+let userPhone = '081-234-5678';
+function pointsKey() { return 'cbcb_points_' + userPhone.replace(/\D/g, ''); }
+function getPoints() { return parseInt(localStorage.getItem(pointsKey()) || '0', 10); }
+function setPoints(v) { localStorage.setItem(pointsKey(), String(v)); }
+function renderPoints() { document.getElementById('ph-num').textContent = getPoints().toLocaleString(); }
+
+function animatePoints(from, to) {
+  const el = document.getElementById('ph-num');
+  const dur = 900, start = performance.now();
+  el.classList.add('pop');
+  setTimeout(() => el.classList.remove('pop'), 250);
+  function tick(now) {
+    const t = Math.min((now - start) / dur, 1);
+    const eased = 1 - Math.pow(1 - t, 3);
+    el.textContent = Math.round(from + (to - from) * eased).toLocaleString();
+    if (t < 1) requestAnimationFrame(tick);
+    else el.textContent = to.toLocaleString();
+  }
+  requestAnimationFrame(tick);
+}
+
+/* ═══ NAV ═══ */
+const stepLabels = {
+  1: 'STEP 1 — iPhone Camera / สแกน QR',
+  2: 'STEP 2 — Voucher Auto-Populate',
+  3: 'STEP 3 — Consent + Registration',
+  4: 'STEP 4 — Google Review',
+  5: 'STEP 5 — Spin Wheel + Points',
+};
+function goStep(n) {
+  if (n === 1) resetFlow();
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('step' + n).classList.add('active');
+  document.getElementById('screen-label').textContent = stepLabels[n];
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ═══ STEP 3 → capture phone, key points ═══ */
+function completeRegistration() {
+  const v = document.getElementById('reg-phone').value.trim();
+  if (v) userPhone = v;
+  renderPoints();
+  goStep(4);
+}
+
+/* ═══ STEP 4 — Google Review ═══ */
+function rateStar(n) {
+  document.querySelectorAll('.gr-star').forEach((s, i) => s.classList.toggle('lit', i < n));
+}
+function takeSelfie() {
+  document.getElementById('gr-photo').style.display = 'flex';
+  const t = document.getElementById('gr-text');
+  if (t.classList.contains('placeholder')) {
+    t.classList.remove('placeholder');
+    t.textContent = 'บรรยากาศดีมาก เบียร์สดอร่อย เชียร์บอลสนุกสุดๆ! 🍻⚽';
+  }
+}
+let reviewAwarded = false;
+function postReview() {
+  const ov = document.getElementById('g-overlay');
+  ov.classList.add('active');
+  document.getElementById('g-loading').style.display = 'flex';
+  document.getElementById('g-success').style.display = 'none';
+  setTimeout(() => {
+    document.getElementById('g-loading').style.display = 'none';
+    document.getElementById('g-success').style.display = 'flex';
+    // award base 10 review points
+    if (!reviewAwarded) {
+      const before = getPoints();
+      setPoints(before + 10);
+      animatePoints(before, before + 10);
+      reviewAwarded = true;
+    }
+  }, 1800);
+  setTimeout(() => {
+    ov.classList.remove('active');
+    goStep(5);
+  }, 1800 + 2000);
+}
+
+/* ═══ STEP 5 — Spin Wheel ═══ */
+// 3 equal 120° segments. Centers: 2x=60°, 3x=180°, 5x=300°
+// Hidden weights: 2x=60%, 3x=30%, 5x=10%
+const spinSegments = [
+  { mult: 2, add: 20, target: 60,  color: '#2dbe60', icon: '🟢', title: 'แต้ม 2 เท่า!' },
+  { mult: 3, add: 30, target: 180, color: '#1a9448', icon: '💚', title: 'แต้ม 3 เท่า!' },
+  { mult: 5, add: 50, target: 300, color: '#f5c842', icon: '⭐', title: 'แต้ม 5 เท่า! สุดยอด!' },
+];
+const spinWeights = [0.60, 0.30, 0.10];
+let spinRotation = 0;
+let isSpinning = false;
+
+function pickWeighted() {
+  const r = Math.random();
+  let acc = 0;
+  for (let i = 0; i < spinWeights.length; i++) {
+    acc += spinWeights[i];
+    if (r < acc) return i;
+  }
+  return spinWeights.length - 1;
+}
+
+function doSpin() {
+  if (isSpinning) return;
+  isSpinning = true;
+  const btn = document.getElementById('spin-btn');
+  btn.disabled = true;
+  btn.textContent = '⏳ กำลังหมุน...';
+
+  const idx = pickWeighted();
+  const seg = spinSegments[idx];
+  const currentAngle = spinRotation % 360;
+  let delta = (360 - seg.target - currentAngle + 360) % 360;
+  if (delta < 30) delta += 360;
+  delta += 5 * 360;
+  spinRotation += delta;
+
+  const wheel = document.getElementById('spin-wheel');
+  wheel.style.transition = 'transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99)';
+  wheel.style.transform = `rotate(${spinRotation}deg)`;
+
+  setTimeout(() => showSpinResult(seg), 4300);
+}
+
+function showSpinResult(seg) {
+  const before = getPoints();
+  const after = before + seg.add;
+  setPoints(after);
+  animatePoints(before, after);
+
+  document.getElementById('src-icon').textContent = seg.icon;
+  document.getElementById('src-title').textContent = seg.title;
+  document.getElementById('src-pts').textContent = '+' + seg.add + ' แต้ม';
+  document.getElementById('src-sub').textContent =
+    `10 แต้มฐาน + ${seg.add} แต้มจากวงล้อ = รวมรอบนี้ ${10 + seg.add} แต้ม`;
+  document.getElementById('spin-result').style.display = 'flex';
+  document.getElementById('spin-bottom').style.display = 'flex';
+}
+
+/* ═══ FACEBOOK SHARE ═══ */
+function openFbSheet()  { document.getElementById('fb-sheet-overlay').classList.add('active'); }
+function closeFbSheet() { document.getElementById('fb-sheet-overlay').classList.remove('active'); }
+function confirmFbShare() {
+  closeFbSheet();
+  showToast('แชร์สำเร็จแล้ว! 🎉');
+}
+
+/* ═══ TOAST ═══ */
+let toastTimer = null;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2600);
+}
+
+/* ═══ RESET (re-checkin) ═══ */
+function resetFlow() {
+  // step 4
+  reviewAwarded = false;
+  const t = document.getElementById('gr-text');
+  t.classList.add('placeholder');
+  t.textContent = 'เขียนรีวิวร้านนี้...';
+  document.getElementById('gr-photo').style.display = 'none';
+  rateStar(5);
+  document.getElementById('g-overlay').classList.remove('active');
+  // step 5
+  const wheel = document.getElementById('spin-wheel');
+  wheel.style.transition = 'none';
+  wheel.style.transform = 'rotate(0deg)';
+  spinRotation = 0;
+  isSpinning = false;
+  const btn = document.getElementById('spin-btn');
+  btn.disabled = false;
+  btn.textContent = '🎡 หมุนเลย!';
+  document.getElementById('spin-result').style.display = 'none';
+  document.getElementById('spin-bottom').style.display = 'none';
+  closeFbSheet();
+}
+
+/* init */
+renderPoints();
+</script>
+</body>
+</html>
