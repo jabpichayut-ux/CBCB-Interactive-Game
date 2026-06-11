@@ -269,9 +269,35 @@ body {
 .src-pts { font-size: 26px; font-weight: 900; color: var(--green); }
 
 .spin-bottom-btns { display: none; flex-direction: column; gap: 7px; width: 100%; position: relative; z-index: 2; }
+.line-share-btn { background: #06C755; color: white; border: none; border-radius: 10px; padding: 12px; font-size: 13px; font-weight: 700; font-family: var(--font); cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.line-share-btn:active { opacity: 0.85; }
 .fb-share-btn { background: #1877F2; color: white; border: none; border-radius: 10px; padding: 12px; font-size: 13px; font-weight: 700; font-family: var(--font); cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
 .fb-share-btn:active { opacity: 0.85; }
 .home-btn { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); border: 1px solid rgba(255,255,255,0.2); border-radius: 10px; padding: 11px; font-size: 12px; font-weight: 700; font-family: var(--font); cursor: pointer; }
+
+/* ── LINE SHARE OVERLAYS ── */
+.line-overlay { position: absolute; inset: 0; background: white; display: none; flex-direction: column; z-index: 50; }
+.line-overlay.active { display: flex; }
+.lsh-status { background: #06C755; padding: 6px 14px; display: flex; justify-content: space-between; font-size: 10px; color: white; font-weight: 700; }
+.lsh-topbar { background: #06C755; padding: 10px 14px; color: white; font-size: 14px; font-weight: 700; display: flex; align-items: center; gap: 10px; }
+.lsh-topbar span.close { cursor: pointer; font-size: 18px; }
+.lsh-body { flex: 1; padding: 12px; display: flex; flex-direction: column; gap: 8px; overflow-y: auto; }
+.lsh-hint { font-size: 10px; color: #888; }
+.lsh-friend { display: flex; align-items: center; gap: 10px; padding: 9px; border-radius: 8px; cursor: pointer; }
+.lsh-friend:active { background: #f5f5f5; }
+.lsh-avatar { width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 17px; flex-shrink: 0; }
+.lsh-name { flex: 1; font-size: 13px; font-weight: 700; color: #111; }
+.lsh-check { width: 22px; height: 22px; border-radius: 50%; border: 2px solid #ddd; display: flex; align-items: center; justify-content: center; font-size: 11px; }
+.lsh-check.sel { background: #06C755; border-color: #06C755; color: white; }
+.lsh-send-btn { background: #06C755; color: white; border: none; border-radius: 10px; padding: 13px; font-size: 14px; font-weight: 700; font-family: var(--font); cursor: pointer; margin: 12px; }
+.lsh-chat { flex: 1; padding: 12px; display: flex; flex-direction: column; gap: 8px; background: #ECE5DD; overflow-y: auto; }
+.lsh-chat-date { text-align: center; font-size: 9px; color: #888; }
+.lsh-bubble-row { display: flex; gap: 6px; align-items: flex-start; }
+.lsh-bav { width: 28px; height: 28px; border-radius: 50%; background: #2dbe60; color: white; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 700; flex-shrink: 0; }
+.lsh-rich-card { background: linear-gradient(135deg,#1a5c2e,#0c3d1e); border-radius: 12px; padding: 12px; font-size: 9px; color: white; line-height: 1.6; max-width: 210px; }
+.lsh-rich-card strong { color: #f5c842; font-size: 10px; }
+.lsh-rich-card a { color: #6dff9e; }
+.lsh-rich-card-btn { background: #2dbe60; color: white; border: none; border-radius: 8px; padding: 8px 12px; font-size: 10px; font-weight: 700; font-family: var(--font); width: 100%; cursor: pointer; margin-top: 8px; }
 
 /* ── FACEBOOK SHARE SHEET ── */
 .fb-sheet-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.5); display: none; align-items: flex-end; z-index: 40; }
@@ -517,6 +543,7 @@ body {
       </div>
 
       <div class="spin-bottom-btns" id="spin-bottom">
+        <button class="line-share-btn" onclick="openLineShare()">💬 แชร์ LINE</button>
         <button class="fb-share-btn" onclick="openFbSheet()">👍 แชร์บน Facebook</button>
         <button class="home-btn" onclick="goStep(1)">🔄 เริ่มเช็คอินใหม่</button>
       </div>
@@ -541,6 +568,50 @@ body {
         <div class="fb-sheet-btns">
           <button class="fb-cancel" onclick="closeFbSheet()">ยกเลิก</button>
           <button class="fb-confirm" onclick="confirmFbShare()">แชร์เลย</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LINE SHARE FRIEND PICKER -->
+  <div class="line-overlay" id="line-share-picker">
+    <div class="lsh-status"><span>9:41</span><span>LINE</span><span>📶</span></div>
+    <div class="lsh-topbar">
+      <span class="close" onclick="closeLineShare()">✕</span>
+      <span>ส่งให้เพื่อน</span>
+    </div>
+    <div class="lsh-body">
+      <div class="lsh-hint">เลือกเพื่อนที่ต้องการชวน</div>
+      <div class="lsh-friend" onclick="toggleLshFriend(this)"><div class="lsh-avatar" style="background:#ff6b9d">🐱</div><div class="lsh-name">น้องมิ้ว</div><div class="lsh-check sel">✓</div></div>
+      <div class="lsh-friend" onclick="toggleLshFriend(this)"><div class="lsh-avatar" style="background:#ffa94d">🦊</div><div class="lsh-name">พี่ใจ</div><div class="lsh-check">○</div></div>
+      <div class="lsh-friend" onclick="toggleLshFriend(this)"><div class="lsh-avatar" style="background:#845ef7">🐻</div><div class="lsh-name">เพื่อนสนิท</div><div class="lsh-check sel">✓</div></div>
+      <div class="lsh-friend" onclick="toggleLshFriend(this)"><div class="lsh-avatar" style="background:#339af0">🐬</div><div class="lsh-name">หมูกรอบ</div><div class="lsh-check">○</div></div>
+    </div>
+    <button class="lsh-send-btn" onclick="sendLineShare()">ส่ง →</button>
+  </div>
+
+  <!-- LINE SHARE SENT -->
+  <div class="line-overlay" id="line-share-sent">
+    <div class="lsh-status"><span>9:41</span><span>LINE</span><span>📶</span></div>
+    <div class="lsh-topbar">
+      <span class="close" onclick="closeLineShareSent()">‹</span>
+      <div style="width:28px;height:28px;border-radius:50%;background:#059b48;display:flex;align-items:center;justify-content:center;font-size:14px">✅</div>
+      <div><div style="font-size:13px;font-weight:700">ส่งสำเร็จ</div><div style="font-size:9px;opacity:0.85">ข้อความที่ส่งอัตโนมัติ</div></div>
+    </div>
+    <div class="lsh-chat">
+      <div class="lsh-chat-date">วันนี้</div>
+      <div class="lsh-bubble-row">
+        <div class="lsh-bav">CB</div>
+        <div>
+          <div class="lsh-rich-card">
+            <strong>🏆 มาร่วมสนุกกับ CBCB Campaign!</strong><br>
+            เพิ่งสปินได้แต้มจากวงล้อ 🔥<br>
+            ลุ้นบิน Carabao Cup Final ที่เวมบลีย์!<br>
+            ✈️🏟️ ยิ่งดื่ม ยิ่งมีสิทธิ์!<br>
+            <a href="#">🔗 line.me/ti/p/@carabaotawandangbeverage</a>
+            <button class="lsh-rich-card-btn" onclick="closeLineShareSent()">เข้าร่วมกิจกรรม →</button>
+          </div>
+          <div style="font-size:9px;color:#888;margin-top:4px">📋 ส่งให้ 2 เพื่อนแล้ว</div>
         </div>
       </div>
     </div>
@@ -694,6 +765,20 @@ function showSpinResult(seg) {
   document.getElementById('spin-bottom').style.display = 'flex';
 }
 
+/* ═══ LINE SHARE ═══ */
+function openLineShare() { document.getElementById('line-share-picker').classList.add('active'); }
+function closeLineShare() { document.getElementById('line-share-picker').classList.remove('active'); }
+function closeLineShareSent() { document.getElementById('line-share-sent').classList.remove('active'); }
+function toggleLshFriend(el) {
+  const c = el.querySelector('.lsh-check');
+  c.classList.toggle('sel');
+  c.textContent = c.classList.contains('sel') ? '✓' : '○';
+}
+function sendLineShare() {
+  closeLineShare();
+  document.getElementById('line-share-sent').classList.add('active');
+}
+
 /* ═══ FACEBOOK SHARE ═══ */
 function openFbSheet()  { document.getElementById('fb-sheet-overlay').classList.add('active'); }
 function closeFbSheet() { document.getElementById('fb-sheet-overlay').classList.remove('active'); }
@@ -734,6 +819,8 @@ function resetFlow() {
   document.getElementById('spin-result').style.display = 'none';
   document.getElementById('spin-bottom').style.display = 'none';
   closeFbSheet();
+  closeLineShare();
+  closeLineShareSent();
 }
 
 /* init */
