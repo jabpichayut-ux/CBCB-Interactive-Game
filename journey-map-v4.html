@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Consumer Journey Map — V4 Prototype</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;700;900&family=Prompt:wght@400;500;700;900&display=swap');
+
+:root {
+  --green: #2dbe60;
+  --green-dark: #1a9448;
+  --gold: #f5c842;
+  --font: 'Sarabun', 'Prompt', sans-serif;
+  --bg: #0a0f0c;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0; font-family: var(--font); background: var(--bg);
+  color: #fff; padding: 32px 16px 60px; display: flex;
+  flex-direction: column; align-items: center;
+}
+.hero { text-align: center; max-width: 720px; margin-bottom: 36px; }
+.hero h1 {
+  font-family: 'Prompt', sans-serif; font-weight: 900; font-size: 26px;
+  background: linear-gradient(90deg, var(--green), var(--gold));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  margin: 0 0 8px;
+}
+.hero p { color: rgba(255,255,255,0.65); font-size: 13px; line-height: 1.6; margin: 0; }
+.hero a {
+  display: inline-block; margin-top: 14px; background: var(--green); color: #06170c;
+  font-weight: 700; font-size: 12px; text-decoration: none; padding: 9px 18px;
+  border-radius: 20px;
+}
+
+.map {
+  width: 100%; max-width: 980px; display: grid;
+  grid-template-columns: repeat(5, 1fr); gap: 14px;
+}
+@media (max-width: 900px) { .map { grid-template-columns: 1fr; } }
+
+.step {
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px; padding: 18px 14px; position: relative;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.step-num {
+  position: absolute; top: -14px; left: 14px; width: 28px; height: 28px;
+  border-radius: 50%; background: var(--green); color: #06170c; font-weight: 900;
+  font-size: 13px; display: flex; align-items: center; justify-content: center;
+  font-family: 'Prompt', sans-serif;
+}
+.step-icon { font-size: 26px; margin-top: 10px; }
+.step-title { font-family: 'Prompt', sans-serif; font-weight: 700; font-size: 13px; color: var(--gold); }
+.step-desc { font-size: 11.5px; color: rgba(255,255,255,0.75); line-height: 1.55; }
+.step-pts {
+  margin-top: auto; font-size: 11px; font-weight: 700; color: var(--green);
+  background: rgba(45,190,96,0.12); border: 1px solid rgba(45,190,96,0.3);
+  border-radius: 8px; padding: 5px 8px; text-align: center;
+}
+.arrow {
+  display: none; align-items: center; justify-content: center; color: rgba(255,255,255,0.25);
+  font-size: 20px;
+}
+@media (min-width: 901px) {
+  .map { grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr auto 1fr; align-items: stretch; }
+  .arrow { display: flex; }
+}
+
+.legend {
+  max-width: 980px; width: 100%; margin-top: 40px; display: grid;
+  grid-template-columns: repeat(3, 1fr); gap: 14px;
+}
+@media (max-width: 700px) { .legend { grid-template-columns: 1fr; } }
+.legend-card {
+  background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px; padding: 16px;
+}
+.legend-card h3 { font-family: 'Prompt', sans-serif; font-size: 13px; color: var(--gold); margin: 0 0 8px; }
+.legend-card p { font-size: 11.5px; color: rgba(255,255,255,0.7); line-height: 1.6; margin: 0; }
+
+.totalbar {
+  margin-top: 30px; background: linear-gradient(135deg, rgba(45,190,96,0.15), rgba(245,200,66,0.08));
+  border: 1px solid rgba(45,190,96,0.35); border-radius: 14px; padding: 16px 22px;
+  text-align: center; max-width: 980px; width: 100%;
+}
+.totalbar .num { font-family: 'Prompt', sans-serif; font-weight: 900; font-size: 24px; color: var(--green); }
+.totalbar .lbl { font-size: 11.5px; color: rgba(255,255,255,0.65); }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>🍻 Consumer Journey Map — V4 Prototype</h1>
+  <p>เช็คอิน ลุ้นบินดูคาราบาวคัพ — 5-step standalone flow (no LINE OA), from QR scan to spin wheel reward.</p>
+  <a href="https://jabpichayut-ux.github.io/CBCB-Interactive-Game/carabao-prototype-v4.html" target="_blank">▶ ดูโปรโตไทป์ฉบับเต็ม</a>
+</div>
+
+<div class="map">
+  <div class="step">
+    <div class="step-num">1</div>
+    <div class="step-icon">📷</div>
+    <div class="step-title">สแกน QR Code</div>
+    <div class="step-desc">ผู้บริโภคเปิดกล้อง iOS สแกน QR บนโต๊ะ/ขวดสินค้า เฟรมกล้องพร้อม scanline แบบเรียลไทม์</div>
+    <div class="step-pts">เริ่มต้นเช็คอิน</div>
+  </div>
+  <div class="arrow">➜</div>
+
+  <div class="step">
+    <div class="step-num">2</div>
+    <div class="step-icon">🎫</div>
+    <div class="step-title">รับโค้ดส่วนลดอัตโนมัติ</div>
+    <div class="step-desc">ระบบดึงโค้ด (เช่น CB-374XK) และชื่อร้าน (Tawandang German Brewery) มาแสดงอัตโนมัติ ไม่ต้องพิมพ์เอง</div>
+    <div class="step-pts">ยืนยันสถานที่เช็คอิน</div>
+  </div>
+  <div class="arrow">➜</div>
+
+  <div class="step">
+    <div class="step-num">3</div>
+    <div class="step-icon">📝</div>
+    <div class="step-title">ลงทะเบียน</div>
+    <div class="step-desc">กรอกเบอร์โทรศัพท์ (ใช้เป็น key เก็บแต้ม) และเลือกทีมพรีเมียร์ลีกที่เชียร์</div>
+    <div class="step-pts">สร้างโปรไฟล์ผู้ใช้</div>
+  </div>
+  <div class="arrow">➜</div>
+
+  <div class="step">
+    <div class="step-num">4</div>
+    <div class="step-icon">⭐</div>
+    <div class="step-title">รีวิวบน Google</div>
+    <div class="step-desc">ให้คะแนนดาว เขียนรีวิว ถ่ายเซลฟี่ แล้วกดโพสต์ — มี loading + success state ก่อนเด้งไปหน้าต่อไปอัตโนมัติ</div>
+    <div class="step-pts">+10 แต้ม (ฐาน)</div>
+  </div>
+  <div class="arrow">➜</div>
+
+  <div class="step">
+    <div class="step-num">5</div>
+    <div class="step-icon">🎡</div>
+    <div class="step-title">หมุนวงล้อ + แชร์</div>
+    <div class="step-desc">หมุนวงล้อ 3 ช่อง (2x / 3x / 5x) สุ่มน้ำหนัก 60/30/10 จากนั้นแชร์ LINE หรือ Facebook เพื่อบอกต่อ</div>
+    <div class="step-pts">+20 / +30 / +50 แต้ม</div>
+  </div>
+</div>
+
+<div class="totalbar">
+  <div class="num">10 – 60 แต้ม</div>
+  <div class="lbl">แต้มสะสมต่อการเช็คอิน 1 ครั้ง (รีวิว 10 แต้ม + วงล้อ 20/30/50 แต้ม)</div>
+</div>
+
+<div class="legend">
+  <div class="legend-card">
+    <h3>🎯 จุดต่างจาก LINE OA Flow (M5)</h3>
+    <p>V4 เป็น standalone web flow ไม่ผ่าน LINE rich menu, เหมาะกับการแสกน QR หน้าร้านโดยตรง รองรับผู้ใช้ใหม่เท่านั้น (first-timer)</p>
+  </div>
+  <div class="legend-card">
+    <h3>💾 การเก็บข้อมูล</h3>
+    <p>แต้มเก็บผ่าน localStorage โดยใช้เบอร์โทรศัพท์เป็น key (cbcb_points_ + เลขท้ายเบอร์) เพื่อจำลองการสะสมแต้มข้ามรอบ</p>
+  </div>
+  <div class="legend-card">
+    <h3>📣 ช่องทางบอกต่อ</h3>
+    <p>หลังหมุนวงล้อ ผู้ใช้สามารถแชร์ LINE (เลือกเพื่อน 4 คน) หรือแชร์ Facebook (แคปชั่นอัตโนมัติ) เพื่อกระตุ้น viral loop</p>
+  </div>
+</div>
+
+</body>
+</html>
