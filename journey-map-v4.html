@@ -3,165 +3,340 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Consumer Journey Map — V4 Prototype</title>
+<title>Consumer Journey Map — Carabao V4</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;700;900&family=Prompt:wght@400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap');
 
 :root {
-  --green: #2dbe60;
-  --green-dark: #1a9448;
-  --gold: #f5c842;
-  --font: 'Sarabun', 'Prompt', sans-serif;
-  --bg: #0a0f0c;
+  --ink: #0b0d12;
+  --ink-soft: #525866;
+  --line: #e7e9ee;
+  --surface: #ffffff;
+  --canvas: #f8f9fb;
+  --brand: #15803d;
+  --brand-soft: #ecfdf3;
+  --brand-line: #bbf0cf;
+  --accent: #ca8a04;
+  --shadow-sm: 0 1px 2px rgba(16,24,40,0.06);
+  --shadow-md: 0 4px 12px rgba(16,24,40,0.06), 0 1px 2px rgba(16,24,40,0.04);
+  --shadow-lg: 0 16px 40px rgba(16,24,40,0.10), 0 2px 8px rgba(16,24,40,0.04);
+  --radius: 16px;
 }
 
 * { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 body {
-  margin: 0; font-family: var(--font); background: var(--bg);
-  color: #fff; padding: 32px 16px 60px; display: flex;
-  flex-direction: column; align-items: center;
+  margin: 0;
+  font-family: 'Inter', 'Sarabun', sans-serif;
+  background: var(--canvas);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
 }
-.hero { text-align: center; max-width: 720px; margin-bottom: 36px; }
+
+/* ── Top nav bar ── */
+.topbar {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(255,255,255,0.85); backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 28px;
+}
+.topbar-brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 14px; letter-spacing: -0.01em; }
+.topbar-logo {
+  width: 28px; height: 28px; border-radius: 8px;
+  background: linear-gradient(135deg, #16a34a, #0f5132);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; color: white; flex-shrink: 0;
+}
+.topbar-tag {
+  font-size: 11px; font-weight: 600; color: var(--ink-soft);
+  background: var(--canvas); border: 1px solid var(--line);
+  padding: 3px 9px; border-radius: 999px;
+}
+.topbar-cta {
+  font-size: 13px; font-weight: 600; color: white; text-decoration: none;
+  background: var(--ink); padding: 9px 16px; border-radius: 9px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.topbar-cta:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }
+
+/* ── Hero ── */
+.hero {
+  max-width: 1100px; margin: 0 auto; padding: 72px 28px 56px;
+  text-align: center; position: relative;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--brand-soft); border: 1px solid var(--brand-line);
+  color: var(--brand); font-size: 12px; font-weight: 700;
+  padding: 6px 14px; border-radius: 999px; margin-bottom: 22px;
+  letter-spacing: 0.01em;
+}
 .hero h1 {
-  font-family: 'Prompt', sans-serif; font-weight: 900; font-size: 26px;
-  background: linear-gradient(90deg, var(--green), var(--gold));
+  font-size: 44px; font-weight: 900; letter-spacing: -0.025em;
+  line-height: 1.12; margin: 0 0 18px;
+  background: linear-gradient(180deg, #0b0d12 0%, #2b3140 100%);
   -webkit-background-clip: text; background-clip: text; color: transparent;
-  margin: 0 0 8px;
 }
-.hero p { color: rgba(255,255,255,0.65); font-size: 13px; line-height: 1.6; margin: 0; }
-.hero a {
-  display: inline-block; margin-top: 14px; background: var(--green); color: #06170c;
-  font-weight: 700; font-size: 12px; text-decoration: none; padding: 9px 18px;
-  border-radius: 20px;
+.hero p {
+  font-size: 17px; color: var(--ink-soft); line-height: 1.65;
+  max-width: 620px; margin: 0 auto 30px; font-family: 'Sarabun', sans-serif;
 }
+.hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.btn-primary {
+  background: var(--ink); color: white; font-weight: 600; font-size: 14px;
+  text-decoration: none; padding: 13px 24px; border-radius: 11px;
+  box-shadow: var(--shadow-md); transition: transform 0.15s ease, box-shadow 0.15s ease;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+.btn-secondary {
+  background: white; color: var(--ink); font-weight: 600; font-size: 14px;
+  text-decoration: none; padding: 13px 24px; border-radius: 11px;
+  border: 1px solid var(--line); transition: border-color 0.15s ease, transform 0.15s ease;
+}
+.btn-secondary:hover { border-color: #c8cdd6; transform: translateY(-2px); }
 
-.map {
-  width: 100%; max-width: 980px; display: grid;
-  grid-template-columns: repeat(5, 1fr); gap: 14px;
+/* ── Stat strip ── */
+.stats {
+  max-width: 1100px; margin: 0 auto 64px; padding: 0 28px;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+  background: var(--line); border: 1px solid var(--line); border-radius: var(--radius);
+  overflow: hidden;
 }
-@media (max-width: 900px) { .map { grid-template-columns: 1fr; } }
+@media (max-width: 760px) { .stats { grid-template-columns: repeat(2, 1fr); } }
+.stat { background: white; padding: 24px 22px; text-align: center; }
+.stat-num { font-size: 28px; font-weight: 900; letter-spacing: -0.02em; color: var(--ink); }
+.stat-num.accent { color: var(--brand); }
+.stat-lbl { font-size: 12.5px; color: var(--ink-soft); margin-top: 4px; font-family: 'Sarabun', sans-serif; }
 
-.step {
-  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 16px; padding: 18px 14px; position: relative;
-  display: flex; flex-direction: column; gap: 8px;
+/* ── Section heading ── */
+.section { max-width: 1100px; margin: 0 auto; padding: 0 28px 80px; }
+.section-head { text-align: center; max-width: 600px; margin: 0 auto 48px; }
+.section-eyebrow {
+  font-size: 12px; font-weight: 700; color: var(--brand); letter-spacing: 0.08em;
+  text-transform: uppercase; margin-bottom: 10px;
 }
-.step-num {
-  position: absolute; top: -14px; left: 14px; width: 28px; height: 28px;
-  border-radius: 50%; background: var(--green); color: #06170c; font-weight: 900;
-  font-size: 13px; display: flex; align-items: center; justify-content: center;
-  font-family: 'Prompt', sans-serif;
+.section-head h2 { font-size: 30px; font-weight: 800; letter-spacing: -0.02em; margin: 0 0 12px; }
+.section-head p { font-size: 15px; color: var(--ink-soft); line-height: 1.6; margin: 0; font-family: 'Sarabun', sans-serif; }
+
+/* ── Journey stepper ── */
+.stepper { position: relative; }
+.stepper-track {
+  position: absolute; top: 56px; left: 6%; right: 6%; height: 2px;
+  background: repeating-linear-gradient(90deg, var(--line) 0 8px, transparent 8px 14px);
+  z-index: 0;
 }
-.step-icon { font-size: 26px; margin-top: 10px; }
-.step-title { font-family: 'Prompt', sans-serif; font-weight: 700; font-size: 13px; color: var(--gold); }
-.step-desc { font-size: 11.5px; color: rgba(255,255,255,0.75); line-height: 1.55; }
+@media (max-width: 900px) { .stepper-track { display: none; } }
+.steps {
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px;
+  position: relative; z-index: 1;
+}
+@media (max-width: 900px) { .steps { grid-template-columns: 1fr; gap: 16px; } }
+
+.step-card {
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 26px 20px 22px; display: flex; flex-direction: column; gap: 12px;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  position: relative;
+}
+.step-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: #d6dae2;
+}
+.step-marker {
+  width: 40px; height: 40px; border-radius: 12px;
+  background: linear-gradient(135deg, #16a34a, #0f5132);
+  color: white; font-weight: 800; font-size: 16px;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 6px 14px rgba(15,81,50,0.28);
+  margin-bottom: 2px;
+}
+.step-icon-row { display: flex; align-items: center; justify-content: space-between; }
+.step-icon-row .emoji { font-size: 22px; }
+.step-title { font-size: 14.5px; font-weight: 700; letter-spacing: -0.01em; line-height: 1.35; }
+.step-desc {
+  font-size: 12.5px; color: var(--ink-soft); line-height: 1.6;
+  font-family: 'Sarabun', sans-serif; flex: 1;
+}
 .step-pts {
-  margin-top: auto; font-size: 11px; font-weight: 700; color: var(--green);
-  background: rgba(45,190,96,0.12); border: 1px solid rgba(45,190,96,0.3);
-  border-radius: 8px; padding: 5px 8px; text-align: center;
-}
-.arrow {
-  display: none; align-items: center; justify-content: center; color: rgba(255,255,255,0.25);
-  font-size: 20px;
-}
-@media (min-width: 901px) {
-  .map { grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr auto 1fr; align-items: stretch; }
-  .arrow { display: flex; }
+  margin-top: 4px; display: inline-flex; align-items: center; gap: 5px;
+  font-size: 12px; font-weight: 700; color: var(--brand);
+  background: var(--brand-soft); border: 1px solid var(--brand-line);
+  border-radius: 8px; padding: 6px 10px; align-self: flex-start;
 }
 
-.legend {
-  max-width: 980px; width: 100%; margin-top: 40px; display: grid;
-  grid-template-columns: repeat(3, 1fr); gap: 14px;
+/* ── Funnel summary band ── */
+.funnel {
+  margin-top: 48px; background: linear-gradient(135deg, #0b0d12, #1b2a20);
+  border-radius: 20px; padding: 38px 36px; color: white;
+  display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  flex-wrap: wrap; box-shadow: var(--shadow-lg);
 }
-@media (max-width: 700px) { .legend { grid-template-columns: 1fr; } }
-.legend-card {
-  background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 14px; padding: 16px;
-}
-.legend-card h3 { font-family: 'Prompt', sans-serif; font-size: 13px; color: var(--gold); margin: 0 0 8px; }
-.legend-card p { font-size: 11.5px; color: rgba(255,255,255,0.7); line-height: 1.6; margin: 0; }
+.funnel-text h3 { font-size: 19px; font-weight: 800; margin: 0 0 6px; letter-spacing: -0.01em; }
+.funnel-text p { font-size: 13px; color: rgba(255,255,255,0.65); margin: 0; max-width: 440px; line-height: 1.6; font-family: 'Sarabun', sans-serif; }
+.funnel-num { text-align: right; }
+.funnel-num .big { font-size: 38px; font-weight: 900; letter-spacing: -0.02em; background: linear-gradient(90deg,#4ade80,#facc15); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.funnel-num .small { font-size: 11.5px; color: rgba(255,255,255,0.55); margin-top: 2px; }
 
-.totalbar {
-  margin-top: 30px; background: linear-gradient(135deg, rgba(45,190,96,0.15), rgba(245,200,66,0.08));
-  border: 1px solid rgba(45,190,96,0.35); border-radius: 14px; padding: 16px 22px;
-  text-align: center; max-width: 980px; width: 100%;
+/* ── Feature grid (legend) ── */
+.features {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
 }
-.totalbar .num { font-family: 'Prompt', sans-serif; font-weight: 900; font-size: 24px; color: var(--green); }
-.totalbar .lbl { font-size: 11.5px; color: rgba(255,255,255,0.65); }
+@media (max-width: 760px) { .features { grid-template-columns: 1fr; } }
+.feature-card {
+  background: white; border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 24px; transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+.feature-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.feature-icon {
+  width: 38px; height: 38px; border-radius: 10px; background: var(--brand-soft);
+  border: 1px solid var(--brand-line); display: flex; align-items: center; justify-content: center;
+  font-size: 17px; margin-bottom: 14px;
+}
+.feature-card h3 { font-size: 14.5px; font-weight: 700; margin: 0 0 8px; letter-spacing: -0.01em; }
+.feature-card p { font-size: 12.5px; color: var(--ink-soft); line-height: 1.65; margin: 0; font-family: 'Sarabun', sans-serif; }
+
+/* ── Footer ── */
+.footer {
+  border-top: 1px solid var(--line); padding: 28px; text-align: center;
+  font-size: 12px; color: var(--ink-soft);
+}
 </style>
 </head>
 <body>
 
+<div class="topbar">
+  <div class="topbar-brand">
+    <div class="topbar-logo">🍺</div>
+    CBCB Growth Team
+    <span class="topbar-tag">V4 Prototype</span>
+  </div>
+  <a class="topbar-cta" href="https://jabpichayut-ux.github.io/CBCB-Interactive-Game/carabao-prototype-v4.html" target="_blank">เปิดโปรโตไทป์ →</a>
+</div>
+
 <div class="hero">
-  <h1>🍻 Consumer Journey Map — V4 Prototype</h1>
-  <p>เช็คอิน ลุ้นบินดูคาราบาวคัพ — 5-step standalone flow (no LINE OA), from QR scan to spin wheel reward.</p>
-  <a href="https://jabpichayut-ux.github.io/CBCB-Interactive-Game/carabao-prototype-v4.html" target="_blank">▶ ดูโปรโตไทป์ฉบับเต็ม</a>
-</div>
-
-<div class="map">
-  <div class="step">
-    <div class="step-num">1</div>
-    <div class="step-icon">🎫</div>
-    <div class="step-title">ซื้อครบ 1 ลิตร รับ Voucher</div>
-    <div class="step-desc">ผู้บริโภคซื้อสินค้าครบ 1 ลิตรที่ร้าน รับ Voucher พร้อมโค้ด (เช่น CB-374XK) และชื่อร้าน (Tawandang German Brewery) ทันที</div>
-    <div class="step-pts">+1 แต้ม</div>
-  </div>
-  <div class="arrow">➜</div>
-
-  <div class="step">
-    <div class="step-num">2</div>
-    <div class="step-icon">📷</div>
-    <div class="step-title">สแกน QR Code บน Voucher</div>
-    <div class="step-desc">เปิดกล้อง iOS สแกน QR Code ที่พิมพ์บน Voucher เพื่อเริ่มเช็คอินเข้ากิจกรรม เฟรมกล้องพร้อม scanline แบบเรียลไทม์</div>
-    <div class="step-pts">ยืนยันสถานที่เช็คอิน</div>
-  </div>
-  <div class="arrow">➜</div>
-
-  <div class="step">
-    <div class="step-num">3</div>
-    <div class="step-icon">📝</div>
-    <div class="step-title">ลงทะเบียน</div>
-    <div class="step-desc">กรอกเบอร์โทรศัพท์ (ใช้เป็น key เก็บแต้ม) และเลือกทีมพรีเมียร์ลีกที่เชียร์</div>
-    <div class="step-pts">สร้างโปรไฟล์ผู้ใช้</div>
-  </div>
-  <div class="arrow">➜</div>
-
-  <div class="step">
-    <div class="step-num">4</div>
-    <div class="step-icon">⭐</div>
-    <div class="step-title">รีวิวบน Google</div>
-    <div class="step-desc">ให้คะแนนดาว เขียนรีวิว ถ่ายเซลฟี่ แล้วกดโพสต์ — มี loading + success state ก่อนเด้งไปหน้าต่อไปอัตโนมัติ</div>
-    <div class="step-pts">+10 แต้ม (ฐาน)</div>
-  </div>
-  <div class="arrow">➜</div>
-
-  <div class="step">
-    <div class="step-num">5</div>
-    <div class="step-icon">🎡</div>
-    <div class="step-title">หมุนวงล้อ + แชร์</div>
-    <div class="step-desc">หมุนวงล้อ 3 ช่อง (2x / 3x / 5x) สุ่มน้ำหนัก 60/30/10 จากนั้นแชร์ LINE หรือ Facebook เพื่อบอกต่อ</div>
-    <div class="step-pts">+20 / +30 / +50 แต้ม</div>
+  <div class="hero-badge">🗺️ Consumer Journey Map</div>
+  <h1>เช็คอิน ลุ้นบินดูคาราบาวคัพ</h1>
+  <p>5-step standalone flow ที่ออกแบบใหม่ ไม่ผ่าน LINE OA — จากการรับ Voucher หน้าร้าน ไปจนถึงการหมุนวงล้อรับแต้มและบอกต่อเพื่อน</p>
+  <div class="hero-actions">
+    <a class="btn-primary" href="https://jabpichayut-ux.github.io/CBCB-Interactive-Game/carabao-prototype-v4.html" target="_blank">▶ ดูโปรโตไทป์ฉบับเต็ม</a>
+    <a class="btn-secondary" href="#journey">ดู Journey Map ↓</a>
   </div>
 </div>
 
-<div class="totalbar">
-  <div class="num">11 – 61 แต้ม</div>
-  <div class="lbl">แต้มสะสมต่อการเช็คอิน 1 ครั้ง (Voucher 1 แต้ม + รีวิว 10 แต้ม + วงล้อ 20/30/50 แต้ม)</div>
+<div class="stats">
+  <div class="stat"><div class="stat-num">5</div><div class="stat-lbl">ขั้นตอนทั้งหมด</div></div>
+  <div class="stat"><div class="stat-num accent">11–61</div><div class="stat-lbl">แต้มสะสมต่อรอบ</div></div>
+  <div class="stat"><div class="stat-num">2</div><div class="stat-lbl">ช่องทางบอกต่อ (LINE / FB)</div></div>
+  <div class="stat"><div class="stat-num">0</div><div class="stat-lbl">การติดตั้งแอปเพิ่ม</div></div>
 </div>
 
-<div class="legend">
-  <div class="legend-card">
-    <h3>🎯 จุดต่างจาก LINE OA Flow (M5)</h3>
-    <p>V4 เป็น standalone web flow ไม่ผ่าน LINE rich menu, เหมาะกับการแสกน QR หน้าร้านโดยตรง รองรับผู้ใช้ใหม่เท่านั้น (first-timer)</p>
+<div class="section" id="journey">
+  <div class="section-head">
+    <div class="section-eyebrow">The Flow</div>
+    <h2>5 ขั้นตอนสู่การรับรางวัล</h2>
+    <p>ออกแบบให้ผู้บริโภคทำได้จบในเบราว์เซอร์เดียว ไม่ต้องสลับแอป ตั้งแต่ซื้อสินค้าจนถึงหมุนวงล้อ</p>
   </div>
-  <div class="legend-card">
-    <h3>💾 การเก็บข้อมูล</h3>
-    <p>แต้มเก็บผ่าน localStorage โดยใช้เบอร์โทรศัพท์เป็น key (cbcb_points_ + เลขท้ายเบอร์) เพื่อจำลองการสะสมแต้มข้ามรอบ</p>
+
+  <div class="stepper">
+    <div class="stepper-track"></div>
+    <div class="steps">
+      <div class="step-card">
+        <div class="step-icon-row">
+          <div class="step-marker">1</div>
+          <div class="emoji">🎫</div>
+        </div>
+        <div class="step-title">ซื้อครบ 1 ลิตร รับ Voucher</div>
+        <div class="step-desc">ผู้บริโภคซื้อสินค้าครบ 1 ลิตรที่ร้าน รับ Voucher พร้อมโค้ด (เช่น CB-374XK) และชื่อร้าน (Tawandang German Brewery) ทันที</div>
+        <div class="step-pts">+1 แต้ม</div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-icon-row">
+          <div class="step-marker">2</div>
+          <div class="emoji">📷</div>
+        </div>
+        <div class="step-title">สแกน QR Code บน Voucher</div>
+        <div class="step-desc">เปิดกล้อง iOS สแกน QR Code ที่พิมพ์บน Voucher เพื่อเริ่มเช็คอินเข้ากิจกรรม พร้อม scanline แบบเรียลไทม์</div>
+        <div class="step-pts">ยืนยันสถานที่เช็คอิน</div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-icon-row">
+          <div class="step-marker">3</div>
+          <div class="emoji">📝</div>
+        </div>
+        <div class="step-title">ลงทะเบียน</div>
+        <div class="step-desc">กรอกเบอร์โทรศัพท์ (ใช้เป็น key เก็บแต้ม) และเลือกทีมพรีเมียร์ลีกที่เชียร์</div>
+        <div class="step-pts">สร้างโปรไฟล์ผู้ใช้</div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-icon-row">
+          <div class="step-marker">4</div>
+          <div class="emoji">⭐</div>
+        </div>
+        <div class="step-title">รีวิวบน Google</div>
+        <div class="step-desc">ให้คะแนนดาว เขียนรีวิว ถ่ายเซลฟี่ แล้วกดโพสต์ — มี loading + success state ก่อนเด้งไปหน้าต่อไปอัตโนมัติ</div>
+        <div class="step-pts">+10 แต้ม (ฐาน)</div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-icon-row">
+          <div class="step-marker">5</div>
+          <div class="emoji">🎡</div>
+        </div>
+        <div class="step-title">หมุนวงล้อ + แชร์</div>
+        <div class="step-desc">หมุนวงล้อ 3 ช่อง (2x / 3x / 5x) สุ่มน้ำหนัก 60/30/10 จากนั้นแชร์ LINE หรือ Facebook เพื่อบอกต่อ</div>
+        <div class="step-pts">+20 / +30 / +50 แต้ม</div>
+      </div>
+    </div>
   </div>
-  <div class="legend-card">
-    <h3>📣 ช่องทางบอกต่อ</h3>
-    <p>หลังหมุนวงล้อ ผู้ใช้สามารถแชร์ LINE (เลือกเพื่อน 4 คน) หรือแชร์ Facebook (แคปชั่นอัตโนมัติ) เพื่อกระตุ้น viral loop</p>
+
+  <div class="funnel">
+    <div class="funnel-text">
+      <h3>แต้มสะสมรวมต่อการเช็คอิน 1 ครั้ง</h3>
+      <p>Voucher 1 แต้ม + รีวิว Google 10 แต้ม + โบนัสวงล้อ 20/30/50 แต้ม — ออกแบบให้รู้สึกได้รางวัลทุกขั้นตอน ไม่ใช่แค่ตอนจบ</p>
+    </div>
+    <div class="funnel-num">
+      <div class="big">11 – 61</div>
+      <div class="small">แต้มต่อรอบ</div>
+    </div>
   </div>
+</div>
+
+<div class="section">
+  <div class="section-head">
+    <div class="section-eyebrow">Why It Works</div>
+    <h2>ออกแบบมาเพื่อ Conversion และ Virality</h2>
+    <p>ทุกองค์ประกอบของ V4 ถูกออกแบบให้ลดความเสียดทาน (friction) และเพิ่มโอกาสบอกต่อ</p>
+  </div>
+
+  <div class="features">
+    <div class="feature-card">
+      <div class="feature-icon">🎯</div>
+      <h3>Standalone — ไม่ผ่าน LINE OA</h3>
+      <p>V4 เป็น standalone web flow ไม่ต้องผ่าน LINE rich menu เหมาะกับการสแกน QR หน้าร้านโดยตรง รองรับผู้ใช้ใหม่ (first-timer) เป็นหลัก</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">💾</div>
+      <h3>เก็บแต้มแบบ Persistent</h3>
+      <p>แต้มเก็บผ่าน localStorage โดยใช้เบอร์โทรศัพท์เป็น key (cbcb_points_ + เลขท้ายเบอร์) เพื่อจำลองการสะสมแต้มข้ามรอบการเช็คอิน</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📣</div>
+      <h3>Built-in Viral Loop</h3>
+      <p>หลังหมุนวงล้อ ผู้ใช้สามารถแชร์ LINE (เลือกเพื่อน 4 คน) หรือแชร์ Facebook (แคปชั่นอัตโนมัติ) เพื่อกระตุ้นให้เพื่อนเข้าร่วมกิจกรรมต่อ</p>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  CBCB Interactive Game · เช็คอิน ลุ้นบินดูคาราบาวคัพ · Internal Prototype Documentation
 </div>
 
 </body>
