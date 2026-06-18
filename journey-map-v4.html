@@ -130,7 +130,7 @@ body {
 }
 @media (max-width: 900px) { .stepper-track { display: none; } }
 .steps {
-  display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px;
   position: relative; z-index: 1;
 }
 @media (max-width: 900px) { .steps { grid-template-columns: 1fr; gap: 16px; } }
@@ -221,7 +221,7 @@ body {
 <div class="hero">
   <div class="hero-badge">🗺️ Consumer Journey Map</div>
   <h1>เช็คอิน ลุ้นบินดูคาราบาวคัพ</h1>
-  <p>5-step standalone flow ที่ออกแบบใหม่ ไม่ผ่าน LINE OA — จากการรับ Voucher หน้าร้าน ไปจนถึงการหมุนวงล้อรับแต้มและบอกต่อเพื่อน</p>
+  <p>4-step standalone flow ที่ออกแบบใหม่ ไม่ผ่าน LINE OA — จากการรับ Voucher หน้าร้าน ไปจนถึงการหมุนวงล้อรับแต้มและบอกต่อเพื่อน</p>
   <div class="hero-actions">
     <a class="btn-primary" href="https://jabpichayut-ux.github.io/CBCB-Interactive-Game/carabao-prototype-v4.html" target="_blank">▶ ดูโปรโตไทป์ฉบับเต็ม</a>
     <a class="btn-secondary" href="#journey">ดู Journey Map ↓</a>
@@ -229,8 +229,8 @@ body {
 </div>
 
 <div class="stats">
-  <div class="stat"><div class="stat-num">5</div><div class="stat-lbl">ขั้นตอนทั้งหมด</div></div>
-  <div class="stat"><div class="stat-num accent">11–61</div><div class="stat-lbl">แต้มสะสมต่อรอบ</div></div>
+  <div class="stat"><div class="stat-num">4</div><div class="stat-lbl">ขั้นตอนทั้งหมด</div></div>
+  <div class="stat"><div class="stat-num accent">31–61</div><div class="stat-lbl">แต้มสะสมต่อรอบ</div></div>
   <div class="stat"><div class="stat-num">2</div><div class="stat-lbl">ช่องทางบอกต่อ (LINE / FB)</div></div>
   <div class="stat"><div class="stat-num">0</div><div class="stat-lbl">การติดตั้งแอปเพิ่ม</div></div>
 </div>
@@ -238,7 +238,7 @@ body {
 <div class="section" id="journey">
   <div class="section-head">
     <div class="section-eyebrow">The Flow</div>
-    <h2>5 ขั้นตอนสู่การรับรางวัล</h2>
+    <h2>4 ขั้นตอนสู่การรับรางวัล</h2>
     <p>ออกแบบให้ผู้บริโภคทำได้จบในเบราว์เซอร์เดียว ไม่ต้องสลับแอป ตั้งแต่ซื้อสินค้าจนถึงหมุนวงล้อ</p>
   </div>
 
@@ -278,21 +278,11 @@ body {
       <div class="step-card">
         <div class="step-icon-row">
           <div class="step-marker">4</div>
-          <div class="emoji">🏅</div>
-        </div>
-        <div class="step-title">สะสมคะแนน</div>
-        <div class="step-desc">หลังให้ความยินยอมในขั้นตอนลงทะเบียน ระบบสะสมคะแนนให้ทันทีโดยอัตโนมัติ — ไม่ต้องรีวิว ไม่ต้องทำขั้นตอนเพิ่ม</div>
-        <div class="step-pts">+10 แต้ม (ฐาน)</div>
-      </div>
-
-      <div class="step-card">
-        <div class="step-icon-row">
-          <div class="step-marker">5</div>
           <div class="emoji">🎡</div>
         </div>
-        <div class="step-title">หมุนวงล้อ + แชร์</div>
-        <div class="step-desc">หมุนวงล้อ 3 ช่อง (2x / 3x / 5x) สุ่มน้ำหนัก 60/30/10 จากนั้นแชร์ LINE หรือ Facebook เพื่อบอกต่อ</div>
-        <div class="step-pts">+20 / +30 / +50 แต้ม</div>
+        <div class="step-title">สะสมคะแนน หมุนวงล้อ + แชร์</div>
+        <div class="step-desc">หลังให้ความยินยอมในขั้นตอนลงทะเบียน ระบบสะสมคะแนนให้ทันทีโดยอัตโนมัติ จากนั้นหมุนวงล้อ 3 ช่อง (2x / 3x / 5x) สุ่มน้ำหนัก 60/30/10 แล้วแชร์ LINE หรือ Facebook เพื่อบอกต่อ</div>
+        <div class="step-pts">+10 แต้ม (ฐาน) + 20 / 30 / 50 แต้ม</div>
       </div>
     </div>
   </div>
@@ -303,7 +293,7 @@ body {
       <p>Voucher 1 แต้ม + สะสมคะแนนหลังลงทะเบียน 10 แต้ม + โบนัสวงล้อ 20/30/50 แต้ม — ออกแบบให้รู้สึกได้รางวัลทุกขั้นตอน ไม่ใช่แค่ตอนจบ</p>
     </div>
     <div class="funnel-num">
-      <div class="big">11 – 61</div>
+      <div class="big">31 – 61</div>
       <div class="small">แต้มต่อรอบ</div>
     </div>
   </div>
