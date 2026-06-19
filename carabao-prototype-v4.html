@@ -331,7 +331,7 @@ body {
 
 <div class="proto-header">
   <div class="proto-title">Carabao Prototype V4</div>
-  <div class="proto-sub">เช็คอิน ลุ้นบินดูคาราบาวคัพ · 5 ขั้นตอน</div>
+  <div class="proto-sub">เช็คอิน ลุ้นบินดูคาราบาวคัพ · 4 ขั้นตอน</div>
 </div>
 
 <!-- ── PERSISTENT POINTS HEADER ── -->
@@ -345,11 +345,35 @@ body {
 <div class="phone">
   <div class="phone-notch"></div>
 
-  <!-- ══ STEP 1 — iOS CAMERA / QR SCAN ══ -->
+  <!-- ══ STEP 1 — RECEIVE VOUCHER (ซื้อครบ 1 ลิตร) ══ -->
   <div id="step1" class="screen active">
+    <div class="status-bar"><span>9:41</span><span>🔋 📶</span></div>
+    <div class="step-dots">
+      <div class="sd active"></div><div class="sd"></div><div class="sd"></div><div class="sd"></div>
+    </div>
+    <div class="wv">
+      <div class="wv-pattern"></div>
+      <div class="wv-logo-bar"><img class="wv-logo" src="CBCB%20Logo.png" alt="CBCB"></div>
+      <div class="wv-body">
+        <div class="wv-title">🎁 ได้รับ Voucher แล้ว!</div>
+        <div class="voucher-card">
+          <div class="voucher-check-anim">✓</div>
+          <div class="voucher-detected">✅ ซื้อครบ 1 ลิตร รับ Voucher ทันที</div>
+          <div class="voucher-code-label">รหัส Voucher</div>
+          <div class="voucher-code">CB-374XK</div>
+          <div class="voucher-venue">📍 Tawandang German Brewery</div>
+        </div>
+        <div class="wv-sub">รับ 1 แต้มทันทีที่ได้ Voucher<br>สแกน QR Code บน Voucher เพื่อเช็คอินต่อ</div>
+        <button class="wv-btn" onclick="goStep(2)">สแกน QR Code เพื่อเช็คอิน →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ STEP 2 — iOS CAMERA / QR SCAN ══ -->
+  <div id="step2" class="screen">
     <div class="status-bar dark"><span>9:41</span><span>🔋 📶</span></div>
     <div class="step-dots on-dark">
-      <div class="sd active"></div><div class="sd"></div><div class="sd"></div><div class="sd"></div><div class="sd"></div>
+      <div class="sd done"></div><div class="sd active"></div><div class="sd"></div><div class="sd"></div>
     </div>
     <div class="cam-screen">
       <div class="cam-topbar">
@@ -368,32 +392,8 @@ body {
       </div>
       <div class="cam-controls">
         <span class="cam-ctrl-icon">⚡</span>
-        <div class="cam-shutter" onclick="goStep(2)"></div>
+        <div class="cam-shutter" onclick="goStep(3)"></div>
         <span class="cam-ctrl-icon">🔄</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- ══ STEP 2 — VOUCHER AUTO-POPULATE ══ -->
-  <div id="step2" class="screen">
-    <div class="status-bar"><span>9:41</span><span>🔋 📶</span></div>
-    <div class="step-dots">
-      <div class="sd done"></div><div class="sd active"></div><div class="sd"></div><div class="sd"></div><div class="sd"></div>
-    </div>
-    <div class="wv">
-      <div class="wv-pattern"></div>
-      <div class="wv-logo-bar"><img class="wv-logo" src="CBCB%20Logo.png" alt="CBCB"></div>
-      <div class="wv-body">
-        <div class="wv-title">🧾 ตรวจพบ Voucher แล้ว</div>
-        <div class="voucher-card">
-          <div class="voucher-check-anim">✓</div>
-          <div class="voucher-detected">✅ ระบบตรวจพบ Voucher ของคุณแล้ว</div>
-          <div class="voucher-code-label">รหัส Voucher</div>
-          <div class="voucher-code">CB-374XK</div>
-          <div class="voucher-venue">📍 Tawandang German Brewery</div>
-        </div>
-        <div class="wv-sub">ระบบกรอกรหัสให้อัตโนมัติ<br>ไม่ต้องพิมพ์เอง</div>
-        <button class="wv-btn" onclick="goStep(3)">ยืนยัน — ไปลงทะเบียน →</button>
       </div>
     </div>
   </div>
@@ -402,7 +402,7 @@ body {
   <div id="step3" class="screen">
     <div class="status-bar"><span>9:41</span><span>🔋 📶</span></div>
     <div class="step-dots">
-      <div class="sd done"></div><div class="sd done"></div><div class="sd active"></div><div class="sd"></div><div class="sd"></div>
+      <div class="sd done"></div><div class="sd done"></div><div class="sd active"></div><div class="sd"></div>
     </div>
     <div class="wv">
       <div class="wv-pattern"></div>
@@ -434,82 +434,16 @@ body {
             <option>Bournemouth</option><option>ไม่มีทีมที่ชอบ</option>
           </select>
         </div>
-        <button class="wv-btn" onclick="completeRegistration()" style="margin-top:4px">ถัดไป — รีวิวร้าน →</button>
+        <button class="wv-btn" onclick="completeRegistration()" style="margin-top:4px">ถัดไป — สะสมคะแนน →</button>
       </div>
     </div>
   </div>
 
-  <!-- ══ STEP 4 — GOOGLE REVIEW ══ -->
+  <!-- ══ STEP 4 — สะสมคะแนน + SPIN WHEEL + SHARE ══ -->
   <div id="step4" class="screen">
-    <div class="status-bar"><span>9:41</span><span>🔋 📶</span></div>
-    <div class="step-dots">
-      <div class="sd done"></div><div class="sd done"></div><div class="sd done"></div><div class="sd active"></div><div class="sd"></div>
-    </div>
-    <div class="greview" style="position:relative">
-      <div class="greview-bar">
-        <span class="g-logo"><span class="g-b">G</span><span class="g-r">o</span><span class="g-y">o</span><span class="g-b">g</span><span class="g-g">l</span><span class="g-r">e</span></span>
-        <span class="greview-bar-title">รีวิว</span>
-      </div>
-      <div class="greview-body">
-        <div class="gr-venue-row">
-          <div class="gr-venue-icon">🍺</div>
-          <div>
-            <div class="gr-venue-name">Tawandang German Brewery</div>
-            <div class="gr-venue-sub">ร้านอาหาร · เบียร์สด · พระราม 3</div>
-          </div>
-        </div>
-        <div class="gr-prompt">ให้คะแนนประสบการณ์ของคุณ</div>
-        <div class="gr-stars" id="gr-stars">
-          <span class="gr-star lit" onclick="rateStar(1)">★</span>
-          <span class="gr-star lit" onclick="rateStar(2)">★</span>
-          <span class="gr-star lit" onclick="rateStar(3)">★</span>
-          <span class="gr-star lit" onclick="rateStar(4)">★</span>
-          <span class="gr-star lit" onclick="rateStar(5)">★</span>
-        </div>
-        <div class="gr-textbox placeholder" id="gr-text">เขียนรีวิวร้านนี้...</div>
-        <button class="gr-cam-btn" id="gr-cam-btn" onclick="takeSelfie()">📷 ถ่ายเซลฟี่กับเบียร์ของคุณ</button>
-        <div class="gr-photo-preview" id="gr-photo" style="display:none">
-          <div class="gr-photo-badge">✓ แนบรูปแล้ว</div>
-          <div class="gr-photo-inner"><span style="font-size:26px">🤳🍺</span><span style="font-size:9px">เซลฟี่กับเบียร์</span></div>
-        </div>
-        <button class="gr-post-btn" onclick="postReview()">โพสต์</button>
-
-        <!-- step guide -->
-        <div class="guide-panel">
-          <div class="guide-title">วิธีรีวิวรับแต้ม</div>
-          <div class="guide-step">1. ✍️ เขียนรีวิว</div>
-          <div class="guide-step">2. 📷 ถ่ายเซลฟี่กับเบียร์</div>
-          <div class="guide-step">3. ✅ กด โพสต์</div>
-          <div class="clarity-rules">
-            <div class="clarity-rule ok">✅ ภาพคมชัด เห็นใบหน้าและเบียร์ชัดเจน</div>
-            <div class="clarity-rule ok">✅ แสงสว่างเพียงพอ ไม่มืด</div>
-            <div class="clarity-rule no">❌ ห้ามภาพเบลอหรือโฟกัสไม่ชัด</div>
-            <div class="clarity-rule no">❌ ห้ามใช้ภาพจากคลังหรือภาพที่แต่ง Filter</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- google overlay -->
-      <div class="g-overlay" id="g-overlay">
-        <div id="g-loading" style="display:flex;flex-direction:column;align-items:center;gap:14px">
-          <div class="g-spinner"></div>
-          <div class="g-ov-title">กำลังเชื่อมต่อ Google Maps...</div>
-        </div>
-        <div id="g-success" style="display:none;flex-direction:column;align-items:center;gap:14px">
-          <div class="g-success-icon">✓</div>
-          <div class="g-ov-title">รีวิวของคุณถูกส่งไปยัง<br>Google Maps แล้ว ✅</div>
-          <a class="g-link" href="https://www.google.com/maps" target="_blank">ดูรีวิวของคุณบน Google Maps →</a>
-          <div class="g-ov-sub">+10 แต้มจากการรีวิว · กำลังไปหมุนวงล้อ...</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ══ STEP 5 — SPIN WHEEL + POINTS ══ -->
-  <div id="step5" class="screen">
     <div class="status-bar dark"><span>9:41</span><span>🔋 📶</span></div>
     <div class="step-dots on-dark">
-      <div class="sd done"></div><div class="sd done"></div><div class="sd done"></div><div class="sd done"></div><div class="sd active"></div>
+      <div class="sd done"></div><div class="sd done"></div><div class="sd done"></div><div class="sd active"></div>
     </div>
     <div class="spin-screen">
       <svg class="confetti-svg" viewBox="0 0 320 160" xmlns="http://www.w3.org/2000/svg">
@@ -521,7 +455,7 @@ body {
       </svg>
 
       <div class="spin-heading">🎡 หมุนวงล้อทวีคูณแต้ม!</div>
-      <div class="spin-subheading">คุณได้ 10 แต้มฐานจากการรีวิว<br>หมุนวงล้อเพื่อรับแต้มเพิ่ม!</div>
+      <div class="spin-subheading">คุณได้ 10 แต้มฐานจากการลงทะเบียน<br>หมุนวงล้อเพื่อรับแต้มเพิ่ม!</div>
 
       <div class="wheel-wrap">
         <div class="wheel-pointer"></div>
@@ -562,7 +496,7 @@ body {
         </div>
         <div class="fb-caption-box">มาร่วมสนุกกันเลย! เชียร์บอล ชนบาว สนุกมากกก 🍻⚽ <span class="ht">#เชียร์บอลเชียร์บาว</span></div>
         <div class="fb-photo-prev">
-          <div class="fb-photo-badge">รูปจากรีวิว</div>
+          <div class="fb-photo-badge">รูปจากกิจกรรม</div>
           <span style="font-size:30px">🤳🍺</span>
         </div>
         <div class="fb-sheet-btns">
@@ -619,7 +553,7 @@ body {
 
 </div><!-- /phone -->
 
-<div class="screen-label" id="screen-label">STEP 1 — iPhone Camera / สแกน QR</div>
+<div class="screen-label" id="screen-label">STEP 1 — Receive Voucher (+1 pt)</div>
 
 <!-- toast -->
 <div class="toast" id="toast"></div>
@@ -649,11 +583,10 @@ function animatePoints(from, to) {
 
 /* ═══ NAV ═══ */
 const stepLabels = {
-  1: 'STEP 1 — iPhone Camera / สแกน QR',
-  2: 'STEP 2 — Voucher Auto-Populate',
+  1: 'STEP 1 — Receive Voucher (+1 pt)',
+  2: 'STEP 2 — iPhone Camera / สแกน QR',
   3: 'STEP 3 — Consent + Registration',
-  4: 'STEP 4 — Google Review',
-  5: 'STEP 5 — Spin Wheel + Points',
+  4: 'STEP 4 — สะสมคะแนน + Spin Wheel + Share',
 };
 function goStep(n) {
   if (n === 1) resetFlow();
@@ -661,52 +594,35 @@ function goStep(n) {
   document.getElementById('step' + n).classList.add('active');
   document.getElementById('screen-label').textContent = stepLabels[n];
   window.scrollTo({ top: 0, behavior: 'smooth' });
+  if (n === 1) awardVoucherPoint();
 }
 
-/* ═══ STEP 3 → capture phone, key points ═══ */
+/* ═══ STEP 1 — receive voucher (+1 pt) ═══ */
+let voucherAwarded = false;
+function awardVoucherPoint() {
+  if (voucherAwarded) return;
+  const before = getPoints();
+  setPoints(before + 1);
+  animatePoints(before, before + 1);
+  voucherAwarded = true;
+}
+
+/* ═══ STEP 3 → capture phone, award base points, go to spin ═══ */
+let baseAwarded = false;
 function completeRegistration() {
   const v = document.getElementById('reg-phone').value.trim();
   if (v) userPhone = v;
   renderPoints();
+  if (!baseAwarded) {
+    const before = getPoints();
+    setPoints(before + 10);
+    animatePoints(before, before + 10);
+    baseAwarded = true;
+  }
   goStep(4);
 }
 
-/* ═══ STEP 4 — Google Review ═══ */
-function rateStar(n) {
-  document.querySelectorAll('.gr-star').forEach((s, i) => s.classList.toggle('lit', i < n));
-}
-function takeSelfie() {
-  document.getElementById('gr-photo').style.display = 'flex';
-  const t = document.getElementById('gr-text');
-  if (t.classList.contains('placeholder')) {
-    t.classList.remove('placeholder');
-    t.textContent = 'บรรยากาศดีมาก เบียร์สดอร่อย เชียร์บอลสนุกสุดๆ! 🍻⚽';
-  }
-}
-let reviewAwarded = false;
-function postReview() {
-  const ov = document.getElementById('g-overlay');
-  ov.classList.add('active');
-  document.getElementById('g-loading').style.display = 'flex';
-  document.getElementById('g-success').style.display = 'none';
-  setTimeout(() => {
-    document.getElementById('g-loading').style.display = 'none';
-    document.getElementById('g-success').style.display = 'flex';
-    // award base 10 review points
-    if (!reviewAwarded) {
-      const before = getPoints();
-      setPoints(before + 10);
-      animatePoints(before, before + 10);
-      reviewAwarded = true;
-    }
-  }, 1800);
-  setTimeout(() => {
-    ov.classList.remove('active');
-    goStep(5);
-  }, 1800 + 2000);
-}
-
-/* ═══ STEP 5 — Spin Wheel ═══ */
+/* ═══ STEP 4 — Spin Wheel ═══ */
 // 3 equal 120° segments. Centers: 2x=60°, 3x=180°, 5x=300°
 // Hidden weights: 2x=60%, 3x=30%, 5x=10%
 const spinSegments = [
@@ -799,15 +715,11 @@ function showToast(msg) {
 
 /* ═══ RESET (re-checkin) ═══ */
 function resetFlow() {
+  // step 1
+  voucherAwarded = false;
+  // step 3
+  baseAwarded = false;
   // step 4
-  reviewAwarded = false;
-  const t = document.getElementById('gr-text');
-  t.classList.add('placeholder');
-  t.textContent = 'เขียนรีวิวร้านนี้...';
-  document.getElementById('gr-photo').style.display = 'none';
-  rateStar(5);
-  document.getElementById('g-overlay').classList.remove('active');
-  // step 5
   const wheel = document.getElementById('spin-wheel');
   wheel.style.transition = 'none';
   wheel.style.transform = 'rotate(0deg)';
@@ -825,6 +737,7 @@ function resetFlow() {
 
 /* init */
 renderPoints();
+awardVoucherPoint();
 </script>
 </body>
 </html>
